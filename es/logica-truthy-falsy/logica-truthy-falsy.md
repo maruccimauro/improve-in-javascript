@@ -2,7 +2,7 @@
 
 ---
 
-## Índice de la Guía
+**Índice de la Guía**
 
 1. [Introducción](#introducción)
     - [¿Qué es truthy y falsy en JavaScript?](#qué-es-truthy-y-falsy-en-javascript)
@@ -84,7 +84,7 @@ En este caso la cadena "" es un valor Falsy , porque esta vacío y bajo coerció
 
 Comprender esto es sumamente importante al momento de usar estructuras de control(if, while) , operadores lógicos(&&,||,!), coerción en comparaciones (\==,===) y demás escenarios.
 
-## Importancia en la evaluación lógica
+### Importancia en la evaluación lógica
 
 El concepto de truthy y falsy en JavaScript es fundamental para evaluar la lógica, afectando el comportamiento de expresiones condicionales, operadores lógicos y estructuras de control. Su comprensión permite escribir código más limpio, eficiente y robusto, evitando así que tengamos errores comunes relacionados con la coerción implícita de valores.
 
@@ -152,7 +152,7 @@ console.log(!"Juan");
 // false , la inversion del valor booleano de una cadena no vacia(true) es false
 ```
 
-# Diferencias con otros lenguajes
+### Diferencias con otros lenguajes
 
 En JavaScript, la coerción implícita es la encargada de convertir de manera automática ciertos valores en true o false. Pese a que este es un concepto global frente otros lenguajes de programación, la conversión booleana difiere entre los mismos.
 Para poder observar correctamente esta idea, veamos una tabla comparativa de como diferentes lenguajes interpretan de manera distinta la coerción implícita:
@@ -171,11 +171,11 @@ Para poder observar correctamente esta idea, veamos una tabla comparativa de com
 | `{}` (objeto vacío)     | `truthy`   | `falsy`                                             | `truthy`               |
 | `"0"` (cadena con cero) | `truthy`   | `truthy`                                            | `falsy`                |
 
-# Conceptos Fundamentales
+## Conceptos Fundamentales
 
 Hay que entender, que en JavaScript todos los valores pueden clasificarse en truthy o falsy al ser evaluados en un contexto booleano. Por ello, cuando usamos un valor dentro de una expresión lógica (ej. if, while, &&, ||, etc), se comportará como true o false sin necesidad de que hagamos una conversión explícita.
 
-# Definición formal de truthy y falsy
+### Definición formal de truthy y falsy
 
 **Definicion formal de Falsy:**
 Un valor falsy es aquel que, cuando se evalúa en un contexto booleano, se convierte en false.
@@ -183,7 +183,7 @@ Un valor falsy es aquel que, cuando se evalúa en un contexto booleano, se convi
 **Definición Formal de Truthy:**
 Por otra parte, un valor Truthy es cualquier valor que no sea falsy, es decir, que cuando lo evaluamos en un contexto booleano, se convierte en true.
 
-# Valores falsy en JavaScript
+### Valores falsy en JavaScript
 
 en la siguiente tabla encontraremos la representacion del conjunto de valores falsy.
 | Valor | Descripción |
@@ -197,7 +197,7 @@ en la siguiente tabla encontraremos la representacion del conjunto de valores fa
 | `undefined`| Representa un valor no definido. |
 | `NaN` | El resultado de una operación matemática inválida. |
 
-# Valores truthy en JavaScript
+### Valores truthy en JavaScript
 
 en la siguiente tabla encontraremos la representacion del conjunto de valores truthy.
 | Valor | Descripción |
@@ -251,4 +251,133 @@ console.log("0" === 0); // false (sin coerción: diferentes tipos, string vs num
 
 console.log([] == false); // true (con coerción: array vacío es truthy, pero se convierte a "")
 console.log([] === false); // false (sin coerción: diferentes tipos, array vs boolean)
+```
+
+## Operadores Lógicos y Evaluación de Cortocircuito
+
+En cualquier lenguaje de programación los operadores lógicos son fundamentales, y JavaScript no es una excepción de ello, el uso de operadores lógicos es muy común para realizar comparaciones, combinar expresiones booleanas y hasta para beneficiarse de un comportamiento conocido como evaluación de cortocircuito (short-circuit evaluación), que optimiza el rendimiento e influye en el flujo de control de los programas.
+Primero profundicemos en los operadores lógicos &&, || y ! para a posterior abordar en cada uno comprender su flujo de un cortocircuito.
+
+### Operador lógico && (AND)
+
+el operar lógico && en condicionales devuelve true solo cuando ambos operandos (izquierdo y derecho) son un valor del conjunto Truthy.
+
+```javascript
+if (true && 5) {
+    console.log("la evalaucion es true.");
+} else {
+    console.log("la evalaucion es false.");
+} // la evalaucion es true.
+```
+
+```javascript
+if (true && 0) {
+    console.log("la evalaucion es true.");
+} else {
+    console.log("la evalaucion es false.");
+} // la evalaucion es false.
+```
+
+En tanto cuando hablamos de asignación y argumentos el comportamiento del operador && determina que en caso de que el primer operando pertenezca al conjunto de valores truthy este devolverá el segundo operando (derecha), en contrario si pertenece al conjunto de valores falsy , devolverá el primer operando (izquierda).
+Veámoslo mejor con un ejemplo.
+
+```javascript
+console.log(0 && "hola mundo"); // el primer operando es falsy , por lo cual mostrara 0
+```
+
+```javascript
+console.log([] && "hola mundo"); // el primer operando es truthy , por lo cual mostrara "hola mundo"
+//recuerda que para JavaScript un array vacio es un valor delc conjunto Truthy.
+```
+
+### Operador lógico || (OR)
+
+el operador lógico || (or) devolverá true, si al menos 1 de los operandos es Truthy, si ambos son falsy , devolverá false.
+
+```javascript
+console.log(true || true); // true
+console.log(true || false); // true
+console.log(false || true); // true
+console.log(false || false); // false
+```
+
+En tanto cuando hablamos de asignación y argumentos el comportamiento del operador || determina que en todos los casos se devolverá el primer operando (izquierda) sea cual sea, su conjunto de pertenencia(truthy o falsy)
+Vayamos a un ejemplo para entenderlo mejor:
+
+```javascript
+console.log([] || "hola mundo"); // sin importar si es falsy o truthy , devolvera (0)[] un array vacio.
+```
+
+### Operador lógico ! (NOT)
+
+El operador ! (NOT) tiene la particularidad a contraste de && y ||, de ser un operador unario, es decir que posee un único operando, en caso del lado derecho, al utilizarlo podremos notar que convierte el valor del operando a un valor booleano y a posterior invierte dicho valor, tal que, si el valor es false se convertirá en true y si el valor es true se convertirá en false.
+observemos esto con el siguiente ejemplo:
+
+```javascript
+console.log(!true); // false
+console.log(!false); // true
+console.log(!0); // true
+console.log(!""); // true
+```
+
+### Evaluación de cortocircuito
+
+¡Ahora que abordamos los operadores comprometidos a este tema, podemos afrontar el concepto de cortocircuito! vayamos por él.
+La evaluación de cortocircuito es una característica sumamente importante de los operadores lógicos en JavaScript.
+Es comportamiento determina que el segundo operando de una expresión lógica no se evalúa si el resultado puede determinarse a partir del primer operando.
+
+**Evaluación de cortocircuito con && (AND):**
+Si el primer operando es falsy, el resultado de la expresión es falsy sin necesidad de evaluar el segundo operando.
+
+```javascript
+function anunciar() {
+    console.log("La ejecucion paso por aqui!");
+}
+
+false && anunciar();
+//no veremos nada por consola , por que el primer operando pertenece al conjunto falsy
+```
+
+en caso contrario, si el operador izquierdo es del conjunto truthy, el segundo operando será evaluado.
+
+```javascript
+function anunciar() {
+    console.log("La ejecucion paso por aqui!");
+}
+
+true && anunciar();
+//veremos por consola "La ejecucion paso por aqui!" , por que el primer operando pertenece al conjunto truthy
+```
+
+**Evaluación de cortocircuito con || (OR):**
+Si el primer operando es truthy, el resultado es el primer operando, sin necesidad de evaluar el segundo operando.
+
+```javascript
+function anunciar() {
+    console.log("La ejecucion paso por aqui!");
+}
+
+true || anunciar();
+//no veremos nada por consola , por que el primer operando pertenece al conjunto trurhy.
+```
+
+Si el primer operando es falsy, el resultado es el segundo operando.
+
+```javascript
+function anunciar() {
+    console.log("La ejecucion paso por aqui!");
+}
+
+false || anunciar();
+//veremos por consola "La ejecucion paso por aqui!" , por que el primer operando pertenece al conjunto falsy
+```
+
+**Evaluación de cortocircuito y la seguridad:**
+El uso de cortocircuito también nos permite minimizar los riesgos de error al intentar acceder a áreas no definidas o donde un operador no está definido, evitando así un fallo.
+si el primer operando no es truthy el segundo operando no existiría, por ende, evitamos ejecutarlo.
+
+```javascript
+let user = null;
+
+console.log(user && user.name); // user es null , por tanto user.name no existe y nunca se ejecuto el segundo operando.
 ```
