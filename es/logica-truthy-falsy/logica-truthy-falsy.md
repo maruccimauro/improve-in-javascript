@@ -170,8 +170,16 @@ Para poder observar correctamente esta idea, veamos una tabla comparativa de com
 Hay que entender, que en JavaScript todos los valores pueden clasificarse en truthy o falsy al ser evaluados en un contexto booleano. Por ello, cuando usamos un valor dentro de una expresión lógica (ej. if, while, &&, ||, etc), se comportará como true o false sin necesidad de que hagamos una conversión explícita.
 
 # Definición formal de truthy y falsy
+
 **Definicion formal de Falsy:**
 Un valor falsy es aquel que, cuando se evalúa en un contexto booleano, se convierte en false.
+
+**Definición Formal de Truthy:**
+Por otra parte, un valor Truthy es cualquier valor que no sea falsy, es decir, que cuando lo evaluamos en un contexto booleano, se convierte en true.
+
+
+# Valores falsy en JavaScript
+en la siguiente tabla encontraremos la representacion del conjunto de valores falsy.
 | Valor      | Descripción |
 |------------|------------|
 | `false`    | El valor booleano `false`. |
@@ -183,10 +191,8 @@ Un valor falsy es aquel que, cuando se evalúa en un contexto booleano, se convi
 | `undefined`| Representa un valor no definido. |
 | `NaN`      | El resultado de una operación matemática inválida. |
 
-
-**Definición Formal de Truthy:**
-Por otra parte, un valor Truthy es cualquier valor que no sea falsy, es decir, que cuando lo evaluamos en un contexto booleano, se convierte en true.
-
+# Valores truthy en JavaScript
+en la siguiente tabla encontraremos la representacion del conjunto de valores truthy.
 | Valor                           | Descripción |
 |---------------------------------|------------|
 | `true`                          | El valor booleano `true`. |
