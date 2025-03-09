@@ -165,3 +165,34 @@ Para poder observar correctamente esta idea, veamos una tabla comparativa de com
 | `[]` (array vacío)  | `truthy`   | `falsy` | `falsy` |
 | `{}` (objeto vacío) | `truthy`   | `falsy` | `truthy` |
 | `"0"` (cadena con cero) | `truthy` | `truthy` | `falsy` |
+
+# Conceptos Fundamentales
+Hay que entender, que en JavaScript todos los valores pueden clasificarse en truthy o falsy al ser evaluados en un contexto booleano. Por ello, cuando usamos un valor dentro de una expresión lógica (ej. if, while, &&, ||, etc), se comportará como true o false sin necesidad de que hagamos una conversión explícita.
+
+# Definición formal de truthy y falsy
+**Definicion formal de Falsy:**
+Un valor falsy es aquel que, cuando se evalúa en un contexto booleano, se convierte en false.
+| Valor      | Descripción |
+|------------|------------|
+| `false`    | El valor booleano `false`. |
+| `0`        | El número `0` en cualquier base (`0`, `0.0`, `0x0`, etc.). |
+| `-0`       | El número `-0`, que es distinto de `0` en ciertas operaciones matemáticas. |
+| `0n`       | El `BigInt` con valor `0n`. |
+| `""`       | Una cadena vacía. |
+| `null`     | Representa la ausencia de valor. |
+| `undefined`| Representa un valor no definido. |
+| `NaN`      | El resultado de una operación matemática inválida. |
+
+
+**Definición Formal de Truthy:**
+Por otra parte, un valor Truthy es cualquier valor que no sea falsy, es decir, que cuando lo evaluamos en un contexto booleano, se convierte en true.
+
+| Valor                           | Descripción |
+|---------------------------------|------------|
+| `true`                          | El valor booleano `true`. |
+| Cualquier número distinto de `0` | Incluye positivos y negativos como `42`, `-3.14`. |
+| Cualquier `BigInt` distinto de `0n` | Ejemplo: `1n`, `-10n`. |
+| Cadenas no vacías               | `"hello"`, `"false"`, `"0"`, etc. |
+| Objetos                         | `{}`, `{ key: "value" }`, `new Date()`, etc. |
+| Arrays                          | `[]`, `[1, 2, 3]`, etc. (incluso un array vacío es truthy). |
+| Funciones                       | `function() {}`, `() => {}`, etc. |
