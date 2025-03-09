@@ -25,7 +25,6 @@
     - [Uso en asignaciones predeterminadas (|| y ??)](#uso-en-asignaciones-predeterminadas--y-)
     - [Doble negación (!!) y coerción explícita](#doble-negación--y-coerción-explícita)
     - [Optional Chaining (?.) y falsy](#optional-chaining--y-falsy)
-    - [Nullish Coalescing (??) vs ||](#nullish-coalescing--vs-)
 6. [Aplicaciones Prácticas y Casos de Uso](#aplicaciones-prácticas-y-casos-de-uso)
     - [Validaciones de datos](#validaciones-de-datos)
     - [Valores predeterminados en funciones](#valores-predeterminados-en-funciones)
@@ -380,4 +379,104 @@ si el primer operando no es truthy el segundo operando no existiría, por ende, 
 let user = null;
 
 console.log(user && user.name); // user es null , por tanto user.name no existe y nunca se ejecuto el segundo operando.
+```
+
+## Manipulación Avanzada de Truthy y Falsy
+
+Comprender como manipular la toma de decisiones avanzadas con fundamentos de truthy y falsy, nos va a permitir escribir un Código más limpio , seguro y eficiente. ¡Vamos por ello!
+
+### Uso en asignaciones predeterminadas (|| y ??)
+
+JavaScript nos permite asignar valores predeterminados a una variable en caso de que su valor original sea falsy o nullish. Tradicionalmente, se usaba el operador lógico || (OR) pero con la introducción de Nullish coalescing (??, coalision nula) tenemos una nueva opción más precisa.
+Veamos la diferencia entre los dos , en un caso donde es propicia la utilización de ?? (nullish coalescing).
+
+En este caso tenemos el operador || (OR) que considera el valor 0 como un Falsy y nos devolviera el segundo operador, pero en nuestro contexto de uso, queremos que el valor 0 nos permita definir un mensaje sin espera, pero el operador || (OR) no lo permite:
+
+```Javascript
+let tiempoEspera = 0;
+let timeout = tiempoEspera || 3000;
+
+setTimeout(() => {
+    console.log("hola mundo.");
+}, timeout); //aparecera un mensaje despues de 3 segundos.
+```
+
+es por ello que aquí entra en juego el operador ?? (nullish coalescing) cuyo comportamiento dictamina que todo valor que no sea null o undefined será considerado como valido, esto incluyendo al número 0 en cuestión. Entonces, si se recibe como primer operando un valor valido, obtendremos ese mismo valor, en caso de ser un valor no valido, obtendremos el valor del segundo operando.
+Vemos como ahora sí, nuestra rutina funciona correctamente al ingresar el valor 0 o null/undefined.
+
+```Javascript
+let tiempoEspera = 0;
+let timeout = tiempoEspera ?? 3000;
+
+setTimeout(() => {
+    console.log("hola mundo.");
+}, timeout); //aparecera un mensaje en 0 segundos, es decir sin espera.
+```
+
+```Javascript
+let tiempoEspera = undefined;
+let timeout = tiempoEspera ?? 3000;
+
+setTimeout(() => {
+    console.log("hola mundo.");
+}, timeout); //aparecera un mensaje en 3 segundos.
+```
+
+| Valor               | Considerado Válido (`??`) | Considerado Inválido (`??`) |
+| ------------------- | ------------------------- | --------------------------- |
+| `null`              | ❌ No                     | ✅ Sí                       |
+| `undefined`         | ❌ No                     | ✅ Sí                       |
+| `false`             | ✅ Sí                     | ❌ No                       |
+| `0`                 | ✅ Sí                     | ❌ No                       |
+| `""` (cadena vacía) | ✅ Sí                     | ❌ No                       |
+| `"texto"`           | ✅ Sí                     | ❌ No                       |
+| `NaN`               | ✅ Sí                     | ❌ No                       |
+| `{}` (objeto vacío) | ✅ Sí                     | ❌ No                       |
+| `[]` (array vacío)  | ✅ Sí                     | ❌ No                       |
+
+### Doble negación (!!) y coerción explícita
+
+**¿Qué es !!(double negation) y por qué se usa?**
+En JavaScript, el uso de doble negación se usa para convertir cualquier valor en su equivalente booleano de manera explícita.
+Al aplicar la primer negacion ! , utilizamos la coerción implícita para transforma un valor en un booleano y a su vez ese valor es invertido, el segundo operador de negación permite volver a invertir la negación inicial obteniendo explícitamente el valor booleano original.
+
+```
+console.log(!!"Hola");  // true
+console.log(!!0);       // false
+console.log(!!null);    // false
+console.log(!!"");      // false
+console.log(!![]);      // true (recuerda que un array vacío es truthy)
+console.log(!!{});      // true (recuerda que un objeto vacío es truthy)
+```
+
+Normalmente, remitimos esta práctica a validar si una variable tiene un valor "real":
+
+```javascript
+let userInput = "";
+if (!!userInput) {
+    console.log("Tiene valor");
+} else {
+    console.log("No tiene valor");
+} // "No tiene valor"
+```
+
+### Optional Chaining (?.) y falsy
+
+El encadenamiento opción ?. (optional chaining) es una funcionalidad que nos permite acceder a propiedades de objetos sin provocar errores si la propiedad no existe o es nullish (null o undefined), en cambio nos devolverá undefined.
+Veamos dos claros ejemplos para interpretar como procede esta funcionalidad muy útil.
+
+Sin ?. (Optional Chaining):
+
+```javascript
+let usuario = { perfil: null };
+
+console.log(usuario.perfil.nombre); // nos devolvera un error del tipo "Cannot read properties of null"
+```
+
+Con ?. (optional Chaining):
+
+```javascript
+let usuario = { perfil: null };
+
+console.log(usuario.perfil?.nombre); // nos devolera "undefined"
 ```
