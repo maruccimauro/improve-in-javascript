@@ -17,10 +17,11 @@ Con cariño, Mauro.
 
 1. [Introducción](#introducción)
     - [¿Qué es la precedencia y asociatividad de operadores?](#qué-es-la-precedencia-y-asociatividad-de-operadores)
-    - [Importancia de la precedencia en las expresiones](#importancia-de-la-precedencia-en-las-expresiones)
+    - [Importancia de la precedencia y asociatividad en las expresiones](#importancia-de-la-precedencia-y-asociatividad-en-las-expresiones)
 2. [Conceptos Fundamentales](#conceptos-fundamentales)
     - [Definición de precedencia de operadores](#definición-de-precedencia-de-operadores)
     - [Definición de asociatividad de operadores](#definición-de-asociatividad-de-operadores)
+    - [Relación entre Precedencia y Asociatividad](#relación-entre-precedencia-y-asociatividad)
 3. [Precedencia de Operadores en JavaScript](#precedencia-de-operadores-en-javascript)
     - [Lista de operadores con mayor a menor precedencia](#lista-de-operadores-con-mayor-a-menor-precedencia)
     - [Agrupación de operadores con la misma precedencia](#agrupación-de-operadores-con-la-misma-precedencia)
@@ -76,9 +77,9 @@ let resultado = (5 + 3) * 2;
 console.log(resultado); // 16 ¿por que no 11?
 ```
 
-Vemos como en este caos los operadores paréntesis de agrupación alteran el orden natural de precedencia del restos de los operadores , ya que el nivel de precedencia que poseen es el más alto posible , con un nivel 19 (ya veremos esto en detalle más adelante).
+Vemos como en este caso los operadores paréntesis de agrupación alteran el orden natural de precedencia del restos de los operadores , ya que el nivel de precedencia que poseen es el más alto posible , con un nivel 19 (ya veremos esto en detalle más adelante).
 
-### Importancia de la precedencia en las expresiones
+### Importancia de la precedencia y asociatividad en las expresiones
 
 Comprender el orden en que se ejecutan los operadores y como pueden afectar el resultado final de una expresión por su precedencia y asociatividad es fundamental para
 
@@ -87,3 +88,40 @@ Comprender el orden en que se ejecutan los operadores y como pueden afectar el r
 **Mejora la legibilidad del código:** Si desarrollamos un código bien estructurado y con operadores correctamente aplicados nos permitirá facilidad a la hora de mantenerlo.
 
 **Optimizar el rendimiento:** Al usar correctamente la lógica de precedencia y asociatividad podremos evitar que cálculos innecesarios y mejorar la eficiencia.
+
+## Conceptos Fundamentales
+
+Los operadores son parte de la columna vertebral del desarrollo en cualquier lenguaje de programación, ya que permiten realizar operaciones matemáticas, comparaciones lógicas y manipulación de datos. Dicho esto, cuando una expresión contiene múltiples operadores, es necesario establecer reglas que determinen el orden en que se evalúan tanto los operandos como los operadores.
+Dos conceptos claves que gobiernan este comportamiento son la precedencia de operadores y la asociatividad de operadores. Estos principios aseguran que nuestras expresiones vayan a ser interpretadas siempre se hagan de manera predecible y correcta.
+
+### Definición de Precedencia de Operadores
+
+Como vimos anteriormente la precedencia de operadores es la jerarquía que define qué operador se evalúa primero cuando hay múltiples operadores en nuestra expresión. Los operadores con mayor precedencia se ejecutan antes que los operadores con menor precedencia
+
+### Definición de Asociatividad de Operadores
+
+La asociatividad de operadores es quien determina el orden de evaluación de una expresión cuando dos operadores tienen la misma jerarquía de precedencia. Existiendo dos tipos principales de asociatividad:
+**Asociatividad de izquierda a derecha:** la expresión se evaluara de izquierda a derecha.
+**Asociatividad de derecha a izquierda:** la expresión se evaluara de derecha a izquierda.
+por ejemplo, en el motor de JavaScript la resta (-) tiene una asociatividad de izquierda a derecha:
+
+```javascript
+let resultado = 10 - 5 - 2;
+console.log(resultado); // 3
+```
+
+aquí ya que 10 - 5 está a la izquierda y el operador resta tiene asociatividad de izquierda a derecha será la primera expresión a resolverse , luego continuará 5 - 2 dando 3 como resultado.
+
+otro ejemplo, pero esta vez con asociatividad de derecha a izquierda podría ser el operador de asignación (=):
+
+```javascript
+let b, c, d;
+b = c = d = 10;
+console.log(b, c, d); // 10 10 10
+```
+
+aquí vemos como 10 tiende a asignarse a d por la asociatividad de derecha a izquierda que posee el operador de asignación (=), a posterior, se asignara d a c y finalmente c a b.
+
+### Relación entre Precedencia y Asociatividad
+
+La precedencia y la asociatividad trabajan juntas como un equipo para determinar el orden de evaluación de nuestras expresiones. Mientras que la precedencia toma decisiones como qué operador se ejecuta primero, la asociatividad se dedica a resolver situaciones en las que hay operadores de igual precedencia.
