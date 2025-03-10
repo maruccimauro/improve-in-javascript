@@ -50,40 +50,40 @@ Con cariño, Mauro.
 
 ## Introducción
 
-La manipulacion de la lógica de precedencia y asociatividad de operadores es fundamental para comprender como el motor de JavaScript evalúa nuestras expreiones y en cual orden se ejecutan nuestras operaciones, siendo está, la clave para evitar errores lógicos y permitirnos escribir código mas predecible, eficiente y limpio.
+La manipulación de la lógica de precedencia y asociatividad de operadores es fundamental para comprender como el motor de JavaScript evalúa nuestras expresiones y en cual orden se ejecutan nuestras operaciones, siendo está, la clave para evitar errores lógicos y permitirnos escribir código más predecible, eficiente y limpio.
 
 ### ¿Qué es la precedencia y asociatividad de operadores?
 
-En JavaScript pueden existir operaciones con muchos operadores y operandos, y el motor debe tomar desiciones tales como , en que orden se deben evaluar estos operandos y operadores, asi es como entran en juego dos conceptos claves :
+En JavaScript pueden existir operaciones con muchos operadores y operandos, y el motor debe tomar decisiones tales como, en que orden se deben evaluar estos operandos y operadores, así es como entran en juego dos conceptos claves :
 
-**Precedencia de operadores:** es la regla que rige cuando en una expresion tenemos multiples operadores, donde los operadores con mayor precedencia se ejecutan antes que los operadores de menor precedencia.
+**Precedencia de operadores:** es la regla que rige cuando en una expresión tenemos múltiples operadores, donde los operadores con mayor precedencia se ejecutan antes que los operadores de menor precedencia.
 
-**Asociativdad de operadores:** ¿que sucede si dos operadores tienen la misma precedencia? ... la asociatividad se encarga de deerminar la direccion en la que se evalúan, ya sea de izquierda a derecha(asociatividad izquierda) o de derecha a izquierda(asociatividad derecha)
+**Asociatividad de operadores:** ¿qué sucede si dos operadores tienen la misma precedencia? ... la asociatividad se encarga de determinar la dirección en la que se evalúan, ya sea de izquierda a derecha (asociatividad izquierda) o de derecha a izquierda(asociatividad derecha)
 
-Partamos de unos para intentar comprender mejor estos dos conceptos sumamente utiles a la hora de desarrollar nuestras aplicaciones.
+Partamos de unos para intentar comprender mejor estos dos conceptos sumamente útiles a la hora de desarrollar nuestras aplicaciones.
 
 ```javascript
 let resultado = 5 + 3 * 2;
-console.log(resultado); // 11 ¿por que no 16?
+console.log(resultado); // 11 ¿por qué no 16?
 ```
 
-Aqui, podemos observar que la multiplicacion (_) tiene una mayor precedencia que el operador de suma (+), por lo tanto, la primer expresion a evaluarse sera 3 _ 2 , resultando en 6, y luego se le suma 5, obteniendo asi 11.
+aquí, podemos observar que la multiplicación (_) tiene una mayor precedencia que el operador de suma (+), por lo tanto, la primer expresión a evaluarse será 3 _ 2 , resultando en 6, y luego se le suma 5, obteniendo así 11.
 
-Pero si quisieramos que la suma se evalúe primero , podriamos solucionarlo con el uso del operador parentesis de agrupacion ().
+Pero si quisiéramos que la suma se evalúe primero , podríamos solucionarlo con el uso del operador paréntesis de agrupación ().
 
 ```javascript
 let resultado = (5 + 3) * 2;
 console.log(resultado); // 16 ¿por que no 11?
 ```
 
-Vemos como en este caos los operadores parentesis de agrupacion alteran el orden natural de precedencia del restos de los operadores , ya que el nivel de precedencia que poseen es el mas alto posible , con un nivel 19 (ya veremos esto en detalle mas adelante).
+Vemos como en este caos los operadores paréntesis de agrupación alteran el orden natural de precedencia del restos de los operadores , ya que el nivel de precedencia que poseen es el más alto posible , con un nivel 19 (ya veremos esto en detalle más adelante).
 
 ### Importancia de la precedencia en las expresiones
 
-Comprender el orden en que se ejecutan los operadores y como pueden afectar el resultado final de una expresion por su precedencia y asociatividad es fundamental para
+Comprender el orden en que se ejecutan los operadores y como pueden afectar el resultado final de una expresión por su precedencia y asociatividad es fundamental para
 
-**Evitar errores lógicos:** Si no entendemos bien una precedencia, una operacion puede producirnos resultados que no esperamos.
+**Evitar errores lógicos:** Si no entendemos bien una precedencia, una operación puede producirnos resultados que no esperamos.
 
-**Mejora la legibilidad del código:** Si desarrollamos un codigo bien estructurado y con operadores correctamente aplicados nos permitira facilidad a la hora de mantenerlo.
+**Mejora la legibilidad del código:** Si desarrollamos un código bien estructurado y con operadores correctamente aplicados nos permitirá facilidad a la hora de mantenerlo.
 
 **Optimizar el rendimiento:** Al usar correctamente la lógica de precedencia y asociatividad podremos evitar que cálculos innecesarios y mejorar la eficiencia.
