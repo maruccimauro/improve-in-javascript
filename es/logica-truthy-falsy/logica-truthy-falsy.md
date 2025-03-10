@@ -34,7 +34,7 @@
     - [Confusión entre null, undefined y false](#confusión-entre-null-undefined-y-false)
     - [Errores con 0, NaN y cadenas vacías](#errores-con-0-nan-y-cadenas-vacías)
     - [Manejo seguro de valores](#manejo-seguro-de-valores)
-8. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
+8. [Comparación con otros Lenguajes](#comparación-con-otros-lenguajes)
     - [Diferencias de coerción en TypeScript](#diferencias-de-coerción-en-typescript)
 9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
@@ -706,3 +706,23 @@ console.log(0 == NaN); // false, por que NaN no es comparable
 ### Manejo seguro de valores
 
 Cuando hablamos de manejo seguro de valores, hacemos referencia a que el desarrollador debe de verificar que las variables y valores con los que trabajara este correctamente alineados y definidos con los tipos que se esperan para trabajar, esto ayudara a evitar errores de imprevistos.
+
+## Comparación con otros Lenguajes
+
+### Diferencias de coerción en TypeScript
+
+TypeScript es un superset de JavaScript, lo que significa que extiende las características de JavaScript sin eliminar las existentes, no obstante, existen algunas excepciones como lo podrían ser el tipado estático y control de tipos que influyen en el modo en que la coerción es utilizada.
+El tipado estático de TypeScript mejora la seguridad del código y ayuda a evitar errores al desarrollar aplicaciones complejas ya que no permite que se realicen algunas conversiones implícitas de manera automática, permitiendo detectar errores antes de ejecutar el código. Este tipado fuerte de TypeScript requerirá que se manejen las conversiones de manera más explícitas.
+
+```typescript
+let str: string = "5";
+let num: number = 1;
+
+console.log(str + num); // "51" (concatenación, como en JS, pero esto está permitido en TypeScript)
+
+let invalid: number = "5"; // Error: Type 'string' is not assignable to type 'number'.
+
+// Coerción explícita (necesita conversión explícita en TS):
+let coerced: number = <number>+str; // 5 (convierte la cadena '5' a número)
+let coerced2: number = Number(str); // 5 (Otra forma de conversión explícita)
+```
