@@ -34,9 +34,7 @@
     - [Confusión entre null, undefined y false](#confusión-entre-null-undefined-y-false)
     - [Errores con 0, NaN y cadenas vacías](#errores-con-0-nan-y-cadenas-vacías)
     - [Manejo seguro de valores](#manejo-seguro-de-valores)
-    - [Uso adecuado de coerción](#uso-adecuado-de-coerción)
 8. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
-    - [Truthy y Falsy en Python, Ruby y PHP](#truthy-y-falsy-en-python-ruby-y-php)
     - [Diferencias de coerción en TypeScript](#diferencias-de-coerción-en-typescript)
 9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
@@ -600,7 +598,7 @@ lo cambiamos por:
 usuario.estaVerificado && enviarCorreoDeConfirmacion() && esperarConfirmacion();
 ```
 
-## Filtros y limpieza de datos
+### Filtros y limpieza de datos
 
 El manejo de valores truthy y falsy es útil para filtrar arrays y limpiar datos en JavaScript.
 
@@ -610,3 +608,101 @@ let datos = [0, "Hola", "", null, 42, undefined, "JavaScript", false];
 let datosLimpios = datos.filter(Boolean); // Se usa Boolean como callback
 console.log(datosLimpios); // [ "Hola", 42, "JavaScript" ]
 ```
+
+## Errores Comunes y Buenas Prácticas
+
+Abordaremos algunos errores comunes y buenas prácticas para poder aplicar lo aprendido de manera correcta, ¡recuerda que uno nunca deja de aprender!
+
+### Confusión entre null, undefined , false y el uso de == y ===
+
+Uno de los errores más comunes entre los desarrolladores es la confusión entre los valores null, undefined y false, aunque todos pertenecen al conjunto de falsy , no son lo mismo y tampoco operan igual ante el operador == (igualdad no estricta).
+Veamos la definición de cada uno para entender esta idea correctamente.
+
+**null:** Representa la ausencia intencionada de cualquier valor o referencia. Es un valor explícito asignado por el desarrollador para indicar que algo está vacío.
+
+```javascript
+let user = null; // Significa que la variable "user" está vacía, pero explícitamente.
+```
+
+**undefined:** indica que una variable ha sido declarada pero no inicializada (es decir, no se le ha asignado un valor). También es el valor que retorna una función que no tiene un return explícito.
+
+```javascript
+let user; // 'user' ha sido declarada, pero no inicializada, por lo tanto tiene el valor `undefined`
+```
+
+```javascript
+function saludo() {
+    console.log("Hola");
+}
+console.log(saludo()); // Esto devuelve `undefined` porque no hay un `return`
+```
+
+**false:**: es un valor booleano que explícitamente significa "falso".
+
+```javascript
+let activado = false; // activado esta explicitamente como falso.
+```
+
+por lo tanto null , undefined y false pertenecen al conjunto de valores falsy pero son diferentes , podemos corroborarlo ejerciendo una comparación estricta:
+
+```javascript
+console.log(false === null); // false, pertenecen los dos al conjunto falsy pero no son lo mismo
+console.log(false === undefined); // false, pertenecen los dos al conjunto falsy pero no son lo mismo
+console.log(null === undefined); // false, pertenecen los dos al conjunto falsy pero no son lo mismo
+```
+
+Así mismo, pese a que null , undefined y false pertenecen al conjunto de valores falsy el operador == (igualdad no estricta) posee sus propias reglas dentro del motor de JavaScript al ejercer la coerción implícita sobre undefined y null, donde se determina que solo ellos dos son no estrictamente iguales:
+
+```javascript
+console.log(false == null); // false para el operador de igualdad no estricta
+console.log(false == undefined); // false para el operador de igualdad no estricta
+console.log(null == undefined); // true para el operador de igualdad no estricta
+```
+
+### Errores con 0, NaN y cadenas vacías
+
+los valores 0 , NaN y cadena vacía a pesar de ser considerados falsy en JavaScript, no son iguales entre sí, lo que puede llevar a conficiones.
+Veamos la definición de cada uno para entender esta idea correctamente.
+
+**0:** Representa el valor cero. Es un número, pero cuando se utiliza en una condición, se considera falsy.
+
+```javascript
+let numero = 0;
+if (!numero) {
+    console.log("El número es falsy");
+}
+```
+
+**NaN:** Es un valor especial que representa "Not-a-Number". Resulta de operaciones aritméticas inválidas, como dividir cero entre cero. Es importante saber que a pesar de ser falsy, NaN no es igual a sí mismo, y para validar si es un valor NaN debe usarse la funcion isNaN(), esto se debe a que NaN es un número especial que representa una cantidad indefinida o invalida, y no se puede igualar a sí misma, ya que es un valor incierto o bien no comparable.
+
+```javascript
+let numeroInvalido = 0 / 0;
+console.log(isNaN(numeroInvalido)); // true
+console.log(numeroInvalido === NaN); // false, por que NaN no es igual a si mismo
+console.log(NaN == NaN); //false no es posible comparar NaN con sigo misma.
+```
+
+**Cadenas vacías (""):** Es una cadena que no contiene ningún carácter. Aunque también es falsy, su comportamiento en comparación con otros valores falsy puede causar confusión.
+
+```javascript
+let cadena = "";
+if (!cadena) {
+    console.log("la cadena es falsy");
+}
+```
+
+ahora abordemos las 3 diferencias comparándola entre ellas.
+
+```javascript
+console.log("" === 0); //false , por que no son lo mismo pese a pertenecer al conjunto de valores falsy.
+console.log("" === NaN); //false, por que NaN no es comparable
+console.log(0 === NaN); //false, por que NaN no es comparable
+
+console.log("" == 0); // true por que la coerción implícita transforma "" y 0 en false explicito.
+console.log("" == NaN); // false, por que NaN no es comparable
+console.log(0 == NaN); // false, por que NaN no es comparable
+```
+
+### Manejo seguro de valores
+
+Cuando hablamos de manejo seguro de valores, hacemos referencia a que el desarrollador debe de verificar que las variables y valores con los que trabajara este correctamente alineados y definidos con los tipos que se esperan para trabajar, esto ayudara a evitar errores de imprevistos.
