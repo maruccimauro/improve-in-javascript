@@ -1,6 +1,16 @@
 # Manipulación de Lógica de Evaluación de Truthy y Falsy en JavaScript
 
----
+<hr>
+## ¡Antes de comenzar!
+
+¡Antes de querer resolver todas las incógnitas del universo posible (como nos sucede a muchos), ten en cuenta que nuestro cerebro, con cada cosa que aprendemos día a día, necesita tiempo, alimentación y descanso para generar las conexiones neuronales físicas. Este no es un proceso instantáneo, sino progresivo, permitiendo que podamos retener, aprender y relacionar la información en el futuro, tanto cercano como lejano.
+Por ello, es fundamental aplicar lo que aprendes en tu día a día, reforzando esas conexiones de manera continua. Más importante que desear una mente capaz de memorizar todo al instante, es comprender que nuestro cerebro no funciona de esa manera. En cambio, es mejor desarrollar una **mente resolutiva, capaz de entender la abstracción del problema y canalizar el camino hacia una solución.**!
+
+Te deseo lo mejor en este camino en el que buscas mejorar tu box de conocimientos.❤️
+
+Con cariño, Mauro.
+
+<hr>
 
 **Índice de la Guía**
 
@@ -38,7 +48,6 @@
     - [Diferencias de coerción en TypeScript](#diferencias-de-coerción-en-typescript)
 9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
-    - [Recursos recomendados](#recursos-recomendados)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
 ---
@@ -720,9 +729,154 @@ let num: number = 1;
 
 console.log(str + num); // "51" (concatenación, como en JS, pero esto está permitido en TypeScript)
 
-let invalid: number = "5"; // Error: Type 'string' is not assignable to type 'number'.
+let invalido: number = "5"; // Error: Type 'string' is not assignable to type 'number'.
 
 // Coerción explícita (necesita conversión explícita en TS):
-let coerced: number = <number>+str; // 5 (convierte la cadena '5' a número)
-let coerced2: number = Number(str); // 5 (Otra forma de conversión explícita)
+let coercion1: number = <number>+str; // 5 (convierte la cadena '5' a número)
+let coercion2: number = Number(str); // 5 (Otra forma de conversión explícita)
 ```
+
+## Conclusión y Recursos Adicionales
+
+El conocimiento de los conceptos de truthy y falsy son fundamentales y los cimientos para comprender como en JavaScript los valores son evaluados en contextos booleanos, esto nos permite orientarnos a escribir Código más eficiente, legible y limpio. Aunque la coerción implícita puede ser algo confusa hasta comprenderla en profundidad y en los diferentes contextos posibles, dominarla es crucial para aprovechar al máximo las capacidades de JavaScript y evitar errores comunes difíciles de depurar. además, conocer la diferencia con otros lenguajes nos indica que aunque este sea un concepto global en programación, no todos los lenguajes proceden de la misma manera.
+
+### Resumen de conceptos clave
+
+**Truthy y Falsy:**
+Truthy: Son aquellos valores que serán evaluados como "verdadero" dentro de contexto booleano.
+Falsy: Son aquellos valores que serán evaluados como "falso" dentro de contexto booleano.
+
+**Coerción:**
+Coerción implícita: Es la conversión automática de un valor de un tipo de dato a otro por parte del motor de JavaScript.
+Coerción explícita: Es la conversión manual de un valor de un tipo de dato a otro por parte del desarrollador.
+
+**Operadores Lógicos:**
+&& (AND): operador que devuelve "verdadero" si ambos operandos son truthy.
+|| (OR): operador que devuelve "verdadero" si al menos un operando es truthy.
+! (NOT): operador que invierte el valor booleano de un operando.
+
+**Evaluación de Cortocircuito:**
+Comportamiento de los operadores lógicos && y || donde el segundo operando no se evalúa si el resultado ya se puede determinar con el primer operando.
+
+**Operadores de Comparación:**
+== (Igualdad no estricta): Permite la coerción implícita antes de ejercer la comparación.
+=== (Igualdad estricta): Compara valores y tipos de datos sin coerción implícita.
+
+**Nullish:**
+son los valores que indican ausencia de valor de definido (null, undefined)
+
+**Nullish Coalescing (??):**
+Operador que devuelve el operando derecho cuando el operando izquierdo es null o undefined.
+
+**Optional Chaining (?.):**
+Permite acceder a propiedades de objetos sin errores si la propiedad no existe o es nullish.
+
+**Doble Negación (!!):**
+Se utiliza para convertir cualquier valor a su equivalente booleano de manera explícita.
+
+**Tipado Dinámico:**
+Característica de un lenguaje de programación (ej. JavaScript) donde las variables pueden cambiar de tipo en tiempo de ejecución.
+
+**Tipado estático:**
+característica de un lenguaje de programación (ej. Typescript) donde los valores de las variables son definidos y no cambian a lo largo del tiempo.
+
+### Ejercicios y desafíos prácticos
+
+Truthy y Falsy
+
+```JavaScript
+
+console.log(Boolean(0)); // ¿Cuál es la salida?
+console.log(Boolean("")); // ¿Cuál es la salida?
+console.log(Boolean(null)); // ¿Cuál es la salida?
+console.log(Boolean(undefined)); // ¿Cuál es la salida?
+console.log(Boolean(NaN)); // ¿Cuál es la salida?
+console.log(Boolean("Hola")); // ¿Cuál es la salida?
+console.log(Boolean({})); // ¿Cuál es la salida?
+console.log(Boolean([])); // ¿Cuál es la salida?
+```
+
+Coerción Implícita
+
+```JavaScript
+
+console.log(5 + "5"); // ¿Cuál es la salida?
+console.log(5 * "2"); // ¿Cuál es la salida?
+console.log(5 == "5"); // ¿Cuál es la salida?
+console.log(5 === "5"); // ¿Cuál es la salida?
+console.log(null == undefined); // ¿Cuál es la salida?
+console.log(null === undefined); // ¿Cuál es la salida?
+console.log(true + 1); // ¿Cuál es la salida?
+console.log(false + 1); // ¿Cuál es la salida?
+```
+
+Operadores Lógicos
+
+```JavaScript
+
+console.log(true && false); // ¿Cuál es la salida?
+console.log(true || false); // ¿Cuál es la salida?
+console.log(!true); // ¿Cuál es la salida?
+console.log(!0); // ¿Cuál es la salida?
+console.log(!""); // ¿Cuál es la salida?
+console.log(null || "Hola"); // ¿Cuál es la salida?
+console.log(undefined && "Hola"); // ¿Cuál es la salida?
+console.log(NaN || "Hola"); // ¿Cuál es la salida?
+```
+
+Nullish Coalescing (??)
+
+```JavaScript
+
+console.log(null ?? "Hola"); // ¿Cuál es la salida?
+console.log(undefined ?? "Hola"); // ¿Cuál es la salida?
+console.log(0 ?? "Hola"); // ¿Cuál es la salida?
+console.log("" ?? "Hola"); // ¿Cuál es la salida?
+console.log(NaN ?? "Hola"); // ¿Cuál es la salida?
+```
+
+Optional Chaining (?.)
+
+```javaScript
+
+const obj = { a: { b: { c: 1 } } };
+console.log(obj.a.b.c); // ¿Cuál es la salida?
+console.log(obj.a?.b?.c); // ¿Cuál es la salida?
+console.log(obj.a?.x?.c); // ¿Cuál es la salida?
+```
+
+Doble Negación (!!)
+
+```JavaScript
+
+console.log(!!"Hola"); // ¿Cuál es la salida?
+console.log(!!0); // ¿Cuál es la salida?
+console.log(!!null); // ¿Cuál es la salida?
+console.log(!!""); // ¿Cuál es la salida?
+console.log(!!{}); // ¿Cuál es la salida?
+```
+
+Evaluación de Cortocircuito
+
+```JavaScript
+
+let x = 1;
+true || (x = 2);
+console.log(x); // ¿Cuál es la salida?
+
+let y = 1;
+false && (y = 2);
+console.log(y); // ¿Cuál es la salida?
+
+let z = null;
+z ?? console.log("Hola"); // ¿Cuál es la salida?
+```
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
