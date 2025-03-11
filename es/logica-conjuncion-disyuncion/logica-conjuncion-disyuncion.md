@@ -34,11 +34,7 @@ Con cariño, Mauro.
 5. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión entre `&&` y `||` en expresiones anidadas](#confusión-entre--y--en-expresiones-anidadas)
     - [Uso incorrecto de truthy y falsy en condiciones](#uso-incorrecto-de-truthy-y-falsy-en-condiciones)
-    - [Manejo seguro de valores con operadores lógicos](#manejo-seguro-de-valores-con-operadores-lógicos)
-6. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
-    - [Evaluación lógica en Python, Java y JavaScript](#evaluación-lógica-en-python-java-y-javascript)
-    - [Diferencias de comportamiento en TypeScript](#diferencias-de-comportamiento-en-typescript)
-7. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+6. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
@@ -397,4 +393,45 @@ let usuarios = [
 
 let usuario = usuarios.find((u) => u.id === 3) || { nombre: "Invitado" };
 console.log(usuario.nombre); // "Invitado"
+```
+
+## Errores Comunes y Buenas Prácticas
+
+### Confusión entre `&&` y `||` en expresiones anidadas
+
+Uno de los errores más frecuentes que podemos producir es confundir la precedencia y el comportamiento de && y || en expresiones complejas. llegando a resultados sin saber cuales son los caminos que ha seguido el flujo de ejecucion.
+
+```javascript
+console.log(true || (true && false));
+```
+
+aqui primero se evalua `true && false` resultando en false, luego evaluamos `true || false` resultando en true.
+¡Debemos entender que camino lleva nuestro flujo de ejecucion y en que orden lo hace!
+
+### Uso incorrecto de truthy y falsy en condiciones
+
+Como vimos, JavaScript evalúa ciertos valores como truthy o falsy. Usar esto de forma incorrecta puede llevar a errores sutiles
+
+```javascript
+let longitud = 0;
+
+if (longitud) {
+    console.log("ingresaste una longitud");
+} else {
+    console.log("no ingresaste una longitud"); //se mostrara en consola.
+}
+```
+
+En este contexto , 0 (cero) es una longuitud valida , pero nuestro flujo de ejecucion no lo toma como tal , ya que 0 es un valor del conjunto falsy.
+
+la solucion es que seamos mas explicitos en la solucion de nuestra necesidad :
+
+```javascript
+let longitud = 0;
+
+if (longitud >= 0) {
+    console.log("ingresaste una longitud"); //se mostrara en consola.
+} else {
+    console.log("no ingresaste una longitud");
+}
 ```
