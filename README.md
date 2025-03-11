@@ -17,6 +17,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de Lógica de Precedencia y Asociatividad de Operadores en JavaScript](es/logica-precedencia-asociatividad/logica-precedencia-asociatividad.md)
 
+#### - [Manipulación de lógica de Conjuncion y Disyuncion](es/logica-conjuncion-disyuncion/logica-conjuncion-disyuncion.md)
+
 ---
 
 Muchas Gracias por leerme!
