@@ -28,7 +28,7 @@ Con cariño, Mauro.
 4. [Uso Avanzado y Manipulación](#uso-avanzado-y-manipulación)
     - [Uso de `&&` y `||` en asignaciones predeterminadas](#uso-de--y--en-asignaciones-predeterminadas)
     - [Doble negación (`!!`) y coerción explícita](#doble-negación--y-coerción-explícita)
-    - [Operadores lógicos en combinación con nullish coalescing (`??`)](#operadores-lógicos-en-combinación-con-nullish-coalescing-)
+    - [Operador lógico OR y nullish coalescing](#operador-lógico-or-y-nullish-coalescing)
     - [Uso de operadores lógicos en funciones y retorno de valores](#uso-de-operadores-lógicos-en-funciones-y-retorno-de-valores)
 5. [Casos de Uso en la Práctica](#casos-de-uso-en-la-práctica)
     - [Validaciones de entrada de usuario](#validaciones-de-entrada-de-usuario)
@@ -244,7 +244,7 @@ La evaluación de cortocircuito es una característica crucial en nuestros opera
 
 ### Cómo funciona el cortocircuito con && (AND)
 
-Nuestros operadores && realizaran una evaluacion de cortocircuito de izquierda a derecha. esto significa que si el primer operando es falso, no es necesario que nuestro segundo operando sea evaluado, por que para que una expresion con operador && de como resultado true , todos sus operandos deben ser verdaderos.
+Nuestros operadores && realizaran una evaluación de cortocircuito de izquierda a derecha. esto significa que si el primer operando es falso, no es necesario que nuestro segundo operando sea evaluado, porque para que una expresión con operador && de como resultado true, todos sus operandos deben ser verdaderos.
 
 ```javascript
 let a = true;
@@ -261,14 +261,14 @@ console.log(mensaje("pos1", a) && mensaje("pos2", b) && mensaje("pos3", c))
 /*
 pos1  // perteneciente a mensaje("pos1", a) retorno : true
 pos2  // perteneciente a mensaje("pos2", b) retorno : false
-false // perteneciente al console.log() de mayor nivel al resolver la expresion por cortocircuito.
+false // perteneciente al console.log() de mayor nivel al resolver la expresión por cortocircuito.
 */
 ```
 
-como podemos observar `mensaje("pos3", c)` nunca es evaluado ya que el cortocircuito detecto que no tiene mayor sentido proseguir con la evaluacion al momento de haber recibido el retorno false de `mensaje("pos2", b)`.
+cómo podemos observar `mensaje("pos3", c)` nunca es evaluado ya que el cortocircuito detecto que no tiene mayor sentido proseguir con la evaluación al momento de haber recibido el retorno false de `mensaje("pos2", b)`.
 
 **Cómo funciona el cortocircuito con || (OR)**
-En el caso de nuestros operadores ||, el cortocircuito se activa si el primer operando es verdadero, ya que no es necesario que evaluen el nuestro segundo operando ya que una expresión OR siempre será true si al menos uno de nuestros operandos es verdadero.
+En el caso de nuestros operadores ||, el cortocircuito se activa si el primer operando es verdadero, ya que no es necesario que evalúen el nuestro segundo operando ya que una expresión OR siempre será true si al menos uno de nuestros operandos es verdadero.
 
 ```javascript
 let a = false;
@@ -285,8 +285,88 @@ console.log(mensaje("pos1", a) || mensaje("pos2", b) || mensaje("pos3", c))
 /*
 pos1  // perteneciente a mensaje("pos1", a) retorno : false
 pos2  // perteneciente a mensaje("pos2", b) retorno : true
-false // perteneciente al console.log() de mayor nivel al resolver la expresion por cortocircuito.
+false // perteneciente al console.log() de mayor nivel al resolver la expresión por cortocircuito.
 */
 ```
 
-Aqui podemos observar que `mensaje("pos3", c)` nunca es evaluado ya que el cortocircuito determino que no tiene mayor sentido proseguir con la evaluacion al momento de haber recibido el retorno true de `mensaje("pos2", b)`.
+aquí podemos observar que `mensaje("pos3", c)` nunca es evaluado ya que el cortocircuito determino que no tiene mayor sentido proseguir con la evaluación al momento de haber recibido el retorno true de `mensaje("pos2", b)`.
+
+## Uso Avanzado y Manipulación
+
+Los operadores && (AND) y || (OR) en JavaScript no solo los podemos utilizar para evaluar nuestras condiciones, si no también podemos emplearlos en asignaciones, conversiones de valores y optimización de código. ¡Veamos cómo aprovechar estas características!.
+
+### Uso de && y || en asignaciones predeterminadas
+
+Podemos usar || (OR) para establecer valores predeterminados en caso de que el operando izquierdo pertenezca al conjunto de valores falsy, por contrario podemos usar && (AND) en los casos donde queramos dar un valor predeterminado cuando el operando izquierdo pertenece al conjunto de valores truthy.
+
+Veamos unos ejemplos con ambos operadores.
+
+```javascript
+let usuario = null;
+let nombre = usuario || "Invitado";
+console.log(`Bienvenido ${nombre}!`); // bienvenido Invitado
+```
+
+```javascript
+let usuario = null;
+let nombre = usuario || "Invitado";
+console.log(`Bienvenido ${nombre}!`); // bienvenido Invitado
+```
+
+ya que usuario es pertenece al conjunto de valores falsy , el operador OR asignara el operando derecho.
+
+```javascript
+let usuario = { nombre: "Mauro" };
+usuario && console.log(`Hola ${usuario.nombre}!`);
+```
+
+como usuario es un objeto el cual pertenece al conjunto de valores truthy, el operador && evaluara el operando derecho.
+
+### Doble negación (!!) y coerción explícita
+
+El operador !! (doble negación) se utiliza cuando necesitamos convertir un valor en su equivalente booleano de manera explícita. La primera negación (!) convierte el valor a su opuesto en el contexto booleano mediante coerción implícita. La segunda negación (!) revierte esta inversión, obteniendo así el valor booleano correspondiente del original.
+
+```javascript
+console.log(!!"Texto"); // true (una cadena no vacía es truthy)
+console.log(!!0); // false (0 es falsy)
+console.log(!!null); // false (null es falsy)
+console.log(!![]); // true (un array vacío es truthy)
+```
+
+### Operador lógico OR y nullish coalescing
+
+El operador ?? (Nullish Coalescing) es similar a ||, pero con una diferencia clave, y es que solo considera null y undefined(valores nullish) como valores falsy, mientras que || también considera 0, false y "" (cadena vacía).
+
+comparemos a ambos con un ejemplo práctico:
+
+```javascript
+let valor = 0 || "valor por defecto";
+console.log(valor); // "valor por defecto", porque 0 pertenece al conjunto falsy para el operador ||
+```
+
+```javascript
+let valor = 0 ?? "valor por defecto";
+console.log(valor); // 0, por que ?? solo evalúa valores nullish como tipo false.
+```
+
+### Uso de operadores lógicos en funciones y retorno de valores
+
+Podemos utilizar los operadores lógicos en nuestras funciones para simplificar nuestro flujo de ejecución, retornando valores condicionales sin necesidad de utilizar estructuras if.
+
+```javascript
+function obtenerMensaje(mostrar) {
+    return mostrar && "Hola Mundo!";
+}
+
+console.log(obtenerMensaje(true)); // "Hola Mundo!"
+console.log(obtenerMensaje(false)); // false
+```
+
+```javascript
+function obtenerNombre(usuario) {
+    return usuario.nombre || "Desconocido";
+}
+
+console.log(obtenerNombre({ nombre: "Mauro" })); // "Mauro"
+console.log(obtenerNombre({})); // "Desconocido"
+```
