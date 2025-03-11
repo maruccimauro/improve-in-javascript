@@ -22,31 +22,27 @@ Con cariño, Mauro.
     - [El operador `&&` (AND) en profundidad](#el-operador--and-en-profundidad)
     - [El operador `||` (OR) en profundidad](#el-operador--or-en-profundidad)
     - [Valores truthy y falsy en la evaluación lógica](#valores-truthy-y-falsy-en-la-evaluación-lógica)
-3. [Evaluación de Expresiones Booleanas](#evaluación-de-expresiones-booleanas)
-    - [Precedencia y asociatividad de los operadores lógicos](#precedencia-y-asociatividad-de-los-operadores-lógicos)
-    - [Combinación de AND y OR en expresiones complejas](#combinación-de-and-y-or-en-expresiones-complejas)
-4. [Evaluación de Cortocircuito](#evaluación-de-cortocircuito)
+3. [Evaluación de Cortocircuito](#evaluación-de-cortocircuito)
     - [Cómo funciona el cortocircuito con `&&`](#cómo-funciona-el-cortocircuito-con-)
     - [Cómo funciona el cortocircuito con `||`](#cómo-funciona-el-cortocircuito-con-)
-    - [Casos prácticos de evaluación de cortocircuito](#casos-prácticos-de-evaluación-de-cortocircuito)
-5. [Uso Avanzado y Manipulación](#uso-avanzado-y-manipulación)
+4. [Uso Avanzado y Manipulación](#uso-avanzado-y-manipulación)
     - [Uso de `&&` y `||` en asignaciones predeterminadas](#uso-de--y--en-asignaciones-predeterminadas)
     - [Doble negación (`!!`) y coerción explícita](#doble-negación--y-coerción-explícita)
     - [Operadores lógicos en combinación con nullish coalescing (`??`)](#operadores-lógicos-en-combinación-con-nullish-coalescing-)
     - [Uso de operadores lógicos en funciones y retorno de valores](#uso-de-operadores-lógicos-en-funciones-y-retorno-de-valores)
-6. [Casos de Uso en la Práctica](#casos-de-uso-en-la-práctica)
+5. [Casos de Uso en la Práctica](#casos-de-uso-en-la-práctica)
     - [Validaciones de entrada de usuario](#validaciones-de-entrada-de-usuario)
     - [Condiciones en estructuras de control](#condiciones-en-estructuras-de-control)
     - [Filtrado y manipulación de arrays con AND y OR](#filtrado-y-manipulación-de-arrays-con-and-y-or)
     - [Optimización de código con operadores lógicos](#optimización-de-código-con-operadores-lógicos)
-7. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
+6. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión entre `&&` y `||` en expresiones anidadas](#confusión-entre--y--en-expresiones-anidadas)
     - [Uso incorrecto de truthy y falsy en condiciones](#uso-incorrecto-de-truthy-y-falsy-en-condiciones)
     - [Manejo seguro de valores con operadores lógicos](#manejo-seguro-de-valores-con-operadores-lógicos)
-8. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
+7. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
     - [Evaluación lógica en Python, Java y JavaScript](#evaluación-lógica-en-python-java-y-javascript)
     - [Diferencias de comportamiento en TypeScript](#diferencias-de-comportamiento-en-typescript)
-9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+8. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
@@ -241,3 +237,56 @@ if ("") {
     console.log("Esto es un valor de la categoria Falsy");
 }
 ```
+
+## Evaluación de Cortocircuito
+
+La evaluación de cortocircuito es una característica crucial en nuestros operadores lógicos && (AND) y || (OR). Esta evaluación nos permite que los operadores corten el proceso de evaluación tan pronto como se puede determinar el resultado final, optimizando el rendimiento y evitando la ejecución innecesaria de código.
+
+### Cómo funciona el cortocircuito con && (AND)
+
+Nuestros operadores && realizaran una evaluacion de cortocircuito de izquierda a derecha. esto significa que si el primer operando es falso, no es necesario que nuestro segundo operando sea evaluado, por que para que una expresion con operador && de como resultado true , todos sus operandos deben ser verdaderos.
+
+```javascript
+let a = true;
+let b = false;
+let c = true;
+
+function mensaje(mensaje, bool) {
+    console.log(mensaje);
+    return bool;
+}
+
+//prettier-ignore
+console.log(mensaje("pos1", a) && mensaje("pos2", b) && mensaje("pos3", c))
+/*
+pos1  // perteneciente a mensaje("pos1", a) retorno : true
+pos2  // perteneciente a mensaje("pos2", b) retorno : false
+false // perteneciente al console.log() de mayor nivel al resolver la expresion por cortocircuito.
+*/
+```
+
+como podemos observar `mensaje("pos3", c)` nunca es evaluado ya que el cortocircuito detecto que no tiene mayor sentido proseguir con la evaluacion al momento de haber recibido el retorno false de `mensaje("pos2", b)`.
+
+**Cómo funciona el cortocircuito con || (OR)**
+En el caso de nuestros operadores ||, el cortocircuito se activa si el primer operando es verdadero, ya que no es necesario que evaluen el nuestro segundo operando ya que una expresión OR siempre será true si al menos uno de nuestros operandos es verdadero.
+
+```javascript
+let a = false;
+let b = true;
+let c = true;
+
+function mensaje(mensaje, bool) {
+    console.log(mensaje);
+    return bool;
+}
+
+//prettier-ignore
+console.log(mensaje("pos1", a) || mensaje("pos2", b) || mensaje("pos3", c))
+/*
+pos1  // perteneciente a mensaje("pos1", a) retorno : false
+pos2  // perteneciente a mensaje("pos2", b) retorno : true
+false // perteneciente al console.log() de mayor nivel al resolver la expresion por cortocircuito.
+*/
+```
+
+Aqui podemos observar que `mensaje("pos3", c)` nunca es evaluado ya que el cortocircuito determino que no tiene mayor sentido proseguir con la evaluacion al momento de haber recibido el retorno true de `mensaje("pos2", b)`.
