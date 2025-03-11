@@ -30,19 +30,15 @@ Con cariño, Mauro.
     - [Doble negación (`!!`) y coerción explícita](#doble-negación--y-coerción-explícita)
     - [Operador lógico OR y nullish coalescing](#operador-lógico-or-y-nullish-coalescing)
     - [Uso de operadores lógicos en funciones y retorno de valores](#uso-de-operadores-lógicos-en-funciones-y-retorno-de-valores)
-5. [Casos de Uso en la Práctica](#casos-de-uso-en-la-práctica)
-    - [Validaciones de entrada de usuario](#validaciones-de-entrada-de-usuario)
-    - [Condiciones en estructuras de control](#condiciones-en-estructuras-de-control)
     - [Filtrado y manipulación de arrays con AND y OR](#filtrado-y-manipulación-de-arrays-con-and-y-or)
-    - [Optimización de código con operadores lógicos](#optimización-de-código-con-operadores-lógicos)
-6. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
+5. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión entre `&&` y `||` en expresiones anidadas](#confusión-entre--y--en-expresiones-anidadas)
     - [Uso incorrecto de truthy y falsy en condiciones](#uso-incorrecto-de-truthy-y-falsy-en-condiciones)
     - [Manejo seguro de valores con operadores lógicos](#manejo-seguro-de-valores-con-operadores-lógicos)
-7. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
+6. [Comparación con Otros Lenguajes](#comparación-con-otros-lenguajes)
     - [Evaluación lógica en Python, Java y JavaScript](#evaluación-lógica-en-python-java-y-javascript)
     - [Diferencias de comportamiento en TypeScript](#diferencias-de-comportamiento-en-typescript)
-8. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+7. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
@@ -369,4 +365,36 @@ function obtenerNombre(usuario) {
 
 console.log(obtenerNombre({ nombre: "Mauro" })); // "Mauro"
 console.log(obtenerNombre({})); // "Desconocido"
+```
+
+### Filtrado y manipulación de arrays con AND y OR
+
+Los operadores lógicos también son útiles para filtrar, buscar o transformar datos en nuestros arrays.
+
+Ejemplo de filtrado con filter() y &&.
+
+```javascript
+let productos = [
+    { nombre: "Laptop", precio: 1500, disponible: true },
+    { nombre: "Mouse", precio: 25, disponible: false },
+    { nombre: "Teclado", precio: 75, disponible: true },
+];
+
+let productosDisponibles = productos.filter(
+    (p) => p.precio < 100 && p.disponible
+);
+console.log(productosDisponibles);
+// [{ nombre: "Teclado", precio: 75, disponible: true }]
+```
+
+Ejemplo de búsqueda con find() y ||.
+
+```javascript
+let usuarios = [
+    { id: 1, nombre: "Juan" },
+    { id: 2, nombre: "María" },
+];
+
+let usuario = usuarios.find((u) => u.id === 3) || { nombre: "Invitado" };
+console.log(usuario.nombre); // "Invitado"
 ```
