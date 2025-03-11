@@ -32,10 +32,7 @@ Con cariño, Mauro.
 6. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión con la precedencia en expresiones complejas](#confusión-con-la-precedencia-en-expresiones-complejas)
     - [Uso de paréntesis para claridad](#uso-de-paréntesis-para-claridad)
-7. [Comparación con otros Lenguajes](#comparación-con-otros-lenguajes)
-    - [Diferencias de precedencia entre JavaScript y Python](#diferencias-de-precedencia-entre-javascript-y-python)
-    - [Impacto de la precedencia en C++ y JavaScript](#impacto-de-la-precedencia-en-c-y-javascript)
-8. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+7. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
@@ -335,3 +332,65 @@ let limpio = (3 + 4) * (5 - 2) / (6 + 3 - 4 + 3); //mas limpio y legible.
 
 console.log(noLimpio, limpio); // 2.625 2.625
 ```
+
+## Conclusión y Recursos Adicionales
+
+Es importante entender que dominar la precedencia y asociatividad de operadores y su relación con el motor de JavaScript es esencial para que podamos escribir código más claro, predecible y libre de errores. Aunque cuando nos enfrentemos a la tabla de precedencia y asociatividad puede presentarse de manera intimidante, el simple hecho de comprender su incidencia y saber dónde encontrarla es suficiente para que nos equipemos de una herramienta poderosa para controlar el flujo de nuestro código y su ejecución, asegurando que se comporte como nosotros esperamos que lo haga. la práctica constante y la familiarización con estos conceptos nos van a permitir no caer en trampas comunes que nosotros mismos sin intención podríamos generar mejorando así significativamente la calidad de nuestro código.
+
+### Resumen de conceptos clave:
+
+**Precedencia de operadores:** Define el orden en que se evalúan los operadores en una expresión. Los operadores con mayor precedencia se ejecutan primero.
+
+**Asociatividad de operadores:** Determina la dirección en que se evalúan los operadores con la misma precedencia (izquierda a derecha o derecha a izquierda).
+
+**Paréntesis:**el paréntesis permiten controlar explícitamente el orden de evaluación, anulando las reglas de precedencia y asociatividad de otros operadores en relación a él ya que tienen la precedencia más alta.
+
+**Operadores combinados:** Simplifican y optimizan las expresiones, permitiendo modificar variables de manera concisa (por ejemplo, +=, -=, \*=, /=).
+
+**Buenas prácticas:** Utilizar paréntesis para claridad, dividir expresiones complejas, familiarizarse con la tabla de precedencia.
+
+### Ejercicios y desafíos prácticos
+
+¿Cuál es la salida de cada caso?
+
+```javascript
+console.log(8 + 3 * 4)
+console.log((8 + 3) * 4)
+console.log(15 - 4 / 2)
+console.log((15 - 4) / 2)
+console.log(2 ** 3 + 5)
+console.log(2 ** (3 + 5))
+console.log(10 % 3 * 2)
+console.log(10 % (3 * 2))
+console.log(true && false || true)
+console.log(true || false && true)
+console.log((true || false) && true)
+console.log(false ?? true || false)
+console.log((false ?? true) || false)
+console.log(5 + 3 > 6 && 10 - 2 < 9)
+console.log(!(5 + 3 > 6) || 10 - 2 < 9)
+```
+
+¡Corrige los errores en las siguientes expresiones para que produzcan el resultado deseado!
+
+```javascript
+console.log(10 - 2 * 3); // Resultado esperado: 24
+console.log(false || (true && false)); // Resultado esperado: true
+console.log(5 + 2 ** 3 / 4); // Resultado esperado: 7
+console.log(8 / 2 + 3 * 4); // Resultado esperado: 20
+console.log((15 % 4) + 2 * 3); // Resultado esperado: 9
+console.log(2 ** 4 - 10 / 2); // Resultado esperado: 11
+console.log((true && false) || (true && true)); // Resultado esperado: false
+console.log(20 / 5 - 2 * 2); // Resultado esperado: 0
+console.log((9 % 2) + 4 ** 2); // Resultado esperado: 17
+console.log(6 + 3 * 2 ** 2); // Resultado esperado: 36
+```
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
