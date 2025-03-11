@@ -399,14 +399,14 @@ console.log(usuario.nombre); // "Invitado"
 
 ### Confusión entre `&&` y `||` en expresiones anidadas
 
-Uno de los errores más frecuentes que podemos producir es confundir la precedencia y el comportamiento de && y || en expresiones complejas. llegando a resultados sin saber cuales son los caminos que ha seguido el flujo de ejecucion.
+Uno de los errores más frecuentes que podemos producir es confundir la precedencia y el comportamiento de && y || en expresiones complejas. llegando a resultados sin saber cuales son los caminos que ha seguido el flujo de ejecución.
 
 ```javascript
 console.log(true || (true && false));
 ```
 
 aqui primero se evalua `true && false` resultando en false, luego evaluamos `true || false` resultando en true.
-¡Debemos entender que camino lleva nuestro flujo de ejecucion y en que orden lo hace!
+¡Debemos entender que camino lleva nuestro flujo de ejecución y en qué orden lo hace!
 
 ### Uso incorrecto de truthy y falsy en condiciones
 
@@ -422,9 +422,9 @@ if (longitud) {
 }
 ```
 
-En este contexto , 0 (cero) es una longuitud valida , pero nuestro flujo de ejecucion no lo toma como tal , ya que 0 es un valor del conjunto falsy.
+En este contexto, 0 (cero) es una longitud valida , pero nuestro flujo de ejecución no lo toma como tal , ya que 0 es un valor del conjunto falsy.
 
-la solucion es que seamos mas explicitos en la solucion de nuestra necesidad :
+la solución es que seamos más explícitos en la solución de nuestra necesidad:
 
 ```javascript
 let longitud = 0;
@@ -434,4 +434,59 @@ if (longitud >= 0) {
 } else {
     console.log("no ingresaste una longitud");
 }
+```
+
+## Conclusión y Recursos Adicionales
+
+La manipulación de la lógica de evaluación de conjunción y disyunción es una habilidad esencial para podamos desarrollar en JavaScript. Dominar estos conceptos nos permitirá escribir código más limpio, eficiente y expresivo. Nuestra capacidad de evaluar condiciones complejas, utilizar cortocircuitos y entender la coerción de tipos nos abrirá un abanico de posibilidades para resolver problemas de manera más creativa y efectiva.
+
+### Resumen de los conceptos clave
+
+**Conjunción (&&):** Devuelve true solo si todas las condiciones son true.
+
+**Disyunción (||):** Devuelve true si al menos una condición es true.
+
+**Cortocircuito:** Optimiza la evaluación de expresiones lógicas al evitar la ejecución innecesaria de código.
+
+**Truthy y Falsy:** Valores que se evalúan como true o false en un contexto booleano.
+
+**Nullish Coalescing (??):** Devuelve el operando derecho solo si el operando izquierdo es null o undefined.
+
+**Doble negación (!!):** Convierte cualquier valor a su equivalente booleano.
+
+### Ejercicios y desafíos prácticos
+
+¿Cuál es la salida por consola de cada caso? Verifícalo al finalizar.
+
+```javascript
+function saludar() {
+    console.log("¡Hola!");
+    return true;
+}
+let a = 10;
+let valor = 0;
+
+console.log(true && "Hola" && 5);
+
+console.log(false || "Mundo" || 0);
+
+console.log(null ?? "Valor por defecto");
+
+console.log(undefined || (10 && "JavaScript"));
+
+console.log(!"" && "Truthy");
+
+console.log(a > 5 || (a += 5));
+
+console.log(a);
+
+console.log(false || (true && false));
+
+console.log(false && saludar());
+
+console.log(!![] && !!{});
+
+console.log(valor || "Valor predeterminado");
+
+console.log(valor ?? "Valor predeterminado");
 ```
