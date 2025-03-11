@@ -490,3 +490,12 @@ console.log(valor || "Valor predeterminado");
 
 console.log(valor ?? "Valor predeterminado");
 ```
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
