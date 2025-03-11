@@ -22,10 +22,7 @@ Con cariño, Mauro.
     - [Definición de precedencia de operadores](#definición-de-precedencia-de-operadores)
     - [Definición de asociatividad de operadores](#definición-de-asociatividad-de-operadores)
     - [Relación entre Precedencia y Asociatividad](#relación-entre-precedencia-y-asociatividad)
-3. [Precedencia de Operadores en JavaScript](#precedencia-de-operadores-en-javascript)
-    - [Lista de operadores con mayor a menor precedencia](#lista-de-operadores-con-mayor-a-menor-precedencia)
-    - [Agrupación de operadores con la misma precedencia](#agrupación-de-operadores-con-la-misma-precedencia)
-    - [Impacto de la precedencia en el orden de evaluación](#impacto-de-la-precedencia-en-el-orden-de-evaluación)
+3. [Lista de operadores con mayor a menor precedencia](#lista-de-operadores-con-mayor-a-menor-precedencia)
 4. [Asociatividad de Operadores en JavaScript](#asociatividad-de-operadores-en-javascript)
     - [Operadores con asociatividad izquierda a derecha](#operadores-con-asociatividad-izquierda-a-derecha)
     - [Operadores con asociatividad derecha a izquierda](#operadores-con-asociatividad-derecha-a-izquierda)
@@ -125,3 +122,74 @@ aquí vemos como 10 tiende a asignarse a d por la asociatividad de derecha a izq
 ### Relación entre Precedencia y Asociatividad
 
 La precedencia y la asociatividad trabajan juntas como un equipo para determinar el orden de evaluación de nuestras expresiones. Mientras que la precedencia toma decisiones como qué operador se ejecuta primero, la asociatividad se dedica a resolver situaciones en las que hay operadores de igual precedencia.
+
+## lista de operadores con mayor a menor precedencia
+
+A continuación podemos ver una lista donde detalla el nivel de precedencia con el que trabaja el motor de Javascript:
+
+| Precedencia | Tipo de operador                                      | Asociatividad | Operadores individuales |
+| ----------- | ----------------------------------------------------- | ------------- | ----------------------- |
+| 19          | Agrupamiento                                          | n/a           | `( … )`                 |
+| 18          | Acceso a propiedades (notación por punto)             | Izquierda     | `… . …`                 |
+| 18          | Acceso a propiedades (notación por corchetes)         | Izquierda     | `… [ … ]`               |
+| 18          | `new` (con lista de argumentos)                       | n/a           | `new … ( … )`           |
+| 18          | Llamada a función                                     | Izquierda     | `… ( … )`               |
+| 18          | Encadenamiento opcional                               | Izquierda     | `?.`                    |
+| 17          | `new` (sin lista de argumentos)                       | Derecha       | `new …`                 |
+| 16          | Incremento sufijo                                     | n/a           | `… ++`                  |
+| 16          | Decremento sufijo                                     | n/a           | `… --`                  |
+| 15          | NOT lógico                                            | Derecha       | `! …`                   |
+| 15          | NOT a nivel de bits                                   | Derecha       | `~ …`                   |
+| 15          | Suma unaria                                           | Derecha       | `+ …`                   |
+| 15          | Negación unaria                                       | Derecha       | `- …`                   |
+| 15          | Incremento prefijo                                    | Derecha       | `++ …`                  |
+| 15          | Decremento prefijo                                    | Derecha       | `-- …`                  |
+| 15          | `typeof`                                              | Derecha       | `typeof …`              |
+| 15          | `void`                                                | Derecha       | `void …`                |
+| 15          | `delete`                                              | Derecha       | `delete …`              |
+| 15          | `await`                                               | Derecha       | `await …`               |
+| 14          | Potenciación (`**`)                                   | Derecha       | `… ** …`                |
+| 13          | Multiplicación (`*`)                                  | Izquierda     | `… * …`                 |
+| 13          | División (`/`)                                        | Izquierda     | `… / …`                 |
+| 13          | Resto (`%`)                                           | Izquierda     | `… % …`                 |
+| 12          | Adición (`+`)                                         | Izquierda     | `… + …`                 |
+| 12          | Sustracción (`-`)                                     | Izquierda     | `… - …`                 |
+| 11          | Desplazamiento de bits a la izquierda (`<<`)          | Izquierda     | `… << …`                |
+| 11          | Desplazamiento de bits a la derecha (`>>`)            | Izquierda     | `… >> …`                |
+| 11          | Desplazamiento de bits a la derecha sin signo (`>>>`) | Izquierda     | `… >>> …`               |
+| 10          | Menor a (`<`)                                         | Izquierda     | `… < …`                 |
+| 10          | Menor o igual a (`<=`)                                | Izquierda     | `… <= …`                |
+| 10          | Mayor a (`>`)                                         | Izquierda     | `… > …`                 |
+| 10          | Mayor o igual a (`>=`)                                | Izquierda     | `… >= …`                |
+| 10          | `in`                                                  | Izquierda     | `… in …`                |
+| 10          | `instanceof`                                          | Izquierda     | `… instanceof …`        |
+| 9           | Igualdad (`==`)                                       | Izquierda     | `… == …`                |
+| 9           | Desigualdad (`!=`)                                    | Izquierda     | `… != …`                |
+| 9           | Igualdad estricta (`===`)                             | Izquierda     | `… === …`               |
+| 9           | Desigualdad estricta (`!==`)                          | Izquierda     | `… !== …`               |
+| 8           | AND a nivel de bits (`&`)                             | Izquierda     | `… & …`                 |
+| 7           | XOR a nivel de bits (`^`)                             | Izquierda     | `… ^ …`                 |
+| 6           | OR a nivel de bits (`\|`)                             | Izquierda     | `… \| …`                |
+| 5           | AND lógico (`&&`)                                     | Izquierda     | `… && …`                |
+| 4           | OR lógico (`\|\|`)                                    | izquierda     | `… \|\| …`              |
+| 4           | Operador de coalescencia nula (`??`)                  | Izquierda     | `… ?? …`                |
+| 3           | Operador condicional (ternario)                       | Derecha       | `… ? … : …`             |
+| 2           | Asignación simple                                     | Derecha       | `… = …`                 |
+| 2           | Asignación con suma                                   | Derecha       | `… += …`                |
+| 2           | Asignación con resta                                  | Derecha       | `… -= …`                |
+| 2           | Asignación con exponenciación                         | Derecha       | `… **= …`               |
+| 2           | Asignación con multiplicación                         | Derecha       | `… *= …`                |
+| 2           | Asignación con división                               | Derecha       | `… /= …`                |
+| 2           | Asignación con módulo                                 | Derecha       | `… %= …`                |
+| 2           | Asignación con desplazamiento a la izquierda          | Derecha       | `… <<= …`               |
+| 2           | Asignación con desplazamiento a la derecha            | Derecha       | `… >>= …`               |
+| 2           | Asignación con desplazamiento sin signo a la derecha  | Derecha       | `… >>>= …`              |
+| 2           | Asignación con AND bit a bit                          | Derecha       | `… &= …`                |
+| 2           | Asignación con XOR bit a bit                          | Derecha       | `… ^= …`                |
+| 2           | Asignación con OR bit a bit                           | Derecha       | `… \|= …`               |
+| 2           | Asignación con AND lógico                             | Derecha       | `… &&= …`               |
+| 2           | Asignación con OR lógico                              | Derecha       | `… \|\|= …`             |
+| 2           | Asignación con operador de fusión nula                | Derecha       | `… ??= …`               |
+| 2           | `yield`                                               | Derecha       | `yield …`               |
+| 2           | `yield*`                                              | Derecha       | `yield* …`              |
+| 1           | Operador coma                                         | Izquierda     | `… , …`                 |
