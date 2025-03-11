@@ -18,7 +18,6 @@ Con cariño, Mauro.
 1. [Introducción](#introducción)
     - [¿Qué es la conjunción (AND) y la disyunción (OR)?](#qué-es-la-conjunción-and-y-la-disyunción-or)
     - [Importancia en la lógica de programación](#importancia-en-la-lógica-de-programación)
-    - [Cómo se diferencian de otros operadores lógicos](#cómo-se-diferencian-de-otros-operadores-lógicos)
 2. [Conceptos Fundamentales](#conceptos-fundamentales)
     - [El operador `&&` (AND) en profundidad](#el-operador--and-en-profundidad)
     - [El operador `||` (OR) en profundidad](#el-operador--or-en-profundidad)
@@ -54,3 +53,53 @@ Con cariño, Mauro.
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
 ---
+
+## 1. Introducción
+
+La manipulación de la lógica de conjunción (&&) y disyunción (||) es fundamental en la programación para relacionarnos de manera correcta con el motor de JavaScript. Estos conceptos nos permiten evaluar condiciones de una manera eficiente, nos facilitan redactar expresiones con toma de decisiones.
+
+### ¿Qué es la conjunción (AND) y la disyunción (OR)?
+
+En lógica booleana, la conjunción (&&) y la disyunción (||) son operadores binarios que nos permiten combinar expresiones booleanas.
+
+**Conjunción lógica (&&) - AND:**
+Nos devolverá true si todas nuestras condiciones son true. Si alguna es false, el resultado es false.
+
+```javascript
+console.log(true && true); // true
+console.log(true && false); // false
+console.log(false && false); // false
+```
+
+```javascript
+let edad = 25;
+let tieneLicencia = true;
+
+if (edad >= 18 && tieneLicencia) {
+    console.log("puedes conducir");
+}
+```
+
+**Disyunción logica (||) OR:**
+nos devolvera true si al menos una de todas nuestras condiciones es true, solo nos devolvera false si todas son false.
+
+```javascript
+console.log(true || false); // true
+console.log(false || true); // true
+console.log(false || false); // false
+```
+
+```javascript
+let esAdmin = false;
+let esModerador = true;
+
+if (esAdmin || esModerador) {
+    console.log("tienes acceso al panel.");
+}
+```
+
+Ambos operadores nos son útiles para evaluar más de una condición y generar toma de decisiones dentro del Código.
+
+### Importancia en la lógica de programación
+
+La conjunción y la disyunción nos facilitan el control del flujo al permitirnos evaluar varias condiciones sin necesidad de múltiples if, definir valores predeterminados de forma segura y reducir el código redundante.
