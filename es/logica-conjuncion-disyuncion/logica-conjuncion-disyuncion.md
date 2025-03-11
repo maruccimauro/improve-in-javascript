@@ -22,9 +22,7 @@ Con cariño, Mauro.
     - [El operador `&&` (AND) en profundidad](#el-operador--and-en-profundidad)
     - [El operador `||` (OR) en profundidad](#el-operador--or-en-profundidad)
     - [Valores truthy y falsy en la evaluación lógica](#valores-truthy-y-falsy-en-la-evaluación-lógica)
-    - [Diferencias clave en la evaluación de AND y OR](#diferencias-clave-en-la-evaluación-de-and-y-or)
 3. [Evaluación de Expresiones Booleanas](#evaluación-de-expresiones-booleanas)
-    - [Cómo evalúa JavaScript los operadores AND y OR](#cómo-evalúa-javascript-los-operadores-and-y-or)
     - [Precedencia y asociatividad de los operadores lógicos](#precedencia-y-asociatividad-de-los-operadores-lógicos)
     - [Combinación de AND y OR en expresiones complejas](#combinación-de-and-y-or-en-expresiones-complejas)
 4. [Evaluación de Cortocircuito](#evaluación-de-cortocircuito)
@@ -125,5 +123,121 @@ if (tormetan == false) {
 let temperatura = 30;
 if (!tormenta && temperatura > 15 && temperatura < 35) {
     console.log("El clima es agradable.");
+}
+```
+
+## Conceptos Fundamentales
+
+### El operador `&&` (AND) en profundidad
+
+El operador && (AND) en JavaScript es uno de los operadores lógicos más fundamentales. Lo utilizamos para evaluar dos o más condiciones booleanas y nos devolverá true solo cuando todas las condiciones de nuestra expresión sean true, si alguna de nuestras condiciones es false, el resultado será false. además, el operador && tiene la propiedad de evaluación por cortocircuito, una herramienta poderosa, esto significa que si la primera condición de nuestra expresión ya es false, no se evaluaran las siguientes condiciones por que el resultado de la expresión puede resolverse en ese mismo momento ya que la operación no puede ser true sin que todas las condiciones lo sean. Esta propiedad nos permitirá optimizar el rendimiento de nuestras aplicaciones ya que nos evita evaluaciones innecesarias. Este operador tiene una precedencia de nivel 5 y una asociatividad de derecha a izquierda.
+
+Ejemplo con cortocircuito:
+
+```javascript
+function enviarMensaje() {
+    console.Log("Mensaje enviado!.");
+}
+
+console.log(false && enviarMensaje());
+```
+
+cómo podemos observar, ¡nunca recibiremos el mensaje por consola ya que el operando con prioridad asociativa es false!
+
+```javascript
+function enviarMensaje() {
+    console.Log("Mensaje enviado!.");
+}
+
+console.log(true && enviarMensaje());
+```
+
+aquí si veremos el mensaje por consola, ya que el operando izquierdo es true , permitiendo así que no se genere el cortocircuito y las evaluaciones sigan su curso.
+
+**tabla de veracidad && (AND)**
+aquí tenemos los comportamientos posibles en una operación binaria con el operador &&
+
+| cuando A es | cuando B es | A && B devuelven |
+| ----------- | ----------- | ---------------- |
+| true        | true        | true             |
+| true        | false       | false            |
+| false       | true        | false            |
+| false       | false       | false            |
+
+### El operador `||` (OR) en profundidad
+
+El operador || (OR) en JavaScript también es un operador lógico muy comúnmente usado, a diferencia de && , este operador lo usaremos para devolver true si al menos una de nuestras condiciones evaluadas es true. Solo nos devolverá false si todas nuestras condiciones son false. Al igual que el operador &&, el operador || también sigue el principio de evaluación de cortocircuito. Si nuestra primer condicional es true, el operador nos devolverá true inmediatamente sin evaluar el resto de nuestras condiciones restantes. ya que él sabe que la expresión completa será true. Este operador tiene una precedencia de nivel 4 y una asociatividad de derecha a izquierda.
+
+```javascript
+function enviarMensaje() {
+    console.Log("Mensaje enviado!.");
+}
+
+console.log(false || enviarMensaje());
+```
+
+Observamos que el mensaje es enviado ya que el operador con prioridad asociativa es false, permitiendo así seguir verificando la expresión en búsqueda de un true.
+
+```javascript
+function enviarMensaje() {
+    console.Log("Mensaje enviado!.");
+}
+
+console.log(true || enviarMensaje());
+```
+
+En este caso contrario, no recibiremos el mensaje ya que el operador || (OR) con el primer operando ya sabe que nuestro resultado será true.
+
+**tabla de veracidad && (AND)**
+aquí tenemos los comportamientos posibles en una operación binaria con el operador ||
+
+| cuando A es | cuando B es | A \|\| B devuelven |
+| ----------- | ----------- | ------------------ |
+| false       | false       | false              |
+| false       | true        | false              |
+| true        | false       | false              |
+| true        | true        | true               |
+
+### Valores truthy y falsy en la evaluación lógica
+
+El motor de JavaScript en relación con los operadores && y || no solo trabajan con valores booleanos explícitos (true o false), si no que también pueden operar con nuestros valores como pertenecientes al conjunto truthy o al conjunto falsy. un valor falsy es cualquier valor que se evaluara como false en un contexto booleano, mientras que un valor truthy será cualquier valor que se evalúe como true.
+
+**Tabla de conjunto de valores falsy y truthy**
+Esta tabla grafica muestra los conjuntos falsy y truthy con sus valores asociados.
+
+| Valor                   | conjunto |
+| ----------------------- | -------- |
+| `false`                 | `falsy`  |
+| `0`                     | `falsy`  |
+| `-0`                    | `falsy`  |
+| `0n` (BigInt)           | `falsy`  |
+| `""` (cadena vacía)     | `falsy`  |
+| `null`                  | `falsy`  |
+| `undefined`             | `falsy`  |
+| `NaN`                   | `falsy`  |
+| `[]` (array vacío)      | `truthy` |
+| `{}` (objeto vacío)     | `truthy` |
+| `"0"` (cadena con cero) | `truthy` |
+| `"hola!"` (cadena)      | `truthy` |
+
+¡Veamos un ejemplo básico para entenderlo mejor!
+
+```javascript
+if ("Hola mundo!") {
+    console.log("Esto es un valor de la categoria Truthy");
+} else {
+    console.log("Esto es un valor de la categoria Falsy");
+}
+```
+
+En este caso la cadena "any text" es un valor que pertenece a la categoría Truthy por que no está vacía, y bajo coerción implícita, JavaScript lo transforma en true.
+
+Pero... ¿qué sucede si evalúa una cadena que está vacía?
+
+```javascript
+if ("") {
+    console.log("Esto es un valor de la categoria Truthy");
+} else {
+    console.log("Esto es un valor de la categoria Falsy");
 }
 ```
