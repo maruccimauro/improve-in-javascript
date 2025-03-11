@@ -31,7 +31,6 @@ Con cariño, Mauro.
     - [Operadores de comparación y su interacción con otros operadores](#operadores-de-comparación-y-su-interacción-con-otros-operadores)
 6. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión con la precedencia en expresiones complejas](#confusión-con-la-precedencia-en-expresiones-complejas)
-    - [Evitar errores en la combinación de operadores](#evitar-errores-en-la-combinación-de-operadores)
     - [Uso de paréntesis para claridad](#uso-de-paréntesis-para-claridad)
 7. [Comparación con otros Lenguajes](#comparación-con-otros-lenguajes)
     - [Diferencias de precedencia entre JavaScript y Python](#diferencias-de-precedencia-entre-javascript-y-python)
@@ -58,16 +57,16 @@ Partamos de unos para intentar comprender mejor estos dos conceptos sumamente ú
 
 ```javascript
 let resultado = 5 + 3 * 2;
-console.log(resultado); // 11 ¿por qué no 16?
+console.log(resultado); // 11 ¿por qué 16) //
 ```
 
-aquí, podemos observar que la multiplicación (_) tiene una mayor precedencia que el operador de suma (+), por lo tanto, la primer expresión a evaluarse será 3 _ 2 , resultando en 6, y luego se le suma 5, obteniendo así 11.
+aquí, podemos observar que la multiplicación (\*) tiene una mayor precedencia que el operador de suma (+), por lo tanto, la primer expresión a evaluarse será 3 \* 2 , resultando en 6, y luego se le suma 5, obteniendo así 11.
 
 Pero si quisiéramos que la suma se evalúe primero , podríamos solucionarlo con el uso del operador paréntesis de agrupación ().
 
 ```javascript
 let resultado = (5 + 3) * 2;
-console.log(resultado); // 16 ¿por que no 11?
+console.log(resultado); // 16 ¿por que 11) //
 ```
 
 Vemos como en este caso los operadores paréntesis de agrupación alteran el orden natural de precedencia del restos de los operadores , ya que el nivel de precedencia que poseen es el más alto posible , con un nivel 19 (ya veremos esto en detalle más adelante).
@@ -276,3 +275,63 @@ if ((a > b && b < c) || a === 5) {
 ```
 
 En este caso, primero se evalúa a > b && b < c, luego el resultado se combina con a === 5 usando el operador ||.
+
+## Errores Comunes y Buenas Prácticas
+
+Uno de los errores más comunes, pero más importantes que nos vamos a cruzarnos con mayor frecuencia es la de subestimar o mal interpretar la precede y asociatividad de los operadores en expresiones complejas. ¡nuestro peor enemigo somos nosotros mismos! , esto nos puede llevar a resultados inesperados y errores lógicos difíciles de depurar.
+
+## Confusión con la precedencia en expresiones complejas
+
+Las expresiones complejas son difíciles de depurar si llegase a tener algún error lógico al momento de desarrollar su contexto.
+
+```javascript
+let resultado = 10 + (5 * 2 ** 3) / 4 - (6 % 4) || (7 && 0);
+console.log(resultado); // ¿cual es el resultado que esperamos? 18!
+```
+
+¡podemos evitar confusiones de cualquier tipo en expresiones como estas de una manera muy sencilla!:
+
+**Conocer la tabla de precedencia y asociatividad:** debemos familiarizarnos con la tabla de operadores de JavaScript, no es necesario que aprendamos todo de memoria , solo aquellos que usamos día a día con el tiempo y para los demás con saber dónde encontrar la información de referencia nos alcanza para casos aislados.
+
+**Dividir expresiones complejas:** podemos dividir la expresión en secciones más pequeñas para así podamos mejorar la legibilidad y reducir la posibilidad a errores.
+
+```javascript
+let a = 5 * 2 ** 3,
+    b = 6 % 4,
+    c = 7 && 0;
+
+let resultado = 10 + a / 4 - b || c;
+console.log(resultado);
+```
+
+**Tiempo:** debemos de darnos el tiempo necesario para entender correctamente lo que estamos haciendo y si se condice con lo que queremos hacer.
+
+### Uso de paréntesis para claridad
+
+**Usar paréntesis:** la idea de que siempre menos código es mejor no siempre es así , a veces agregar unos paréntesis puede ayudarnos a organizar nuestra expresión de manera tal que sin modificar el resultado podamos mejorar la lectura de la misma.
+
+```javascript
+let a = 5 * 2 ** 3;
+let b = 6 % 4;
+let c = 7 && 0;
+
+let resultado = 10 + a / 4 - b || c;
+
+let resultado2 = 10 + a / 4 - b || c; // nos permite una tener mejor lectura y division de partes a primer vista.
+
+console.log(resultado);
+```
+
+**Quitar exceso de paréntesis:** otras veces podemos tener operadores de agrupación () en exceso y es buena idea limpiar un poco nuestra expresión para mejorar la legibilidad.
+
+```javascript
+// prettier-ignore
+
+let noLimpio = ((3 + 4) * (5 - 2)) / (((6 + 3) - 4) + 3);
+
+// prettier-ignore
+
+let limpio = (3 + 4) * (5 - 2) / (6 + 3 - 4 + 3); //mas limpio y legible.
+
+console.log(noLimpio, limpio); // 2.625 2.625
+```
