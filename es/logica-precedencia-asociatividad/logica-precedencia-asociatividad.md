@@ -190,3 +190,49 @@ A continuación podemos ver una lista donde detalla el nivel de precedencia y su
 | 2           | `yield`                                               | Derecha       | `yield …`               |
 | 2           | `yield*`                                              | Derecha       | `yield* …`              |
 | 1           | Operador coma                                         | Izquierda     | `… , …`                 |
+
+## Uso de Paréntesis para Controlar la Evaluación
+
+En JavaScript, los operadores de agrupación () (paréntesis) son fundamentales para gestionar como se evalúan nuestras expresiones, en especial cuando estamos trabajado sobre situaciones con alto grado de complejidad donde la precedencia y la asociatividad pueden no ser evidentes a simple vista o en casos donde necesitamos alterar la forma en la que se resuelven nuestras operaciones y asegurarnos que nuestras expresiones sean evaluadas en el orden deseado.
+
+### La importancia de los paréntesis en las expresiones complejas
+
+La precedencia y asociatividad de los operadores define el orden en que se evaluarán nuestras expresiones si no se usan paréntesis. sin embargo, los paréntesis permiten alterar este comportamiento natural gracias a su propiedad de contener el máximo grado de precedencia, asegurando que las subexpresiones se resuelvan primero , sin tener en cuenta la precedencia y asociatividad de los demás operadores involucrados.
+
+### Cómo los paréntesis modifican la precedencia y asociatividad
+
+**Precedencia y paréntesis:**
+
+```javascript
+let x = 3;
+let y = 4;
+let z = 5;
+let resultado = x + y * z; // se evaluara la multiplicación antes de la suma : 3 + (4 * 5) = 23
+console.log(resultado); // 23
+```
+
+Pero si incorporamos paréntesis agrupando la suma para alterar el orden de evaluación obtenemos los siguiente:
+
+```javascript
+let x = 3;
+let y = 4;
+let z = 5;
+let resultado = (x + y) * z; // se evaluará la suma antes de la multiplicación: (3 + 4) * 5 = 35
+console.log(resultado); // 35
+```
+
+**Asociatividad y paréntesis:**
+
+los operadores de suma y resta tienen asociatividad izquierda a derecha.
+
+```javascript
+let resultado = 10 - 2 - 3; // se evaluará cada operador de izquierda a derecha uno a uno: 10 - 2 - 3 = 5
+console.log(resultado); // 5
+```
+
+Al incorporar paréntesis veremos como alteramos el orden de asociatividad:
+
+```javascript
+let resultado = 10 - (2 - 3); // se evaluara como 10 menos el agrupamiento de 2 - 3 : 10 - (2 - 3) = 11
+console.log(resultado); // 11
+```
