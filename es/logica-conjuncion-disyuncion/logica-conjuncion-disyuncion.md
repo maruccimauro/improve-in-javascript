@@ -103,3 +103,27 @@ Ambos operadores nos son útiles para evaluar más de una condición y generar t
 ### Importancia en la lógica de programación
 
 La conjunción y la disyunción nos facilitan el control del flujo al permitirnos evaluar varias condiciones sin necesidad de múltiples if, definir valores predeterminados de forma segura y reducir el código redundante.
+
+Cuando no usamos conjuncion :
+
+```javascript
+let temperatura = 30;
+let tormenta = false;
+
+if (tormetan == false) {
+    if (temperatura > 15) {
+        if (temperatura < 35) {
+            console.log("El clima es agradable");
+        }
+    }
+}
+```
+
+¡Cuando si usamos conjuncion!:
+
+```javascript
+let temperatura = 30;
+if (!tormenta && temperatura > 15 && temperatura < 35) {
+    console.log("El clima es agradable.");
+}
+```
