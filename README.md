@@ -11,9 +11,11 @@ Con cariño, Mauro.
 
 <hr />
 
-## Temas de interes
+# Temas de interes
 
-##### - [Manipulación de Lógica de Evaluación de Truthy y Falsy en JavaScript](es/logica-truthy-falsy/logica-truthy-falsy.md)
+#### - [Manipulación de Lógica de Evaluación de Truthy y Falsy en JavaScript](es/logica-truthy-falsy/logica-truthy-falsy.md)
+
+#### - [Manipulación de Lógica de Precedencia y Asociatividad de Operadores en JavaScript](es/logica-precedencia-asociatividad/logica-precedencia-asociatividad.md)
 
 ---
 
