@@ -29,7 +29,6 @@ Con cariño, Mauro.
 5. [Operadores Combinados y su Impacto](#operadores-combinados-y-su-impacto)
     - [Operadores aritméticos combinados (+=, -=, \*=, /=)](#operadores-aritméticos-combinados-+=-=--=-)
     - [Operadores de comparación y su interacción con otros operadores](#operadores-de-comparación-y-su-interacción-con-otros-operadores)
-    - [Operadores lógicos combinados (&&, ||)](#operadores-lógicos-combinados--&&-)
 6. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión con la precedencia en expresiones complejas](#confusión-con-la-precedencia-en-expresiones-complejas)
     - [Evitar errores en la combinación de operadores](#evitar-errores-en-la-combinación-de-operadores)
@@ -233,6 +232,47 @@ console.log(resultado); // 5
 Al incorporar paréntesis veremos como alteramos el orden de asociatividad:
 
 ```javascript
-let resultado = 10 - (2 - 3); // se evaluara como 10 menos el agrupamiento de 2 - 3 : 10 - (2 - 3) = 11
+let resultado = 10 - (2 - 3); // se evaluará como 10 menos el agrupamiento de 2 - 3 : 10 - (2 - 3) = 11
 console.log(resultado); // 11
 ```
+
+## Operadores Combinados y su Impacto
+
+Los operadores combinados son una excelente herramienta a la hora de desarrollar nuestro código, nos permiten optimizar y simplificar las expresiones en JavaScript.
+
+**Operadores Aritméticos Combinados (+=, -=, \*=, /=)**
+los operadores aritméticos combinados nos permiten modificar el valor de una variable en función de su valor actual, nos permite realizar cálculos y actualizaciones de manera más compacta.
+¡Veamos un ejemplo!
+
+```javascript
+let x = 5;
+
+x += 3; // esto es equivalente a x = x + 3, es decir el valor actual de x + 3 resultando 8
+console.log(resultado); // 8
+
+x -= 4; // esto es equivalente a x = x - 4, es decir el valor actual de x - 4 resultando en 4
+console.log(resultado); // 4
+
+x *= 10; // esto es equivalente a x = x * 4, es decir el valor actual de x * 10 resultando en 40
+console.log(resultado); // 40
+
+x /= 8; // esto es equivalente a x = x / 8, es decir el valor actual de x / 8 resultando en 5
+console.log(resultado); // 5
+```
+
+La asociatividad de este tipo de operadores es de derecha a izquierda.
+
+## Operadores de comparación y su interacción con otros operadores
+
+Cuando los combinamos los operadores de comparación con los operadores lógicos, deberemos tener en cuenta las prioridades. Por ejemplo, el operador && tiene mayor precedencia que el operador ||, lo que puede influir en cómo se evalúan nuestras expresiones.
+
+```javascript
+let a = 5,
+    b = 10,
+    c = 15;
+if ((a > b && b < c) || a === 5) {
+    console.log("Expresión evaluada como verdadera!");
+}
+```
+
+En este caso, primero se evalúa a > b && b < c, luego el resultado se combina con a === 5 usando el operador ||.
