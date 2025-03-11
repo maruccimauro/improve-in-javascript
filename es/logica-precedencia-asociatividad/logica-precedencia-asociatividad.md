@@ -23,24 +23,21 @@ Con cariño, Mauro.
     - [Definición de asociatividad de operadores](#definición-de-asociatividad-de-operadores)
     - [Relación entre Precedencia y Asociatividad](#relación-entre-precedencia-y-asociatividad)
 3. [Lista de operadores con mayor a menor precedencia](#lista-de-operadores-con-mayor-a-menor-precedencia)
-4. [Asociatividad de Operadores en JavaScript](#asociatividad-de-operadores-en-javascript)
-    - [Operadores con asociatividad izquierda a derecha](#operadores-con-asociatividad-izquierda-a-derecha)
-    - [Operadores con asociatividad derecha a izquierda](#operadores-con-asociatividad-derecha-a-izquierda)
-5. [Uso de Paréntesis para Controlar la Evaluación](#uso-de-paréntesis-para-controlar-la-evaluación)
+4. [Uso de Paréntesis para Controlar la Evaluación](#uso-de-paréntesis-para-controlar-la-evaluación)
     - [La importancia de los paréntesis en las expresiones complejas](#la-importancia-de-los-paréntesis-en-las-expresiones-complejas)
     - [Cómo los paréntesis modifican la precedencia y asociatividad](#cómo-los-paréntesis-modifican-la-precedencia-y-asociatividad)
-6. [Operadores Combinados y su Impacto](#operadores-combinados-y-su-impacto)
+5. [Operadores Combinados y su Impacto](#operadores-combinados-y-su-impacto)
     - [Operadores aritméticos combinados (+=, -=, \*=, /=)](#operadores-aritméticos-combinados-+=-=--=-)
     - [Operadores de comparación y su interacción con otros operadores](#operadores-de-comparación-y-su-interacción-con-otros-operadores)
     - [Operadores lógicos combinados (&&, ||)](#operadores-lógicos-combinados--&&-)
-7. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
+6. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Confusión con la precedencia en expresiones complejas](#confusión-con-la-precedencia-en-expresiones-complejas)
     - [Evitar errores en la combinación de operadores](#evitar-errores-en-la-combinación-de-operadores)
     - [Uso de paréntesis para claridad](#uso-de-paréntesis-para-claridad)
-8. [Comparación con otros Lenguajes](#comparación-con-otros-lenguajes)
+7. [Comparación con otros Lenguajes](#comparación-con-otros-lenguajes)
     - [Diferencias de precedencia entre JavaScript y Python](#diferencias-de-precedencia-entre-javascript-y-python)
     - [Impacto de la precedencia en C++ y JavaScript](#impacto-de-la-precedencia-en-c-y-javascript)
-9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+8. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
@@ -125,7 +122,7 @@ La precedencia y la asociatividad trabajan juntas como un equipo para determinar
 
 ## lista de operadores con mayor a menor precedencia
 
-A continuación podemos ver una lista donde detalla el nivel de precedencia con el que trabaja el motor de Javascript:
+A continuación podemos ver una lista donde detalla el nivel de precedencia y su asociatividad relativa con el que trabaja el motor de Javascript:
 
 | Precedencia | Tipo de operador                                      | Asociatividad | Operadores individuales |
 | ----------- | ----------------------------------------------------- | ------------- | ----------------------- |
