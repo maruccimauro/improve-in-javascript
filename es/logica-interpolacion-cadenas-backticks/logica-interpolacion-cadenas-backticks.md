@@ -140,4 +140,4 @@ console.log(query);
 // Salida: SELECT * FROM usuarios WHERE id = 42;
 ```
 
-y muchos más casos.
+Estos son solo algunos ejemplos de cómo en nuestro dia a dia la interpolación de cadenas puede hacer que nuestro código sea más limpio y eficiente.
