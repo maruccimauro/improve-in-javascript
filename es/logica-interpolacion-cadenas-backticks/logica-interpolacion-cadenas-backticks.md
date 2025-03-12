@@ -123,14 +123,14 @@ Estos son solo algunos ejemplos de cómo en nuestro dia a dia la interpolación 
 
 Los Template Literals (también llamados Template Strings) son una característica introducida en ES6 (ECMAScript 2015) que nos brindan una forma más flexible y legible de manejar nuestras cadenas de texto. Se diferencian por no usar las comillas simples (') y dobles (") en cambio usan backticks (acento grave, `), lo que nos permite interpolar variables, expresiones, saltos de línea y más.
 
-### Expresiones dentro de signos de interpolacion
+### Expresiones dentro de signos de interpolación
 
-La interpolación de expresiones en nuestros template literals lo realizaremos utilizando la sintaxis **${expresion}**, lo que nos permite incluir variables, operaciones matematicas, llamadas a funciones, acceder a objetos y mas , sin necesidad de concatenar con el operador + ni el metodo .concat().
-Ya iremos profundizando mas en el tema a medida que avancemos.
+La interpolación de expresiones en nuestros template literals lo realizaremos utilizando la sintaxis **${expresion}**, lo que nos permite incluir variables, operaciones matemáticas, llamadas a funciones, acceder a objetos y mas , sin necesidad de concatenar con el operador + ni el metodo .concat().
+Ya iremos profundizando más en el tema a medida que avancemos.
 
 ### Manejo de saltos de línea y formato
 
-Una de las caracteristicas mas utiles que nos brindan los template literals es la posibilidad de escribir cadenas de varias lineas sin necesidad de usar \n ni concatenaciones.
+Una de las características más útiles que nos brindan los témplate literals es la posibilidad de escribir cadenas de varias líneas sin necesidad de usar \n ni concatenaciones.
 
 Ejemplo sin Template Literals (concatenación tradicional)
 
@@ -148,7 +148,7 @@ Y esta es la ultima linea.
 */
 ```
 
-Pero podriamos hacer lo mismo mas simple, legible y ordenado.
+Pero podríamos hacer lo mismo más simple, legible y ordenado.
 
 ```javascript
 const mensaje = `Esta es una linea
