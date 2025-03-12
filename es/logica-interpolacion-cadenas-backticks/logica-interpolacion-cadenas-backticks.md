@@ -199,7 +199,7 @@ console.log(`Bienvenido ${obtenerUsuario()}!`);
 // salida Bienvenido Mauro!
 ```
 
-En este ejemplo la nuestra función obtenerUsuario es llamada desde dentro de la interpolación y su resultado se incluye en la construcción del string de salida, esto nos permite hacer lo que queramos antes de devolver un resultado a la cadena.
+En este ejemplo nuestra función obtenerUsuario es llamada desde dentro de la interpolación y su resultado se incluye en la construcción del string de salida, esto nos permite hacer lo que queramos antes de devolver un resultado a la cadena.
 
 ### Interpolación con Arrays y Objetos
 
@@ -294,4 +294,72 @@ let mensaje = formatear`Hola, ${nombre}, ¿cómo estás?`;
 console.log(mensaje); // "hola, MAURO, ¿cómo estás?"
 ```
 
-aquí, la nuestra función formatear recibe tanto las partes literales como las expresiones y transforma todas las expresiones a mayúscula y los literales a minúscula antes de combinarlos. La ventaja de que usemos tagged template es que podemos aplicar una lógica personalizada en cada interpolación y literal por separado.
+aquí, nuestra función formatear recibe tanto las partes literales como las expresiones y transforma todas las expresiones a mayúscula y los literales a minúscula antes de combinarlos. La ventaja de que usemos tagged template es que podemos aplicar una lógica personalizada en cada interpolación y literal por separado.
+
+## Escape y Seguridad en Interpolación
+
+Cuando trabajamos con template literals y realizamos interpolación de valores, es esencial tener en cuenta la seguridad de la aplicación. especialmente cuando se manipulan entradas de usuarios o datos que puedan ser interpretados de manera no deseada. Esto incluye protegerse contra ataques como la inyección de codigo o Cross-Site Scripting (XSS).
+Es importante ver cómo escapar caracteres, prevenir vulnerabilidades y garantizar que la interpolacion se realice de manera seguro en la estructura de nuestro codigo.
+
+### Escape de caracteres en template literals
+
+Cuando hablamos de escape de caracteres hacemos referencia al proceso de convertir ciertos caracteres especiales en su representación segura para que evitemos que se interpreten de manera incorrecta o peligrosa. En el Motor de JavaScript, algunos caracteres tienen significado especial dentro de cadenas de texto o expresiones, como el caracter de comillas (" y '), la barra invertida (\\) entre otros.
+Cuando interpolamos variables dentro de template literals, nos exponemos a estos casos , los valores insertados podrían contener caracteres peligrosos si no se escapan correctamente. Estos es especialmnete relevante en contextos donde los datos podrian incluir codigo HTML, SQL, o cualquier otro lenguaje susceptible de ejecución.
+
+veamos un ejemplo simple de como puede afectarnos !:
+
+```javascript
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Demostración de Ataque XSS</title>
+    </head>
+    <body>
+        <h2>Ejemplo de vulnerabilidad XSS</h2>
+        <hr />
+        <h3>Comentario sin proteccion:</h3>
+        <input style="width: 400px" type="text" id="inputBox1" />
+        <button onclick="procesarComentario(1)">sin escape</button>
+        <div id="salida1"></div>
+        <hr />
+
+        <h3>Comentario con proteccion</h3>
+        <input style="width: 400px" type="text" id="inputBox2" />
+        <button onclick="procesarComentario(2)">con escape</button>
+        <div id="salida2"></div>
+        <hr />
+
+        <script>
+            function escaparHTML(str) {
+                return str.replace(/[&<>"']/g, (match) => {
+                    const escapeMap = {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#39;",
+                    };
+                    return escapeMap[match];
+                });
+            }
+
+            function procesarComentario(id) {
+                let comentario = document.getElementById(`inputBox${id}`).value;
+                if (id === 2) {
+                    comentario = escaparHTML(comentario);
+                }
+                let mensajeHTML = `<p>${comentario}</p>`;
+                document.getElementById(`salida${id}`).innerHTML += mensajeHTML;
+            }
+        </script>
+    </body>
+</html>
+
+```
+
+5. [Escape y Seguridad en Interpolación](#escape-y-seguridad-en-interpolación)
+    - [Escape de caracteres en template literals](#escape-de-caracteres-en-template-literals)
+    - [Manejo de inyección de código malicioso (XSS)](#manejo-de-inyección-de-código-malicioso-xss)
+    - [Interpolación segura en aplicaciones web](#interpolación-segura-en-aplicaciones-web)
