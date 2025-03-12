@@ -16,60 +16,37 @@ Con cariño, Mauro.
 **Índice de la Guía**
 
 1. [Introducción](#introducción)
-
     - [¿Qué es la interpolación de cadenas?](#qué-es-la-interpolación-de-cadenas)
     - [Ventajas sobre la concatenación tradicional](#ventajas-sobre-la-concatenación-tradicional)
     - [Casos de uso comunes](#casos-de-uso-comunes)
-
 2. [Fundamentos de los Template Literals](#fundamentos-de-los-template-literals)
-
-    - [Uso básico de los backticks (`)](#uso-básico-de-los-backticks)
-    - [Expresiones dentro de `${}`](#expresiones-dentro-de)
+    - [Expresiones dentro de signos de interpolacion](#expresiones-dentro-de-signos-de-interpolacion)
     - [Manejo de saltos de línea y formato](#manejo-de-saltos-de-línea-y-formato)
-
-3. [Interpolación de Variables y Expresiones](#interpolación-de-variables-y-expresiones)
-
-    - [Uso de variables dentro de template literals](#uso-de-variables-dentro-de-template-literals)
-    - [Interpolación con expresiones matemáticas y funciones](#interpolación-con-expresiones-matemáticas-y-funciones)
-    - [Concatenación dinámica con template literals](#concatenación-dinámica-con-template-literals)
-
-4. [Manipulación Avanzada con Template Literals](#manipulación-avanzada-con-template-literals)
-
+3. [Manipulación Avanzada con Template Literals](#manipulación-avanzada-con-template-literals)
     - [Interpolación con condicionales ternarios](#interpolación-con-condicionales-ternarios)
     - [Uso de funciones dentro de template literals](#uso-de-funciones-dentro-de-template-literals)
     - [Interpolación con arrays y objetos](#interpolación-con-arrays-y-objetos)
-
-5. [Funciones de Plantilla (Tagged Templates)](#funciones-de-plantilla-tagged-templates)
-
+4. [Funciones de Plantilla (Tagged Templates)](#funciones-de-plantilla-tagged-templates)
     - [¿Qué son los tagged templates?](#qué-son-los-tagged-templates)
     - [Creación de funciones personalizadas de interpolación](#creación-de-funciones-personalizadas-de-interpolación)
     - [Ejemplo práctico de un tagged template](#ejemplo-práctico-de-un-tagged-template)
-
-6. [Escape y Seguridad en Interpolación](#escape-y-seguridad-en-interpolación)
-
+5. [Escape y Seguridad en Interpolación](#escape-y-seguridad-en-interpolación)
     - [Escape de caracteres en template literals](#escape-de-caracteres-en-template-literals)
     - [Manejo de inyección de código malicioso (XSS)](#manejo-de-inyección-de-código-malicioso-xss)
     - [Interpolación segura en aplicaciones web](#interpolación-segura-en-aplicaciones-web)
-
-7. [Casos de Uso y Aplicaciones Prácticas](#casos-de-uso-y-aplicaciones-prácticas)
-
+6. [Casos de Uso y Aplicaciones Prácticas](#casos-de-uso-y-aplicaciones-prácticas)
     - [Generación dinámica de HTML con template literals](#generación-dinámica-de-html-con-template-literals)
     - [Uso en internacionalización y localización](#uso-en-internacionalización-y-localización)
     - [Generación de consultas SQL y JSON dinámicos](#generación-de-consultas-sql-y-json-dinámicos)
-
-8. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
-
+7. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Errores al olvidar los backticks](#errores-al-olvidar-los-backticks)
     - [Mal uso de interpolación con `null` y `undefined`](#mal-uso-de-interpolación-con-null-y-undefined)
     - [Mejores prácticas para escribir código más limpio](#mejores-prácticas-para-escribir-código-más-limpio)
-
-9. [Comparación con Otros Métodos de Concatenación](#comparación-con-otros-métodos-de-concatenación)
-
+8. [Comparación con Otros Métodos de Concatenación](#comparación-con-otros-métodos-de-concatenación)
     - [Diferencias con `+` y `concat()`](#diferencias-con-y-concat)
     - [Compatibilidad con versiones antiguas de JavaScript](#compatibilidad-con-versiones-antiguas-de-javascript)
     - [Uso en TypeScript y otros lenguajes](#uso-en-typescript-y-otros-lenguajes)
-
-10. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
     - [Enlaces y documentación recomendada](#enlaces-y-documentación-recomendada)
@@ -141,3 +118,47 @@ console.log(query);
 ```
 
 Estos son solo algunos ejemplos de cómo en nuestro dia a dia la interpolación de cadenas puede hacer que nuestro código sea más limpio y eficiente.
+
+## Fundamentos de los Template Literals
+
+Los Template Literals (también llamados Template Strings) son una característica introducida en ES6 (ECMAScript 2015) que nos brindan una forma más flexible y legible de manejar nuestras cadenas de texto. Se diferencian por no usar las comillas simples (') y dobles (") en cambio usan backticks (acento grave, `), lo que nos permite interpolar variables, expresiones, saltos de línea y más.
+
+### Expresiones dentro de signos de interpolacion
+
+La interpolación de expresiones en nuestros template literals lo realizaremos utilizando la sintaxis **${expresion}**, lo que nos permite incluir variables, operaciones matematicas, llamadas a funciones, acceder a objetos y mas , sin necesidad de concatenar con el operador + ni el metodo .concat().
+Ya iremos profundizando mas en el tema a medida que avancemos.
+
+### Manejo de saltos de línea y formato
+
+Una de las caracteristicas mas utiles que nos brindan los template literals es la posibilidad de escribir cadenas de varias lineas sin necesidad de usar \n ni concatenaciones.
+
+Ejemplo sin Template Literals (concatenación tradicional)
+
+```javascript
+const mensaje =
+    "Esta es una linea\n" +
+    "Esta es otra linea\n" +
+    "Y esta es la ultima linea.";
+
+console.log(mensaje);
+/* salida :
+Esta es una linea
+Esta es otra linea
+Y esta es la ultima linea.
+*/
+```
+
+Pero podriamos hacer lo mismo mas simple, legible y ordenado.
+
+```javascript
+const mensaje = `Esta es una linea
+Esta es otra linea
+Y esta es la ultima linea.`;
+
+console.log(mensaje);
+/* salida :
+Esta es una linea
+Esta es otra linea
+Y esta es la ultima linea.
+*/
+```
