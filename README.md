@@ -19,6 +19,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de lógica de Conjuncion y Disyuncion](es/logica-conjuncion-disyuncion/logica-conjuncion-disyuncion.md)
 
+#### - [Manipulación de lógica de interpolacion de cadenas backticks](es/logica-interpolacion-cadenas-backticks/logica-interpolacion-cadenas-backticks.md)
+
 ---
 
 Muchas Gracias por leerme!
