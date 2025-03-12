@@ -29,7 +29,6 @@ Con cariño, Mauro.
 4. [Funciones de Plantilla (Tagged Templates)](#funciones-de-plantilla-tagged-templates)
     - [¿Qué son los tagged templates?](#qué-son-los-tagged-templates)
     - [Creación de funciones personalizadas de interpolación](#creación-de-funciones-personalizadas-de-interpolación)
-    - [Ejemplo práctico de un tagged template](#ejemplo-práctico-de-un-tagged-template)
 5. [Escape y Seguridad en Interpolación](#escape-y-seguridad-en-interpolación)
     - [Escape de caracteres en template literals](#escape-de-caracteres-en-template-literals)
     - [Manejo de inyección de código malicioso (XSS)](#manejo-de-inyección-de-código-malicioso-xss)
@@ -228,3 +227,71 @@ let persona = {
 let mensaje = `Mi nombre es ${persona.nombre} y tengo ${persona.edad} años.`;
 console.log(mensaje); // "Mi nombre es Mauro y tengo 34 años."
 ```
+
+## Funciones de Plantilla (Tagged Templates)
+
+### ¿Qué son los tagged templates?
+
+Los tagged templates son una característica avanzada de los templates literals en JavaScript. Nos permiten "etiquetar" un template literal con una función que puede procesar los contenidos del literal antes de que nos devuelvan el resultado final. básicamente, un tagged template permite manipular o transformar el resultado de un tempate literal de manera personalizada por nosotros.
+
+la sintaxis basica de un tagged template es:
+
+```javascript
+tagFunction`string template ${expresion}`;
+```
+
+donde seccionándolo podremos identificar que, tagFunction es el nombre de la función que recibirá el template literal. , string template es la cadena de texto entre los backticks y ${expresion} es una o más expresiones que se interpolan dentro del template literal.
+
+```javascript
+function saludo(literal, nombre, apellido) {
+    //prettier-ignore
+    return `${literal[0]}${nombre.toUpperCase()} ${apellido.toUpperCase()}${literal[2]}`;
+}
+
+let mensaje = saludo`Hola, ${"Mauro"} ${"Marucci"}!`;
+console.log(mensaje); // "Hola, MAURO MARUCCI!"
+```
+
+en el ejemplo que vemos arriba vemos como la función saludo transforma el nombre a mayúscula y podemos dos partes importantes:
+**literal:** es una array de las partes estáticas del template como `["Hola ", " ", "!"]`, este argumento es pasado automáticamente por el motor de JavaScript a la función `saludo`.
+**nombre** es la expresion interpolada `"Mauro"`.
+**apellido** es la expresion interpolada `"Marucci"`
+
+también podemos usar el concepto de `rest parameter` para obtener los argumentos que fueron pasados después de `literal` en un solo array (¡son aquellos que interpolamos!).
+
+```javascript
+function saludo(literal, ...valores) {
+    //prettier-ignore
+    return `${literal[0]}${valores[0].toUpperCase()} ${valores[1].toUpperCase()}${literal[2]}`;
+}
+
+let mensaje = saludo`Hola, ${"Mauro"} ${"Marucci"}!`;
+console.log(mensaje); // "Hola, MAURO MARUCCI!"
+```
+
+### Creación de funciones personalizadas de interpolación
+
+Nuestras funciones personalizadas de interpolación (tagged functions) las podremos crear de manera que tengamos la capacidad de manipular tanto las partes literales como las expresiones dentro del template literal. Cuando usamos un tagged template, la función que elijamos recibe al menos dos parámetros:
+
+**literal**: Un array que contiene las partes fijas del template (es decir, las partes del string que no contienen ninguna interpolación).
+**valores**: Una lista de todas las expresiones que están dentro de ${}.
+
+Con estos dos parámetros, podemos hacer lo que deseemos con los valores, como transformarlos, combinarlos, hacer cálculos, etc.
+Por ejemplo:
+
+```javascript
+function formatear(literal, ...valores) {
+    let resultado = literal[0].toLowerCase();
+    for (let i = 0; i < valores.length; i++) {
+        resultado += valores[i].toUpperCase(); // Convierte las expresiones a mayúsculas
+        resultado += literal[i + 1].toLowerCase(); //convierte los literales a minuscula
+    }
+    return resultado;
+}
+
+let nombre = "Mauro";
+let mensaje = formatear`Hola, ${nombre}, ¿cómo estás?`;
+console.log(mensaje); // "hola, MAURO, ¿cómo estás?"
+```
+
+aquí, la nuestra función formatear recibe tanto las partes literales como las expresiones y transforma todas las expresiones a mayúscula y los literales a minúscula antes de combinarlos. La ventaja de que usemos tagged template es que podemos aplicar una lógica personalizada en cada interpolación y literal por separado.
