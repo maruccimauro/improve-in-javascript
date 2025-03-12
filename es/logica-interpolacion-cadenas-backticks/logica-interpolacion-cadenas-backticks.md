@@ -36,8 +36,7 @@ Con cariño, Mauro.
     - [Generación dinámica de HTML con template literals](#generación-dinámica-de-html-con-template-literals)
     - [Generación de consultas SQL](#generación-de-consultas-sql-y-json-dinámicos)
 7. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
-    - [Errores al olvidar los backticks](#errores-al-olvidar-los-backticks)
-    - [Mal uso de interpolación con `null` y `undefined`](#mal-uso-de-interpolación-con-null-y-undefined)
+    - [Errores Comunes que debemos evitar](#Errores-Comunes-que-debemos-evitar)
     - [Mejores prácticas para escribir código más limpio](#mejores-prácticas-para-escribir-código-más-limpio)
 8. [Comparación con Otros Métodos de Concatenación](#comparación-con-otros-métodos-de-concatenación)
     - [Diferencias con `+` y `concat()`](#diferencias-con-y-concat)
@@ -444,3 +443,107 @@ console.log(query);
 
 aquí generamos una consulta SQL que busca un registro cuyo nombre es Mauro y su dirección es Mihogar 123.
 ¡Recuerda que es necesario escapar siempre los caracteres especiales que puedan ser interpretados en contextos no deseados, te recomiendo profundizar en la inyección SQL para utilizar técnicas de protección para estas situaciones!
+
+## Errores Comunes y Buenas Prácticas
+
+Aunque los tamplate literals son muy buenas herramientas, su uso indebido puede llevar a errores y malas prácticas.
+
+### Errores Comunes que debemos evitar
+
+**Errores al olvidar los backticks**
+Olvidarnos de usarlos backticks , aunque parezca mentira , muchas veces no nos percatamos que los necesitamos, por eso es bueno que analicemos siempre su uso antes de comenzar a trabajar con una cadena compleja.
+
+**Mal uso de interpolación con `null` y `undefined`**
+Otro error común que podríamos cometer es no manejar adecuadamente los valores nullish (null y undefined) en las interpolaciones, ya que el motor de JavaScript convierte estos valores en cadenas vacías (""), lo que nos puede llevar a casos que realmente no esperábamos con salidas confusas y errores lógicos en nuestra aplicación.
+
+```javascript
+const nombre = null;
+const edad = undefined;
+
+const mensaje = `Mi nombre es ${nombre} y tengo ${edad} años.`;
+console.log(mensaje); // "Mi nombre es  y tengo  años."
+```
+
+para evitar esto debemos usar el operador logico OR (||) o el operador de coalescencia nula (??).
+
+```javascript
+const nombre = null;
+const edad = undefined;
+
+const mensaje = `Mi nombre es ${nombre || "Desconocido"} y tengo ${
+    edad ?? "desconocida"
+} años.`;
+console.log(mensaje); // "Mi nombre es Desconocido y tengo desconocida años."
+```
+
+**Abusar de las comillas**
+otras veces intentamos colocar ya sea por costumbre o cual fuese el motivo template literals donde no son necesarias.
+
+```javascript
+const nombre = "Mauro";
+const edad = 34;
+
+const personaJSON = JSON.stringify({
+    nombre: `${nombre}`,
+    edad: `${edad}`,
+});
+
+console.log(personaJSON);
+// salida {"nombre":"Mauro","edad":"34"}
+```
+
+### Mejores prácticas para escribir código más limpio
+
+**Usa template literals para la interpolación de variables**
+Siempre que necesitemos insertar valores dinámicos dentro de una cadena, es importante usar template literals.
+
+Es preferible esto:
+
+```javascript
+const mensaje = `Mi nombre es ${nombre} y tengo ${edad} años.`;
+console.log(mensaje);
+```
+
+a esto:
+
+```javascript
+const mensaje = "Mi nombre es " + nombre + " y tengo " + edad + " años.";
+console.log(mensaje);
+```
+
+**Evita interpolaciones complejas dentro de los template literals:**
+Si bien las template literals nos permiten realizar operaciones complejas dentro de las interpolaciones, en muchos casos es importante generar los calculo fuera del template e incorporar los resultados directamente para así quede más limpio y sea más fácil el mantenimiento del código.
+Es preferible mantener la simpleza dentro del template literals
+
+```javascript
+const precio = 100;
+const descuento = 0.2;
+const precioFinal = precio - precio * descuento;
+
+const mensaje = `El precio final con descuento es $${precioFinal}.`;
+console.log(mensaje);
+```
+
+en vezde de mantener la complejidad dentro del template literals
+
+```javascript
+const mensaje = `El precio final con descuento es $${precio - precio * 0.2}.`;
+console.log(mensaje);`
+```
+
+imaginemos un template de mayor tamaño y cálculos más complejos...
+
+**Utiliza template literals para múltiples líneas**
+los template literals son ideales cuando necesitamos cadenas de texto que ocupan varias líneas. No solo es más limpio, sino que evitamos la necesidad de concatenar múltiples cadenas o usar saltos de línea manualmente.
+
+```javascript
+const mensaje = `
+  Hola ${nombre},
+  Te informamos que tu solicitud ha sido procesada con éxito.
+  Muchas gracias por tu confianza.
+`;
+console.log(mensaje);
+```
+
+**Limpia los datos cuando uses datos externos:**
+Si usamos datos que provienen de entradas de usuario o fuentes externas ¡siempre asegurémonos de limpiar esos datos antes de insertarlos en un template literal!
