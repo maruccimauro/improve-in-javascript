@@ -75,3 +75,69 @@ Con cariño, Mauro.
     - [Enlaces y documentación recomendada](#enlaces-y-documentación-recomendada)
 
 ---
+
+## Introducción
+
+La interpolación de cadenas es una característica clave en muchos lenguajes de programación que no permite construir cadenas de texto de manera más legible y eficiente en comparación con la concatenación tradicional. El motor de JavaScript, implementa esta funcionalidad mediante los **template literals (literales de plantilla)**, introducidos en ES6.
+
+### ¿Qué es la interpolación de cadenas?
+
+La interpolación de cadenas es el proceso de insertar nuestras variables y expresiones dentro de una cadena de texto sin necesidad de concatenarlas manualmente con métodos tradicionales. Esto lo lograremos utilizando los template literals, los cuales emplean **backtick (\`\`)** en lugar de comillas simples (' ') o dobles (" ").
+
+¡Veamos un ejemplo!
+
+```javascript
+const nombre = "Mauro";
+const edad = 34;
+console.log(`¡Hola, mi nombre es ${nombre} y tengo ${edad} años!`);
+//la salida sera "¡Hola, mi nombre es Mauro y tengo 34 años!""
+```
+
+Aqui tanto la constante nombre como la constante edad la hemos concatenado directamente en la cadena sin necesidad de usar el operador + ni el metodo .concat().
+
+## Ventajas sobre la concatenación tradicional
+
+Antes del ECMAScript 6, la forma en la que construyamos cadenas dinámicas en JavaScript era mediane la concatenación con el operador +. Pero esta técnica puede volver poco legible y propenso a errores nuestro código cuando trabajamos con múltiples variables o expresiones.
+
+**Mayor legibilidad:** Evitamos el uso excesivo del operador +, haciendo que nuestro código sea más claro y fácil de entender.
+**Menos errores de sintaxis:** Al no depender de la concatenación manual, reducimos nuestros posibles errores al manejar espacios y comillas repetidamente.
+**Compatibilidad con expresiones:** ¡podemos incluir operaciones matemáticas, llamadas a funciones y más dentro de la interpolación!
+**Soporte para saltos de línea:** Permite que escribamos cadenas de múltiples líneas sin necesidad de hacer un salto de línea manualmente con \n.
+
+## Casos de uso comunes
+
+La interpolación de cadenas nos será útil en una amplia variedad de escenarios, algunos incluyen:
+Con mensajes dinámicos en nuestra UI:
+
+```javascript
+const usuario = "María";
+console.log(`Bienvenida, ${usuario}!`);
+```
+
+Cuando queramos generar HTML dinámico:
+
+```javascript
+const producto = "Laptop";
+const precio = 1200;
+const html = `<h1>Producto: ${producto}</h1><p>Precio: $${precio}</p>`;
+```
+
+Al trabajar con plantillas de correos electrónicos o mensajes:
+
+```javascript
+function generarMensaje(nombre, pedido) {
+    return `Hola ${nombre}, tu pedido ${pedido} está en camino.`;
+}
+console.log(generarMensaje("Luis", "#12345"));
+```
+
+Consultas SQL dinámicas:
+
+```javascript
+const id = 42;
+const query = `SELECT * FROM usuarios WHERE id = ${id};`;
+console.log(query);
+// Salida: SELECT * FROM usuarios WHERE id = 42;
+```
+
+y muchos más casos.
