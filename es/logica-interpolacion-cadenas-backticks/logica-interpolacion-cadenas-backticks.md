@@ -38,14 +38,9 @@ Con cariño, Mauro.
 7. [Errores Comunes y Buenas Prácticas](#errores-comunes-y-buenas-prácticas)
     - [Errores Comunes que debemos evitar](#Errores-Comunes-que-debemos-evitar)
     - [Mejores prácticas para escribir código más limpio](#mejores-prácticas-para-escribir-código-más-limpio)
-8. [Comparación con Otros Métodos de Concatenación](#comparación-con-otros-métodos-de-concatenación)
-    - [Diferencias con `+` y `concat()`](#diferencias-con-y-concat)
-    - [Compatibilidad con versiones antiguas de JavaScript](#compatibilidad-con-versiones-antiguas-de-javascript)
-    - [Uso en TypeScript y otros lenguajes](#uso-en-typescript-y-otros-lenguajes)
-9. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+8. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
     - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
     - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
-    - [Enlaces y documentación recomendada](#enlaces-y-documentación-recomendada)
 
 ---
 
@@ -547,3 +542,40 @@ console.log(mensaje);
 
 **Limpia los datos cuando uses datos externos:**
 Si usamos datos que provienen de entradas de usuario o fuentes externas ¡siempre asegurémonos de limpiar esos datos antes de insertarlos en un template literal!
+
+## Conclusión y Recursos Adicionales
+
+La interpolación de cadenas mediante template literals representa una mejora significativa en la claridad y eficiencia en nuestro código, su capacidad para simplificar la creación de cadenas dinámicas, manejar múltiples líneas y facilitar la interpolación de expresiones complejas, la convierte en una de nuestras herramientas más esenciales a la hora de desarrollar. Que dominemos esta técnica no solo mejora la legibilidad del código, si no que también reduce la posibilidad de que cometamos errores y facilita nuestro mantenimiento
+
+### Resumen de los conceptos clave
+
+**Template literals:** Nos permiten la interpolación de cadenas usando backticks (``), facilitándonos la inserción de variables y expresiones dentro de cadenas de texto.
+**Interpolación de expresiones:** La sintaxis ${expresión} nos permite incluir operaciones matemáticas, llamadas a funciones y acceso a objetos dentro de las cadenas.
+**Condicionales ternarios:** Nos permiten la inclusión de lógica condicional dentro de las interpolaciones, eligiendo entre diferentes valores basados en una condición.
+**Funciones de plantilla (Tagged Templates):** Nos permiten manipular y transformar el resultado de un template literal de manera personalizada.
+**Escape de caracteres:** Es crucial para la seguridad, evitando la interpretación incorrecta de caracteres especiales y previniendo ataques XSS.
+
+### Ejercicios y desafíos prácticos
+
+Generador de mensajes personalizados:
+`Crea una función que reciba el nombre y la edad de una persona, y devuelva un mensaje personalizado utilizando template literals.`
+`El mensaje debe variar si la persona es mayor o menor de edad, utilizando un condicional ternario dentro del template literal.`
+
+Tabla de productos dinámica:
+`Crea un array de objetos, donde cada objeto represente un producto con propiedades como nombre, precio y descripción. `
+`Utiliza template literals y el método map() para generar una tabla HTML dinámica que muestre la información de cada producto.`
+
+Formateador de nombres:
+`Crea una función de plantilla (tagged template) que reciba un nombre completo (nombre y apellido) y lo formatee de la siguiente manera: el nombre en minúsculas y el apellido en mayúsculas.`
+
+Generador de consultas SQL seguras:
+`Crea una función que reciba el nombre de una tabla y un objeto con el id del usuario a seleccionar y genera una consulta SQL`
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
