@@ -162,3 +162,69 @@ Esta es otra linea
 Y esta es la ultima linea.
 */
 ```
+
+## Manipulación Avanzada con Template Literals
+
+### Interpolación con condicionales ternarios
+
+Una de las características más poderosas que nos proveerán los template literals es la posibilidad de incluir condicionales dentro de ellos. El condicional ternario en JavaScript tiene la forma: `condición ? valor_si_true : valor_si_false`, sabiendo esto, podemos utilizarlo directamente dentro de nuestra interpolación para evaluar expresiones y elegir entre diferentes valores.
+Veamos un ejemplo para poder visibilizarlo mejor.
+
+```javascript
+let edad = 20;
+console.log(`la persona es ${edad < 18 ? "menor" : "mayor"} de edad.`);
+//salida "la persona es mayor de edad."
+```
+
+Como observamos en este ejemplo la condición `edad < 18` se evalúa dentro de nuestra interpolación ${} y dependiendo del resultado booleano devuelto , se elegirá entre uno de los dos valores "menor" y "mayor."
+
+function obtenerSaludo(nombre) {
+return `¡Hola, ${nombre}!`;
+}
+
+let nombre = "Carlos";
+let mensaje = `El saludo es: ${obtenerSaludo(nombre)}`;
+console.log(mensaje); // "El saludo es: ¡Hola, Carlos!"
+
+### Uso de Funciones Dentro de Template Literals
+
+Otra característica avanzada que nos proveen los template literals es la de poder ejecutar funciones dentro de nuestras interpolaciones. Esto permite que realicemos llamadas a funcione complejas directamente dentro de la construcción del string.
+Ejemplo:
+
+```javascript
+function obtenerUsuario() {
+    return "Mauro";
+}
+
+console.log(`Bienvenido ${obtenerUsuario()}!`);
+// salida Bienvenido Mauro!
+```
+
+En este ejemplo la nuestra función obtenerUsuario es llamada desde dentro de la interpolación y su resultado se incluye en la construcción del string de salida, esto nos permite hacer lo que queramos antes de devolver un resultado a la cadena.
+
+### Interpolación con Arrays y Objetos
+
+Los templates literals también nos permitirán realizar interpolaciones con arrays y objetos, lo cual es muy útil cuando necesitamos representar de manera legible datos complejos dentro de nuestra cadena.
+Veámoslo con un ejemplo.
+
+```javascript
+let frutas = ["manzana", "pera", "uva", "naranja"];
+
+//prettier-ignore
+console.log(`descuento en las siguientes frutas de nuestro almacen : ${frutas.join(", ")}.`);
+//salida "descuento en las siguientes frutas de nuestro almacen : manzana, pera, uva, naranja."
+```
+
+¡En este caso no solo usamos un array completo, sino que también su método .join() para crear nuestra lista de descuentos desde el segmento de interpolación!
+
+Cuando trabajamos con objetos, podemos acceder a sus propiedades desde dentro de la interpolación ${}:
+
+```javascript
+let persona = {
+    nombre: "Mauro",
+    edad: 34,
+};
+
+let mensaje = `Mi nombre es ${persona.nombre} y tengo ${persona.edad} años.`;
+console.log(mensaje); // "Mi nombre es Mauro y tengo 34 años."
+```
