@@ -26,6 +26,9 @@ Con cariño, Mauro.
     - [Modificación de prototipos y sus efectos](#modificación-de-prototipos-y-sus-efectos)
 3. [Buenas Prácticas](#buenas-prácticas)
 4. [Efectos de Autoboxing en Rendimiento a gran escala](#efectos-de-autoboxing-en-rendimiento-a-gran-escala)
+5. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+    - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
+    - [Ejercicios y desafíos prácticos](#ejercicios-y-desafíos-prácticos)
 
 ---
 
@@ -264,3 +267,38 @@ Al crear objetos envolventes explícitamente (como new String(), new Number(), n
 Cuando usamos un objeto envolvente, este va a permanecer en la memoria hasta que el recolecto de basura del motor de JavaScript lo elimine. Este objeto va a ocupar más memoria que un valor primitivo porque contiene no solo el valor, sí no también propiedades y métodos adicionales que son parte del objeto.
 En cambio el autoboxing se usa de manera temporal para realizar operaciones sobre un valor primitivo (como cuando invocamos el método .toUpperCase, .toString, etc).
 El motor de JavaScript Crea internamente un objeto envolvente temporal solo durante la ejecución de esta operación, y una vez que la operación termina, el objeto es destruido liberando memoria rápidamente y no la retiene a largo plazo relativo.
+
+## Conclusión y Recursos Adicionales
+
+el autoboxing es una característica del motor de JavaScript que nos facilita el uso de métodos y propiedades en valores primitivos. Si bien puede ser útil, es importante comprender sus implicaciones en el rendimiento y seguir las buenas prácticas para evitar problemas.
+
+### Resumen de conceptos clave
+
+**Autoboxing:** Conversión automática de tipos primitivos a objetos.
+
+**Tipos Primitivos:** Datos inmutables como cadenas, números y booleanos.
+
+**Objetos:** Estructuras complejas que almacenan valores y métodos por referencia.
+
+**Prototipos:** Mecanismo de herencia en JavaScript.
+
+**Rendimiento:** El autoboxing puede afectar el rendimiento en aplicaciones a gran escala
+
+## Ejercicios y desafíos prácticos
+
+1. Puedes analizar este fragmento de código en búsqueda de las líneas en las que ocurren autoboxing por parte del motor de JavaScript ?
+
+```javascript
+let mensaje = "Hola Mundo";
+console.log(mensaje.toUpperCase());
+console.log(mensaje.length);
+for (let char of mensaje) {
+    console.log(char);
+}
+let numero = 42;
+console.log(numero.toFixed(2));
+```
+
+2. Agrega un método invertir al prototipo de String que invierta el orden de los caracteres en una cadena. Luego, prueba el método con una cadena primitiva.
+
+3. extiende el objeto Number y agrega un método adicional. Luego, demuestra cómo el autoboxing permite utilizar este método con valores numéricos primitivos.
