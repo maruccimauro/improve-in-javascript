@@ -25,6 +25,7 @@ Con cariño, Mauro.
     - [Prototipo en JavaScript y su relación con el autoboxing](#prototipo-en-javascript-y-su-relación-con-el-autoboxing)
     - [Modificación de prototipos y sus efectos](#modificación-de-prototipos-y-sus-efectos)
 3. [Buenas Prácticas](#buenas-prácticas)
+4. [Efectos de Autoboxing en Rendimiento a gran escala](#efectos-de-autoboxing-en-rendimiento-a-gran-escala)
 
 ---
 
@@ -253,3 +254,13 @@ Convirtamos explícitamente siempre que podamos los objetos a valores primitivos
 
 **Prevenir efectos secundarios en segmentos criticos**
 Evitemos depender de conversiones implícitas en segmentos críticos, ya que pueden generarnos efectos secundarios difíciles de rastrear.
+
+## Efectos de Autoboxing en Rendimiento a gran escala
+
+El autoboxing es una herramienta poderosa que nos provee el motor de JavaScript para la manipulación de nuestros datos primitivos, pero puede tener efectos significativos en el rendimiento en aplicaciones de gran escala, ciclos repetitivos o en infraestructuras antiguas de bajos recursos.
+
+Al crear objetos envolventes explícitamente (como new String(), new Number(), new Boolean()) en lugar de confiar y desarrollar una buena lógica en nuestra estructura de código para poder confiar en el autoboxing puede ser menos eficiente en términos de uso de memoria y recursos.
+
+Cuando usamos un objeto envolvente, este va a permanecer en la memoria hasta que el recolecto de basura del motor de JavaScript lo elimine. Este objeto va a ocupar más memoria que un valor primitivo porque contiene no solo el valor, sí no también propiedades y métodos adicionales que son parte del objeto.
+En cambio el autoboxing se usa de manera temporal para realizar operaciones sobre un valor primitivo (como cuando invocamos el método .toUpperCase, .toString, etc).
+El motor de JavaScript Crea internamente un objeto envolvente temporal solo durante la ejecución de esta operación, y una vez que la operación termina, el objeto es destruido liberando memoria rápidamente y no la retiene a largo plazo relativo.
