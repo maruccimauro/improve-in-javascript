@@ -21,6 +21,9 @@ Con cariño, Mauro.
     - [Datos primitivos vs objetos](#datos-primitivos-vs-objetos)
     - [Desempaquetado implícito (unboxing)](#desempaquetado-implícito-unboxing)
     - [Diferencia entre valueOf y toString en unboxing](#diferencia-entre-valueof-y-tostring-en-unboxing)
+2. [Interacción con Prototipos y Métodos Nativos](#interacción-con-prototipos-y-métodos-nativos)
+    - [Prototipo en JavaScript y su relación con el autoboxing](#prototipo-en-javascript-y-su-relación-con-el-autoboxing)
+    - [Modificación de prototipos y sus efectos](#modificación-de-prototipos-y-sus-efectos)
 
 ---
 
@@ -202,3 +205,36 @@ if (boolObj.valueOf()) {
 | ------------ | -------------------------------------- | -------------------------------------- |
 | `valueOf()`  | Devuelve el valor primitivo del objeto | `new Number(123).valueOf()` → `123`    |
 | `toString()` | Devuelve una representación en cadena  | `new Number(123).toString()` → `"123"` |
+
+## Interacción con Prototipos y Métodos Nativos
+
+### Prototipo en JavaScript y su relación con el autoboxing
+
+En el motor de JavaScript, todos nuestros objetos tienen un prototipo. Este prototipo es un objeto que actúa como plantilla para los ellos, proporcionando propiedades y métodos que pueden ser compartidos por todos nuestros objetos de este método.
+
+**¿Que es un prototipo?**
+El prototipo de nuestros objetos es simplemente otro objeto que contiene propiedades y métodos que pueden ser heredado por nuestro objeto original. Por ejemplo, cuando creamos un objeto String, ese objeto va a heredar las propiedades y métodos de String.prototype.
+
+```javascript
+let cadena = String("HOLA");
+console.log(cadena.toLowerCase()); //"hola"
+// accedemos al metodo toUpperCase del prototipo String.prototype.
+```
+
+**relación entre prototipos y autoboxing**
+El autoboxing ocurre cuando uno de nuestros valores primitivos es tratado temporalmente como un objeto para que pueda acceder a métodos y propiedades de su prototipo heredado, el motor de JavaScript hace esto de manera implícita y no es visible para nosotros.
+
+### Modificación de prototipos y sus efectos
+
+tengamos Cuidado! porque JavaScript nos permite modificar los prototipos de los objetos envolventes (Number.prototype , String.Prototype , Boolean.Prototype , etc), Sin embargo, como los valores primitivos se convierten temporalmente en objetos a través del autoboxing, nuestros cambios en los prototipos pueden generar comportamientos impredecibles a nivel global.
+
+```javascript
+String.prototype.toLowerCase = function () {
+    return "Algo diferente a lo esperado.";
+};
+
+let cadena = "Hola!";
+console.log(cadena.toLowerCase()); //salida: "Algo diferente a lo esperado."
+```
+
+¡Es sumamente importante que conocer este concepto para evitar esto ya que, puede darnos un dolor de cabeza gigante!
