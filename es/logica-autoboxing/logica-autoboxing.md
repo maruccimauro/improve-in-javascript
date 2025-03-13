@@ -24,6 +24,7 @@ Con cariño, Mauro.
 2. [Interacción con Prototipos y Métodos Nativos](#interacción-con-prototipos-y-métodos-nativos)
     - [Prototipo en JavaScript y su relación con el autoboxing](#prototipo-en-javascript-y-su-relación-con-el-autoboxing)
     - [Modificación de prototipos y sus efectos](#modificación-de-prototipos-y-sus-efectos)
+3. [Buenas Prácticas](#buenas-prácticas)
 
 ---
 
@@ -238,3 +239,17 @@ console.log(cadena.toLowerCase()); //salida: "Algo diferente a lo esperado."
 ```
 
 ¡Es sumamente importante que conocer este concepto para evitar esto ya que, puede darnos un dolor de cabeza gigante!
+
+## Buenas Prácticas
+
+**Evitar autoboxing.**
+No dependamos siempre del autoboxing para convertir nuestros primitivos a objetos implícitamente. Es mejor Realicemos conversiones explícitas usando new Number(), new String(), etc., cuando lo necesitemos.
+
+**Usar operador de comparación estricta (===) siempre que podamos.**
+Evitemos usar ==, en escenarios que no lo necesitemos es bueno ya que este realiza coerción implícita. ¡Usemos === para comparar de manera estricta y evitar resultados inesperados!
+
+**Normalizar tipos antes de comparar**
+Convirtamos explícitamente siempre que podamos los objetos a valores primitivos antes de compararlos. Por ejemplo, usemos valueOf() para convertir nuestros objetos Boolean a un valor primitivo.
+
+**Prevenir efectos secundarios en segmentos criticos**
+Evitemos depender de conversiones implícitas en segmentos críticos, ya que pueden generarnos efectos secundarios difíciles de rastrear.
