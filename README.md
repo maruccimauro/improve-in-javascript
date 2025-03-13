@@ -21,6 +21,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de lógica de interpolacion de cadenas backticks](es/logica-interpolacion-cadenas-backticks/logica-interpolacion-cadenas-backticks.md)
 
+#### - [Manipulación de lógica de autoboxing y sus implicacias en JavaScript](es/logica-autoboxing/logica-autoboxing.md)
+
 ---
 
 Muchas Gracias por leerme!
