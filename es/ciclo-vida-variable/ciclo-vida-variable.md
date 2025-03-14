@@ -25,6 +25,8 @@ Con cariño, Mauro.
     - [Proceso de inicialización](#proceso-de-inicialización)
 4. [Recolección de Basura (Garbage Collection)](#recolección-de-basura-garbage-collection)
     - [Qué es y cómo funciona en JavaScript](#qué-es-y-cómo-funciona-en-javascript)
+5. [Eliminación de Variables](#eliminación-de-variables)
+    - [Uso de `delete`](#uso-de-delete)
 
 ---
 
@@ -137,3 +139,58 @@ En JavaScript, la recolección de basura se realiza de manera automática y est�
 **Referencias contadas:** Cada objeto tiene un contador de referencias que indica cuántas variables o estructuras de datos lo están utilizando. Cuando este contador llega a cero, el objeto es candidato para ser eliminado.
 
 **Marcado y barrido (Mark-and-sweep):** El motor de JavaScript recorre el grafo de objetos, marcando aquellos que están accesibles y limpiando los que no tienen referencias vivas. El proceso de barrido elimina nuestros objetos marcados como inalcanzables.
+
+## Eliminación de Variables:
+
+La eliminación de nuestras variables en JavaScript es un aspecto importante de la gestión de memoria. Aunque JavaScript tiene un recolector de basura automático, entender cómo y cuando las variables son eliminadas puede ayudarnos a escribir código más eficiente y evitar posibles problemas.
+Podemos utilizar el operador delete para eliminar propiedades de un objeto. Sin embargo, su comportamiento es diferente cuando se aplica a variables.
+
+### Uso de `delete`
+
+**Eliminación de propiedades de objetos**
+Cuando usamos delete en la propiedad de un objeto la propiedad es eliminada y el objeto modificado.
+
+```javascript
+let miObj = { nombre: "Mauro", edad: "34" };
+
+console.log(miObj.nombre); // Mauro
+
+delete miObj.edad;
+
+console.log(miObj.nombre); // Mauro
+```
+
+**Eliminacion de variables globales**
+En el contexto global, si hemos declarado una variable implícitamente (sin var, let, const), delete puede eliminarla.
+
+```javascript
+function func() {
+    x = 10;
+}
+
+y = 5;
+func();
+
+delete x;
+delete y;
+
+console.log(x); // ReferenceError
+console.log(y); // ReferenceError
+```
+
+**Eliminación de variables declaradas con var, let o const**
+No podemos eliminar variables declaradas con var, let o const usando delete. Estas variables tienen atributos internos que lo evitan.
+
+```javascript
+var x = 15;
+var y = 10;
+var z = 5;
+
+delete x;
+delete y;
+delete z;
+
+console.log(x); // 15
+console.log(y); // 10
+console.log(z); // 5
+```
