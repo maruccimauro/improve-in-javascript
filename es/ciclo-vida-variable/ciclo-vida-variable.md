@@ -31,6 +31,7 @@ Con cariño, Mauro.
 6. [Eliminación de Variables](#eliminación-de-variables)
     - [Uso de `delete`](#uso-de-delete)
 7. [Buenas Prácticas](#buenas-prácticas-y-errores-comunes)
+8. [Conclusión](#conclusión)
 
 ---
 
@@ -212,3 +213,12 @@ console.log(z); // 5
 ## Conclusión
 
 Dominar el ciclo de vida de nuestras variables en JavaScript es esencial para cualquier de nosotros como desarrolladores, sobre todo en aquello que busquen escribir código limpio, eficiente y libre de errores. Desde la declaración hasta la recolección de basura, cada etapa tiene implicaciones importantes para la gestión de la memoria y el comportamiento de nuestro programa.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
