@@ -208,3 +208,7 @@ console.log(z); // 5
 **Inicializar variables explícitamente**: debemos asignar valores a nuestras variables tan proto como sea posible después de la declaración.
 
 **Usar null y undefined cuando corresponda**: utilicemos null para indicar la ausencia intencional de valor y undefined para indicar que una variable no fue inicializada.
+
+## Conclusión
+
+Dominar el ciclo de vida de nuestras variables en JavaScript es esencial para cualquier de nosotros como desarrolladores, sobre todo en aquello que busquen escribir código limpio, eficiente y libre de errores. Desde la declaración hasta la recolección de basura, cada etapa tiene implicaciones importantes para la gestión de la memoria y el comportamiento de nuestro programa.
