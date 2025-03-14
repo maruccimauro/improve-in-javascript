@@ -15,6 +15,13 @@ Con cariño, Mauro.
 
 **Índice de la Guía**
 
+1. [Introducción](#introducción)
+    - [Ciclo de vida de una variable en JavaScript](#ciclo-de-vida-de-una-variable-en-javascript)
+
 ---
 
 ## Introducción
+
+### Ciclo de vida de una variable en JavaScript
+
+El ciclo de vida de una variable en JavaScript se describe por las etapas que pasa una variable desde su creación hasta su destruccion. Entender este ciclo nos sera fundamental para que entendamos cómo funcionan las variables dentro del contexto de ejecucion de nuestro programa y cómo la memoria se maneja en JavaScript. Las variables en JavaScript pueden tener diferentes estados y, dependiendo de su manipulación pueden experimentar comportamientos especificos como la inicializacion, reasignacion, recoleccion de basura(garbage collection) y eliminacion.
