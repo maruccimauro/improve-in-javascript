@@ -23,6 +23,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de lógica de autoboxing y sus implicacias en JavaScript](es/logica-autoboxing/logica-autoboxing.md)
 
+#### - [Manipulación de lógica de ciclo de vida de una variable](es/ciclo-vida-variable/ciclo-vida-variable.md)
+
 ---
 
 Muchas Gracias por leerme!
