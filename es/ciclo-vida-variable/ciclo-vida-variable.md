@@ -21,6 +21,8 @@ Con cariño, Mauro.
     - [Variables no declaradas (undeclared)](#variables-no-declaradas-undeclared)
     - [Variables indefinidas (undefined)](#variables-indefinidas-undefined)
     - [Comparación con null con undefined](#comparación-con-null-con-undefined)
+3. [Inicialización de Variables](#inicialización-de-variables)
+    - [Proceso de inicialización](#proceso-de-inicialización)
 
 ---
 
@@ -74,3 +76,23 @@ console.log(null === undefined) // false
 ```
 
 aquí podemos observar que null y undefined son diferentes.
+
+## Inicialización de Variables
+
+La inicialización de una variable en JavaScript es el proceso por el cual le asigna un valor después de haber sido declarada.
+
+### Proceso de Inicialización
+
+**inicialización implícita** : Nuestra variable se crea en memoria pero no le asignamos ningún valor definido aún, se le asigna automáticamente undefined si es var o let, const por otra parte nos obliga a asignarle un valor en el momento de la declaración.
+
+```javascript
+let x; //undefined
+var y; //undefined
+```
+
+**inicialización explicita** : declaramos la variable y le asignamos un valor en ese mismo momento.
+
+```javascript
+let x = 10; // 10
+var y = 5; // 5
+```
