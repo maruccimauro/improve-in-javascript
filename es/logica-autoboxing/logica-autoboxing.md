@@ -302,3 +302,12 @@ console.log(numero.toFixed(2));
 2. Agrega un método invertir al prototipo de String que invierta el orden de los caracteres en una cadena. Luego, prueba el método con una cadena primitiva.
 
 3. extiende el objeto Number y agrega un método adicional. Luego, demuestra cómo el autoboxing permite utilizar este método con valores numéricos primitivos.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
