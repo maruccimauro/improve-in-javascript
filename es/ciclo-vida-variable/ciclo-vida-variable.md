@@ -194,3 +194,13 @@ console.log(x); // 15
 console.log(y); // 10
 console.log(z); // 5
 ```
+
+## Buenas Prácticas
+
+**Utilizar let y const en lugar de var** : tanto let como const tienen ámbito de bloque, lo que nos ayuda a evitar comportamientos inesperados y errores comunes asociados con el ámbito de var.
+
+**Declarar variables antes de usarlas**: siempre debemos declarar nuestras variables antes de usarlas. Esto nos evitara errores de `ReferenceError` y mejorara la claridad de nuestro código.
+
+**Inicializar variables explícitamente**: debemos asignar valores a nuestras variables tan proto como sea posible después de la declaración.
+
+**Usar null y undefined cuando corresponda**: utilicemos null para indicar la ausencia intencional de valor y undefined para indicar que una variable no fue inicializada.
