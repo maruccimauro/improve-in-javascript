@@ -23,10 +23,14 @@ Con cariño, Mauro.
     - [Comparación con null con undefined](#comparación-con-null-con-undefined)
 3. [Inicialización de Variables](#inicialización-de-variables)
     - [Proceso de inicialización](#proceso-de-inicialización)
-4. [Recolección de Basura (Garbage Collection)](#recolección-de-basura-garbage-collection)
+4. [Reasignación de Variables](#reasignación-de-variables)
+    - [Modificación del valor de una variable](#modificación-del-valor-de-una-variable)
+    - [Efectos de la reasignación](#efectos-de-la-reasignación)
+5. [Recolección de Basura (Garbage Collection)](#recolección-de-basura-garbage-collection)
     - [Qué es y cómo funciona en JavaScript](#qué-es-y-cómo-funciona-en-javascript)
-5. [Eliminación de Variables](#eliminación-de-variables)
+6. [Eliminación de Variables](#eliminación-de-variables)
     - [Uso de `delete`](#uso-de-delete)
+7. [Buenas Prácticas](#buenas-prácticas-y-errores-comunes)
 
 ---
 
