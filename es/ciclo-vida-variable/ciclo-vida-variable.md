@@ -17,6 +17,10 @@ Con cariño, Mauro.
 
 1. [Introducción](#introducción)
     - [Ciclo de vida de una variable en JavaScript](#ciclo-de-vida-de-una-variable-en-javascript)
+2. [Tipos de Variables](#tipos-de-variables)
+    - [Variables no declaradas (undeclared)](#variables-no-declaradas-undeclared)
+    - [Variables indefinidas (undefined)](#variables-indefinidas-undefined)
+    - [Comparación con null con undefined](#comparación-con-null-con-undefined)
 
 ---
 
@@ -25,3 +29,48 @@ Con cariño, Mauro.
 ### Ciclo de vida de una variable en JavaScript
 
 El ciclo de vida de una variable en JavaScript se describe por las etapas que pasa una variable desde su creación hasta su destruccion. Entender este ciclo nos sera fundamental para que entendamos cómo funcionan las variables dentro del contexto de ejecucion de nuestro programa y cómo la memoria se maneja en JavaScript. Las variables en JavaScript pueden tener diferentes estados y, dependiendo de su manipulación pueden experimentar comportamientos especificos como la inicializacion, reasignacion, recoleccion de basura(garbage collection) y eliminacion.
+
+## Tipos de Variables
+
+Variables no declaradas (undeclared)
+En JavaScript, una variable no declarada es aquella que utilizamos sin haber sido declarada previamente con var, let o const.
+Esto puede ocurrir de dos maneras:
+Uso implícito:
+si asignamos un valor a un nombre que no hayamos declarado, el motor de JavaScript creara automáticamente una variable global con ese nombre. Por Ejemplo:
+
+```javascript
+function example() {
+    y = 20; // Se crea como variable global
+}
+example();
+
+console.log(y); // 20
+console.log(window.y); // 20 (en el navegador)
+```
+
+En este caso creamos una variable global que puede llevar a comportamientos inesperados y difíciles de depurar.
+
+Por otra parte, si intentamos acceder a una variable no declarada sin haber asignado ningún valor (sin que el motor de JavaScript la haya creado implícitamente en el ámbito global) obtendremos un error `ReferenceError`
+
+```javascript
+console.log(variable_no_asignada);
+```
+
+### Variables indefinidas (undefined)
+
+Las variables indefinidas son aquellas que hemos declarado pero todavía no las inicializamos asignándoles ningún valor, Es decir las definimos en el código pero no tienen ningún valor asignado en el momento de su creación, y el motor de JavaScript automáticamente le asignara un valor `undefined`.
+
+```javascript
+let x; // hemos declarado a x , pero nunca le asignamos ningún valor.
+console.log(x); // salida : undefined
+```
+
+### Comparación con null con undefined
+
+Es importante que notemos que undefined y null son dos tipos diferentes en JavaScript, aunque ambos se utilizan para indicar la ausencia de un valor y pertenecen a los valores nullish, undefine se asigna automáticamente cuando una variable no tiene valor, mientras que null es un valor explicito que asignamos para indicar la ausencia intencional de un valor.
+
+```Javascript
+console.log(null === undefined) // false
+```
+
+aquí podemos observar que null y undefined son diferentes.
