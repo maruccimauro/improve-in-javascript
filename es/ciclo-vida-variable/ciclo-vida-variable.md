@@ -23,6 +23,8 @@ Con cariño, Mauro.
     - [Comparación con null con undefined](#comparación-con-null-con-undefined)
 3. [Inicialización de Variables](#inicialización-de-variables)
     - [Proceso de inicialización](#proceso-de-inicialización)
+4. [Recolección de Basura (Garbage Collection)](#recolección-de-basura-garbage-collection)
+    - [Qué es y cómo funciona en JavaScript](#qué-es-y-cómo-funciona-en-javascript)
 
 ---
 
@@ -123,3 +125,15 @@ console.log(obj.edad); // 34
 
 Para variables de tipos primitivos (números, cadenas, booleanos), la reasignación reemplaza el valor anterior en nuestra variable.
 Para tipos de referencia (objetos, arreglos, funciones), la reasignación cambia la referencia almacenada en la variable, apuntando a un nuevo objeto en memoria.
+
+## Recolección de Basura (Garbage Collection)
+
+La recolección de basura (garbage collection) es un proceso automático del motor de JavaScript que gestiona la memoria del programa.Su objetivo principal es liberar espacio en la memoria eliminando nuestros objetos y variables que ya no son accesibles, evitando así fugas de memoria.
+
+### Qué es y cómo funciona en JavaScript
+
+En JavaScript, la recolección de basura se realiza de manera automática y está basada en el algoritmo de referencias contadas y marcado y barrido.
+
+**Referencias contadas:** Cada objeto tiene un contador de referencias que indica cuántas variables o estructuras de datos lo están utilizando. Cuando este contador llega a cero, el objeto es candidato para ser eliminado.
+
+**Marcado y barrido (Mark-and-sweep):** El motor de JavaScript recorre el grafo de objetos, marcando aquellos que están accesibles y limpiando los que no tienen referencias vivas. El proceso de barrido elimina nuestros objetos marcados como inalcanzables.
