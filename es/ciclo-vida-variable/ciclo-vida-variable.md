@@ -96,3 +96,30 @@ var y; //undefined
 let x = 10; // 10
 var y = 5; // 5
 ```
+
+## Reasignación de Variables
+
+La reasignación de una variable en JavaScript ocurre cuando le asignamos un nuevo valor después de haberla declarado e inicializado. Dependiendo del tipo de variable (var, let, const), la posibilidad de reasignación y sus efectos varían.
+
+### Modificación del Valor de una Variable
+
+Cuando manipulamos declaraciones del tipo var y let, es posible modificar el valor de la variable en cualquier momento después de su declaración, con const no se permite reasignar un nuevo valor después de la declaración, Aunque const no nos permite reasignar un nuevo valor, en el caso de objetos y arreglos sí es posible modificar su contenido interno.
+
+```javascript
+let x = 10;
+console.log(x); // 10
+x = 20; // Se reasigna el valor
+console.log(x); // 20
+
+const y = 30;
+y = 40; // TypeError: Assignment to constant variable
+
+const obj = { edad: 30 };
+obj.edad = 34;
+console.log(obj.edad); // 34
+```
+
+### Efectos de la Reasignación.
+
+Para variables de tipos primitivos (números, cadenas, booleanos), la reasignación reemplaza el valor anterior en nuestra variable.
+Para tipos de referencia (objetos, arreglos, funciones), la reasignación cambia la referencia almacenada en la variable, apuntando a un nuevo objeto en memoria.
