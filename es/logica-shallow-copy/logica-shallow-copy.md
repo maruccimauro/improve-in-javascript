@@ -27,7 +27,7 @@ Que podamos comprender la manipulación de datos en JavaScript, particularmente 
 
 ### Importancia de la manipulación de objetos y arrays en JavaScript
 
-En JavaScript, nuestros objetos y arrays son estructuras de datos fundamentales que se utilizan para representar informacion compleja. Sin embargo, a diferencia de los tipos de datos primitivos (como números, cadenas de texto , etc), los objetos y arrays son mutable y se pasan por referencia. Esto implica que, cuando modifiquemos una de estas estructuras, cualquier otra referencia al mismo objeto o array también verá reflejados esos cambios. Comprender esto nos permitira evitar efectos inesperados.
+En JavaScript, nuestros objetos y arrays son estructuras de datos fundamentales que se utilizan para representar información compleja. Sin embargo, a diferencia de los tipos de datos primitivos (como números, cadenas de texto, etc), los objetos y arrays son mutable y se pasan por referencia. Esto implica que, cuando modifiquemos una de estas estructuras, cualquier otra referencia al mismo objeto o array también verá reflejados esos cambios. Comprender esto nos permitirá evitar efectos inesperados.
 
 ```javascript
 let persona1 = { nombre: "Juan", edad: "30" };
@@ -37,14 +37,14 @@ persona2.nombre = "Mauro";
 console.log(persona1.nombre); // "Mauro"
 ```
 
-como podemos observar el cambio en la propiedad nombre de `persona2` se ve reflejada en `persona1` tambien.
+como podemos observar el cambio en la propiedad nombre de `persona2` se ve reflejada en `persona1` también.
 
 ### Diferencia entre shallow copy y deep copy
 
-Las copias de nuestros objetos y arrays pueden clasificarse en dos tipos principales : shallow copy (copia superficial) y deep copy(copia profunda)
+Las copias de nuestros objetos y arrays pueden clasificarse en dos tipos principales: shallow copy (copia superficial) y deep copy(copia profunda)
 
 **Shallow Copy:**
-Este tipo de copia nos crea un nuevo objeto o array, pero las referencia a los elementos internos del objeto o array original no se copia, si no que se comparten. Es decir, si el objeto o array original contiene otros objetos o arrays anidados, esos elementos siguen siendo referenciados directamente desde la copia. Por otra parte los datos primitivos que contenga el objeto o array , seran copias directas de los valores contenidos , es decir que no se veran afectados por el objeto o array copia.
+Este tipo de copia nos crea un nuevo objeto o array, pero las referencia a los elementos internos del objeto o array original no se copia, si no que se comparten. Es decir, si el objeto o array original contiene otros objetos o arrays anidados, esos elementos siguen siendo referenciados directamente desde la copia. Por otra parte los datos primitivos que contenga el objeto o array, serán copias directas de los valores contenidos , es decir que no se veran afectados por el objeto o array copia.
 
 ```javascript
 let persona1 = {
@@ -61,7 +61,7 @@ console.log(persona1.nombre, persona1.direccion); // Mauro {calle: 'Otra Calle',
 console.log(persona2.nombre, persona2.direccion); // Juan {calle: 'Otra Calle', numeracion: '5678'}
 ```
 
-Aqui podemos observar como el nombre no se ve afectado por referencias asociadas ya que son datos primitivos , y en contra parte , el objeto `direccion` si afecta tanto a `persona1` como a `persona2` ya que comparten la misma referencia.
+Aquí podemos observar como el nombre no se ve afectado por referencias asociadas ya que son datos primitivos, y en contra parte, el objeto `direccion` si afecta tanto a `persona1` como a `persona2` ya que comparten la misma referencia.
 
 **Deep Copy:**
 A diferencia de la shallow copy, la deep copy nos creara una nueva estructura completamente independiente, copiando solo nuestro objeto o array original, si no también todos los elementos internos (y sus subelementos).
