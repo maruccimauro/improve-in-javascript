@@ -1,4 +1,4 @@
-# Manipulación de Lógica de Evaluación de Truthy y Falsy en JavaScript
+# Manipulación de Lógica de shallow copy en JavaScript
 
 <img src="/resources/logo.png">
 <hr />

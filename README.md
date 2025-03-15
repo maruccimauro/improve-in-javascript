@@ -25,6 +25,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de lógica de ciclo de vida de una variable](es/ciclo-vida-variable/ciclo-vida-variable.md)
 
+#### - [Manipulación de Lógica de shallow copy en JavaScript](es/logica-shallow-copy/logica-shallow-copy.md)
+
 ---
 
 Muchas Gracias por leerme!
