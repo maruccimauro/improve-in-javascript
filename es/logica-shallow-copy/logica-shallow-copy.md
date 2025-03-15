@@ -23,6 +23,7 @@ Con cariño, Mauro.
     - [Uso del operador spread](#uso-del-operador-spread)
     - [Uso de `Array.slice()` (para arrays)](#uso-de-arrayslice-para-arrays)
     - [Uso de `Object.create()` (para objetos)](#uso-de-objectcreate-para-objetos)
+3. [Conclusión](#conclusión)
 
 ---
 
@@ -161,3 +162,16 @@ persona2.direccion.numeracion = "5678";
 console.log(persona1.nombre, persona1.direccion); // Mauro {calle: 'Otra Calle', numeracion: '5678'}
 console.log(persona2.nombre, persona2.direccion); // Juan {calle: 'Otra Calle', numeracion: '5678'}
 ```
+
+## Conclusión
+
+Al manipular datos en JavaScript, especialmente objetos y arrays, es crucial tener una comprensión sólida de cómo las operaciones de copia pueden afectar la mutabilidad y el comportamiento de nuestros datos.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
