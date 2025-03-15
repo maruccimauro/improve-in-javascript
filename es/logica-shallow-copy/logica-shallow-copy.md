@@ -18,6 +18,11 @@ Con cariño, Mauro.
 1. [Introducción](#introducción)
     - [Importancia de la manipulación de objetos y arrays en JavaScript](#importancia-de-la-manipulación-de-objetos-y-arrays-en-javascript)
     - [Diferencia entre shallow copy y deep copy](#diferencia-entre-shallow-copy-y-deep-copy)
+2. [Métodos comunes en JavaScript para crear shallow copies](#métodos-comunes-en-javascript-para-crear-shallow-copies)
+    - [Uso de `Object.assign()`](#uso-de-objectassign)
+    - [Uso del operador spread](#uso-del-operador-spread)
+    - [Uso de `Array.slice()` (para arrays)](#uso-de-arrayslice-para-arrays)
+    - [Uso de `Object.create()` (para objetos)](#uso-de-objectcreate-para-objetos)
 
 ---
 
@@ -82,3 +87,77 @@ console.log(persona2.nombre, persona2.direccion); // Juan {calle: 'Otra Calle', 
 ```
 
 Podemos observar que al utilizar `JSON.parse(JSON.stringify())` hemos realizado una copia profunda de todos los elementos de persona1 , sin enlazar sus referencias a persona2, donde cada uno es afectado solo por sus propios cambios.
+
+## Métodos comunes en JavaScript para crear shallow copies
+
+Existen varios métodos para que realicemos copias superficiales de objetos y arrays en JavaScript. Los más comunes son el uso de Object.assign(), el operador spread (...) , el método Array.slice() y Object.create().
+
+### Uso de Object.assign()
+
+Object.assign() se usa para copiar todas las propiedades enumerables de nuestro objeto a uno nuevo. Este método solo realiza una copia superficial, por lo que al igual que con el operador spread, las referencias internas no se duplican.
+
+```javascript
+let persona1 = {
+    nombre: "Mauro",
+    direccion: { calle: "Mi Linda Calle", numeracion: "1234" },
+};
+let persona2 = Object.assign({}, persona1);
+
+persona2.nombre = "Juan";
+persona2.direccion.calle = "Otra Calle";
+persona2.direccion.numeracion = "5678";
+
+console.log(persona1.nombre, persona1.direccion); // Mauro {calle: 'Otra Calle', numeracion: '5678'}
+console.log(persona2.nombre, persona2.direccion); // Juan {calle: 'Otra Calle', numeracion: '5678'}
+```
+
+### Uso del operador spread
+
+El operador spread (...) también se utiliza para hacer nuestras copias superficiales. Similar a Object.assign(), Nos crea una nueva copia del objeto de nivel superior, pero no realiza una copia profunda de los objetos anidados.
+
+```javascript
+let persona1 = {
+    nombre: "Mauro",
+    direccion: { calle: "Mi Linda Calle", numeracion: "1234" },
+};
+let persona2 = { ...persona1 };
+
+persona2.nombre = "Juan";
+persona2.direccion.calle = "Otra Calle";
+persona2.direccion.numeracion = "5678";
+
+console.log(persona1.nombre, persona1.direccion); // Mauro {calle: 'Otra Calle', numeracion: '5678'}
+console.log(persona2.nombre, persona2.direccion); // Juan {calle: 'Otra Calle', numeracion: '5678'}
+```
+
+### Uso de Array.slice() (para arrays)
+
+El método slice() de los arrays lo podemos usar para realizar shallow copy sobre uno de nuestros arrays. Este método crea una copia del array desde el índice 0 hasta el ultimo si no se le especifican índices.
+
+```javascript
+let miArray1 = [1, 2, { nombre: "Juan" }];
+let miArray2 = miArray1.slice();
+
+miArray1[2].nombre = "Mauro";
+console.log(miArray1[2]); // {nombre: 'Mauro'}
+console.log(miArray2[2]); // {nombre: 'Mauro'}
+```
+
+### Uso de Object.create() (para objetos)
+
+el método Object.create() también podemos usarlo para hacer una shallow copy de un objeto y nos permite que el copiado tenga el mismo prototipo que el objeto original, mientras que los métodos anteriores (Object.assign(), {...}, Array.slice()) solo copian las propiedades del objeto. Esto nos será útil, cuando deseemos heredar el prototipo de un objeto y hacer una copia superficial.
+
+```javascript
+let persona1 = {
+    nombre: "Mauro",
+    direccion: { calle: "Mi Linda Calle", numeracion: "1234" },
+};
+let persona2 = Object.create(persona1);
+
+persona2.nombre = "Juan";
+persona2.direccion.calle = "Otra Calle";
+persona2.direccion.numeracion = "5678";
+
+console.log(persona1.nombre, persona1.direccion); // Mauro {calle: 'Otra Calle', numeracion: '5678'}
+console.log(persona2.nombre, persona2.direccion); // Juan {calle: 'Otra Calle', numeracion: '5678'}
+```
