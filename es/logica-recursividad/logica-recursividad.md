@@ -22,6 +22,10 @@ Con cariño, Mauro.
     - [Recursión simple vs. recursión múltiple](#recursión-simple-vs-recursión-múltiple)
     - [Recursión de cola (Tail Recursion)](#recursión-de-cola-tail-recursion)
     - [Recursión mutua (Recursión indirecta)](#recursión-mutua-recursión-indirecta)
+3. [Optimización de Funciones Recursivas](#optimización-de-funciones-recursivas)
+    - [Memoización y almacenamiento en caché](#memoización-y-almacenamiento-en-caché)
+    - [Conversión de recursión a iteración (Recursion Unrolling)](#conversión-de-recursión-a-iteración-recursion-unrolling)
+    - [Optimización con recursión de cola](#optimización-con-recursión-de-cola)
 
 ---
 
@@ -193,3 +197,84 @@ function esImpar(n) {
 console.log(esPar(4)); // true
 console.log(esImpar(7)); // true
 ```
+
+## Optimización de Funciones Recursivas
+
+Nuestras funciones recursivas a veces pueden ser ineficientes, especialmente cuando involucran cálculos redundantes o generan una gran cantidad de llamadas, por suerte, existen varias estrategias para optimizar nuestras funciones recursivas y mejorar su rendimiento.
+
+### Memoización y almacenamiento en caché
+
+La memoización es una técnica de optimización que almacena los resultados nuestras funciones en una "cache" para evitar recalcular los mismos valores varias veces. es estrategia es especialmente útil en problemas donde nuestra función recursiva repite cálculos para los mismos parámetros de entrada.
+
+```javascript
+let cache = {}; // Caché para guardar los resultados
+
+function factorialMemo(n) {
+    if (n === 0 || n === 1) return 1; // Caso base: 0! y 1! son 1
+    if (cache[n]) {
+        console.log(`Usando cache para ${n}! (${cache[n]})`);
+        return cache[n]; // Si ya está calculado, lo usamos
+    }
+
+    console.log(`Calculando factorial de ${n}`);
+    cache[n] = n * factorialMemo(n - 1); // Guardamos el resultado
+    return cache[n];
+}
+
+console.log("resultado", factorialMemo(5));
+console.log("resultado", factorialMemo(6));
+```
+
+Cuando ejecutamos el primer `factorialMemo(5)` se calcula recursivamente de 5 a 1 y se guarda en cache cada asociación índice y resultado, cuando ejecutamos `factorialMemo(6)` solo calculamos `6 * 5` , porque el factorial de 5 ya lo tenemos en la cache, ahorrándonos así de volver a realizar gran parte de los cálculos repetidos.
+
+### Conversión de recursión a iteración (Recursion Unrolling)
+
+la recursión unrolling es un enfoque donde consiste en que reemplacemos nuestra función recursiva por una versión iterativa. Esto nos permitirá mejorar el rendimiento y evitar el desbordamiento de pila (stack overflow) en varias situaciones, especialmente cuando la profundidad de nuestras llamadas sea alta.
+
+funcion recursiva :
+
+```javascript
+function factorial(n) {
+    if (n === 0) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+version iterativa( sin recursion):
+
+```javascript
+function factorialIterativo(n) {
+    let resultado = 1;
+    for (let i = 1; i <= n; i++) {
+        resultado *= i;
+    }
+    return resultado;
+}
+```
+
+Aquí evitamos el stack overflow y evitamos utilizar la memoria de la misma manera que lo haría nuestra función recursiva.
+
+### Optimización con recursión de cola
+
+La recursión de cola es un tipo especial de recursión donde la llamada recursiva es la última operación que realiza nuestra función antes de devolver un valor. Esto nos permite que el compilador o el intérprete optimice la recursión, eliminando la necesidad de mantener el contexto de la función anterior en la pila de llamadas.
+**version recursiva normal:**
+
+```javascript
+function factorial(n) {
+    if (n === 0) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+**version recursiva de cola:**
+
+```javascript
+function factorial(n, acumulador = 1) {
+    if (n === 0) return acumulador;
+    return factorial(n - 1, n * acumulador);
+}
+
+console.log(factorial(5));
+```
+
+En este ejemplo, la recursión de cola permite que el compilador o el entorno de ejecución reutilice el mismo marco de pila para cada llamada a nuestra función recursiva.
