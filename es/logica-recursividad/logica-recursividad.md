@@ -297,3 +297,12 @@ Sin embargo, es crucial que entendamos sus diferentes patrones y técnicas de op
 **Recursión mutua:** Dos o más funciones se llaman entre sí.
 **Memoización:** Almacenar resultados de funciones en caché para evitar cálculos repetidos.
 **Recursion Unrolling:** convertir una función recursiva a una iterativa.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
