@@ -26,6 +26,8 @@ Con cariño, Mauro.
     - [Memoización y almacenamiento en caché](#memoización-y-almacenamiento-en-caché)
     - [Conversión de recursión a iteración (Recursion Unrolling)](#conversión-de-recursión-a-iteración-recursion-unrolling)
     - [Optimización con recursión de cola](#optimización-con-recursión-de-cola)
+4. [Conclusión y Recursos Adicionales](#conclusión-y-recursos-adicionales)
+    - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
 
 ---
 
@@ -278,3 +280,20 @@ console.log(factorial(5));
 ```
 
 En este ejemplo, la recursión de cola permite que el compilador o el entorno de ejecución reutilice el mismo marco de pila para cada llamada a nuestra función recursiva.
+
+### Conclusión y Recursos Adicionales
+
+La recursividad es una herramienta muy útil que nos puede permitir resolver problemas complejos al dividirlos en subproblemas más pequeños y manejables.
+Sin embargo, es crucial que entendamos sus diferentes patrones y técnicas de optimización para evitar problemas y desbordamientos de pila. al dominar la recursividad, podremos escribir código más elegante y eficiente para una variedad de aplicaciones.
+
+### Resumen de conceptos clave:
+
+**Recursividad:** Una función que se llama a sí misma para resolver un problema.
+**Caso base:** La condición que detiene la recursión.
+**Caso recursivo:** La parte de la función donde se realiza la llamada recursiva.
+**Recursión simple:** La función se llama a sí misma una vez por ejecución.
+**Recursión múltiple:** La función se llama a sí misma más de una vez, como en el cálculo de Fibonacci.
+**Recursión de cola (Tail Recursion):** La llamada recursiva es la última operación, permitiendo optimizaciones.
+**Recursión mutua:** Dos o más funciones se llaman entre sí.
+**Memoización:** Almacenar resultados de funciones en caché para evitar cálculos repetidos.
+**Recursion Unrolling:** convertir una función recursiva a una iterativa.
