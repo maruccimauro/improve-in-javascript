@@ -27,6 +27,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de Lógica de shallow copy en JavaScript](es/logica-shallow-copy/logica-shallow-copy.md)
 
+#### - [Manipulacion de logica de recursividad en funciones en JavaScript](es/logica-recursividad/logica-recursividad.md)
+
 ---
 
 Muchas Gracias por leerme!
