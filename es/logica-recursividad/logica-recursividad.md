@@ -1,4 +1,4 @@
-# Manipulación de Lógica de shallow copy en JavaScript
+# Manipulacion de logica de recursividad en funciones en JavaScript
 
 <img src="/resources/logo.png">
 <hr />
