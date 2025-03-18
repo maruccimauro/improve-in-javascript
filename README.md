@@ -29,6 +29,8 @@ Con cariño, Mauro.
 
 #### - [Manipulacion de logica de recursividad en funciones en JavaScript](es/logica-recursividad/logica-recursividad.md)
 
+#### - [Manipulacion de logica de orden superior en funciones en JavaScript](es/logica-funciones-orden-superior/logica-funciones-orden-superior.md)
+
 ---
 
 Muchas Gracias por leerme!
