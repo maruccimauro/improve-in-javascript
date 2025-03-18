@@ -25,6 +25,9 @@ Con cariño, Mauro.
     - [Funciones que reciben funciones como argumentos](#funciones-que-reciben-funciones-como-argumentos)
     - [Funciones que retornan funciones](#funciones-que-retornan-funciones)
     - [Composición de funciones](#composición-de-funciones)
+3. [Transformaciones Funcionales con Funciones de Orden Superior](#transformaciones-funcionales-con-funciones-de-orden-superior)
+    - [Uso de `map`, `filter` y `reduce`](#uso-de-map-filter-y-reduce)
+    - [Creación de transformaciones personalizadas](#creación-de-transformaciones-personalizadas)
 
 ---
 
@@ -151,4 +154,53 @@ const componer = (...funcs) => {
 
 const enfatizar2 = componer(agregarExclamacion, agregarMayuscula);
 console.log(enfatizar2("hola mundo")); //salida HOLA MUNDO!
+```
+
+## Transformaciones Funcionales con Funciones de Orden Superior
+
+### Uso de `map`, `filter` y `reduce`
+
+Las funciones `map`, `filter`, y `reduce` son métodos claves en la manipulación de arrays que operan de forma funcional, transformando y reduciendo nuestros datos sin la necesidad de modificar el estado global ni utilizar estructuras de control imperativas como bucles. Estas funciones se basan en el concepto de aplicar una operación a cada elemento de nuestra colección de manera declarativa.
+
+`map`: aplica una función a cada elemento de nuestro array y nos devuelve un nuevo array con los resultados.
+
+```javascript
+const numeros = [1, 2, 3, 4, 5, 6];
+const doblados = numeros.map((num) => num * 2);
+
+console.log(doblados); // salida [2, 4, 6, 8, 10, 12]
+```
+
+`filter`: filtra los elementos de nuestro array según un criterio, devolviéndonos un nuevo array con los elementos que cumplen la condición.
+
+```javascript
+const numeros = [1, 2, 3, 4, 5, 6];
+const mayoresQueCuatro = numeros.filter((num) => num > 4);
+console.log(mayoresQueCuatro); // salida [5, 6]
+```
+
+`reduce`:reduce todos los elementos de nuestro array a un único valor, utilizando una función acumuladora que recibe el valor acumulado y el elemento actual.
+
+```javascript
+const numeros = [1, 2, 3, 4];
+const suma = numeros.reduce((acumulado, valor) => acumulado + valor, 0);
+console.log(suma); // salida 10
+```
+
+Cada uno de estos métodos sigue el principio de "inmutabilidad", donde el estado original no se modifica, y el resultado se obtiene mediane una transformación declarativa.
+
+### Creación de transformaciones personalizadas
+
+A menudo vamos a requerir transformaciones especificas o complejas. Podemos crear funciones personalizadas basadas en métodos como `map`, `filter`, `reduce` sin perder claridad ni la reutilización del código.
+
+```javascript
+function transformarDatos(datos, transformacion) {
+    return datos.map(transformacion);
+}
+
+const nombres = ["mauro", "juan", "ana"];
+const primeraMayuscula = (nombre) =>
+    nombre.charAt(0).toUpperCase() + nombre.slice(1);
+
+console.log(transformarDatos(nombres, primeraMayuscula)); // salida ['Mauro', 'Juan', 'Ana']
 ```
