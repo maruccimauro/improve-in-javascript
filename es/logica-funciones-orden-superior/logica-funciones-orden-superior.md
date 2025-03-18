@@ -22,12 +22,21 @@ Con cariño, Mauro.
     - [Comparación entre programación imperativa y funcional](#comparación-entre-programación-imperativa-y-funcional)
 
 2. [Fundamentos de Funciones de Orden Superior](#fundamentos-de-funciones-de-orden-superior)
+
     - [Funciones que reciben funciones como argumentos](#funciones-que-reciben-funciones-como-argumentos)
     - [Funciones que retornan funciones](#funciones-que-retornan-funciones)
     - [Composición de funciones](#composición-de-funciones)
+
 3. [Transformaciones Funcionales con Funciones de Orden Superior](#transformaciones-funcionales-con-funciones-de-orden-superior)
+
     - [Uso de `map`, `filter` y `reduce`](#uso-de-map-filter-y-reduce)
     - [Creación de transformaciones personalizadas](#creación-de-transformaciones-personalizadas)
+
+4. [Estrategias Avanzadas de Orden Superior](#estrategias-avanzadas-de-orden-superior)
+
+    - [Currificación y aplicación parcial](#currificación-y-aplicación-parcial)
+    - [Clausuras y su relación con funciones de orden superior](#clausuras-y-su-relación-con-funciones-de-orden-superior)
+    - [Programación basada en composición y encadenamiento](#programación-basada-en-composición-y-encadenamiento)
 
 ---
 
@@ -152,8 +161,8 @@ const componer = (...funcs) => {
     };
 };
 
-const enfatizar2 = componer(agregarExclamacion, agregarMayuscula);
-console.log(enfatizar2("hola mundo")); //salida HOLA MUNDO!
+const enfatizar = componer(agregarExclamacion, agregarMayuscula);
+console.log(enfatizar("hola mundo")); //salida HOLA MUNDO!
 ```
 
 ## Transformaciones Funcionales con Funciones de Orden Superior
@@ -203,4 +212,109 @@ const primeraMayuscula = (nombre) =>
     nombre.charAt(0).toUpperCase() + nombre.slice(1);
 
 console.log(transformarDatos(nombres, primeraMayuscula)); // salida ['Mauro', 'Juan', 'Ana']
+```
+
+## Estrategias Avanzadas de Orden Superior
+
+### Currificación y aplicación parcial
+
+La currificacion transforma nuestra función que toma múltiples argumentos en una secuencia de funciones que reciben los argumentos en relación al orden de cómo fueron declarados los parámetros cada una y recibidos los argumentos al momento de la ejecución, esto permite una reutilización más flexible de funciones y facilita su composición
+
+```javascript
+let sumar = (a) => (b) => (c) => a + b + c;
+
+console.log(sumar(10)(5)(3));
+```
+
+Por otro lado, la aplicación parcial a nuestras funciones curriying es similar, pero en lugar de transformar una función completamente, permite fijar algunos de sus parámetros y devolver una nueva función. Con esto podemos fijar valores y generar funciones especializadas sin necesidad de repetir lógica.
+
+```javascript
+let sumar = (a) => (b) => (c) => a + b + c;
+
+sumaCon10ComoBase = sumar(10); // nos retornara una funcion que equivale a (b) => (c) => 10 + b + c
+
+console.log(sumaCon10ComoBase(5)(3)); // salida 18
+
+sumarCon10y5ComoBase = sumaCon10ComoBase(5); //nos retornara una funcion que equivale a (c) => 10 + 5 + c
+
+console.log(sumaCon10y5ComoBase(3)); // salida 18
+```
+
+podemos lograr lo mismo utilizando el metodo `.bind`
+
+```javascript
+function multiplicar(a, b) {
+    return a * b;
+}
+
+multiplicarPor5 = multiplicar.bind(null, 5);
+multiplicarPor10 = multiplicar.bind(null, 10);
+
+console.log(multiplicarPor5(3)); // salida 15
+console.log(multiplicarPor10(8)); // salida 80
+```
+
+La aplicación parcial nos será útil cuando una de nuestras funciones la usamos frecuentemente con algunos argumentos fijos.
+
+### Clausuras y su Relación con Funciones de Orden Superior
+
+una clausura es una de nuestras funciones que "recuerda" el ámbito en el que fue creada, incluso cuando se ejecuta fuera de ese ámbito. Nos serán fundamentales para nuestras funciones de orden superior, ya que nos permiten encapsular valores y comportamientos sin necesidad de variables globales.
+
+```javascript
+function contador() {
+    let conteo = 0;
+    return () => ++conteo;
+}
+
+const incrementar = contador();
+
+console.log(incrementar());
+console.log(incrementar());
+```
+
+Aquí, contador nos devuelve una función que mantiene acceso a la variable count, aunque la función principal ya haya terminado su ejecución. Esto es útil para manejar estados sin exponer variables al ámbito global.
+
+Las clausuras se combinan bien con funciones de orden superior para crear configuraciones dinámicas:
+
+```javascript
+function crearSaludo(prefijo) {
+    return (nombre) => `${prefijo} ${nombre}`;
+}
+
+let saludarA = crearSaludo("Buen dia");
+console.log(saludarA("Mauro")); // salida Buen dia Mauro
+```
+
+Esto nos permite reutilizar lógica sin reescribir funciones repetitivas.
+
+### Programación Basada en Composición y Encadenamiento
+
+La composición de funciones es una técnica clave en programación funcional que nos permite encadenar varias transformaciones en un flujo declarativo. En lugar de ejecutar funciones secuencialmente de manera imperativa, la composición nos permite construir funciones más complejas combinando otras más simples.
+
+la composición puede ser manual :
+
+```javascript
+let agregarMayuscula = (str) => str.toUpperCase();
+let agregarExclamacion = (str) => `${str} !`;
+let enfatizarPalabra = (str) => agregarExclamacion(agregarMayuscula(str));
+
+console.log(enfatizarPalabra("hola mundo")); //salida HOLA MUNDO!
+```
+
+o también puede ser dinámica
+
+```javascript
+let agregarMayuscula = (str) => str.toUpperCase();
+let agregarExclamacion = (str) => `${str} !`;
+
+const componer = (...funcs) => {
+    return (valorInicial) => {
+        return funcs.reduceRight((valorAcumulado, funcionActual) => {
+            return funcionActual(valorAcumulado);
+        }, valorInicial);
+    };
+};
+
+const enfatizar = componer(agregarExclamacion, agregarMayuscula);
+console.log(enfatizar("hola mundo")); //salida HOLA MUNDO!
 ```
