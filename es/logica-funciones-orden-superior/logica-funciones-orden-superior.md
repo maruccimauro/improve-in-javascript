@@ -38,6 +38,9 @@ Con cariño, Mauro.
     - [Clausuras y su relación con funciones de orden superior](#clausuras-y-su-relación-con-funciones-de-orden-superior)
     - [Programación basada en composición y encadenamiento](#programación-basada-en-composición-y-encadenamiento)
 
+5. [Conclusion y conceptos claves](#conclusion-y-conceptos-claves)
+    - [Conceptos claves](#conceptos-claves)
+
 ---
 
 ## Introducción
@@ -318,3 +321,28 @@ const componer = (...funcs) => {
 const enfatizar = componer(agregarExclamacion, agregarMayuscula);
 console.log(enfatizar("hola mundo")); //salida HOLA MUNDO!
 ```
+
+## Conclusion y conceptos claves
+
+Las funciones de orden superior son herramientas exelentes para la programación funcional que nos permite escribir código más limpio, reutilizable y expresivo. Nos facilitan la abstracción de patrones comunes, la manipulación de datos de manera declarativa y la creación de soluciones flexibles y modulares.
+
+### Conceptos claves
+
+**Funciones de orden superior:** Son funciones que pueden recibir otras funciones como argumentos y/o devolver funciones como resultado, permitiendo la abstracción y reutilización de lógica, lo que lleva a un código más modular y mantenible.
+
+**Composición de funciones:** Consiste en combinar múltiples funciones en una sola, donde la salida de una función se convierte en la entrada de la siguiente, facilitando la creación de transformaciones complejas a partir de funciones más simples.
+
+**Currificación y aplicación parcial:** La currificación transforma una función de múltiples argumentos en una secuencia de funciones de un solo argumento, mientras que la aplicación parcial permite fijar algunos argumentos de una función, creando una nueva función especializada; ambas técnicas mejoran la flexibilidad y reutilización de funciones.
+
+**Clausuras:** Son funciones que "recuerdan" el ámbito en el que fueron creadas, incluso cuando se ejecutan fuera de ese ámbito, permitiendo encapsular valores y comportamientos, facilitando la creación de configuraciones dinámicas y el manejo de estado.
+
+**map, filter y reduce:** Son métodos de arrays que permiten transformar y reducir datos de manera declarativa; map aplica una función a cada elemento, filter selecciona elementos según una condición y reduce combina elementos en un solo valor.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
