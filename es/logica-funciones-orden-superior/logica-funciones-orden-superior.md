@@ -1,4 +1,4 @@
-# Manipulación de Lógica de Evaluación de Conjunción y Disyunción
+# Manipulacion de logica de orden superior en funciones
 
 <img src="/resources/logo.png">
 <hr />
@@ -15,11 +15,16 @@ Con cariño, Mauro.
 
 **Índice de la Guía**
 
-## 1. [Introducción](#introducción)
+1. [Introducción](#introducción)
 
--   [¿Qué son las funciones de orden superior?](#qué-son-las-funciones-de-orden-superior)
--   [Ventajas de usar funciones de orden superior](#ventajas-de-usar-funciones-de-orden-superior)
--   [Comparación entre programación imperativa y funcional](#comparación-entre-programación-imperativa-y-funcional)
+    - [¿Qué son las funciones de orden superior?](#qué-son-las-funciones-de-orden-superior)
+    - [Ventajas de usar funciones de orden superior](#ventajas-de-usar-funciones-de-orden-superior)
+    - [Comparación entre programación imperativa y funcional](#comparación-entre-programación-imperativa-y-funcional)
+
+2. [Fundamentos de Funciones de Orden Superior](#fundamentos-de-funciones-de-orden-superior)
+    - [Funciones que reciben funciones como argumentos](#funciones-que-reciben-funciones-como-argumentos)
+    - [Funciones que retornan funciones](#funciones-que-retornan-funciones)
+    - [Composición de funciones](#composición-de-funciones)
 
 ---
 
@@ -78,3 +83,72 @@ console.log(cuadrados); //  [1, 4, 9, 16, 25, 36]
 ```
 
 nuestro ejemplo con enfoque funcional que utiliza el método `map` es más conciso y expresivo, ya que utiliza una función de orden superior en vez de un bucle explicito.
+
+## Fundamentos de Funciones de Orden Superior.
+
+### Funciones que reciben funciones como argumentos
+
+Una de las características clave de las nuestras funciones de orden superior es su capacidad para recibir otras funciones como argumentos. Esto nos permite la abstracción de patrones de código repetitivos y la generalización de comportamientos.
+
+```javascript
+function operar(a, b, operacion) {
+    return operacion(a, b);
+}
+
+const multiplicar = (a, b) => a * b;
+
+console.log(operar(15, 5, multiplicar)); // salida 75
+console.log(operar(60, 2, (a, b) => a / b)); // salida 30
+```
+
+Aquí, `operar` no necesita conocer los detalles de `multiplicar` o cualquier otra función. Solo se encarga de ejecutar la función que recibe como argumento con su propia lógica.
+
+### Funciones que retornan funciones
+
+Nuestras funciones de orden superior también pueden devolver otras funciones. Esto nos será útil para generar funciones especializadas o configurar comportamiento dinámicamente.
+
+```javascript
+function crearMultiplicador(factor) {
+    return function (operando) {
+        return operando * factor;
+    };
+}
+
+const duplicar = crearMultiplicador(2);
+const quintuplicar = crearMultiplicador(5);
+
+console.log(duplicar(10)); // salida 20
+console.log(quintuplicar(10)); // salida 50
+```
+
+Aquí, `crearMultiplicador` genera una nueva función que multiplica por un valor determinado, lo que nos permite la creación de funciones reutilizables con parámetros que nosotros predefinamos.
+
+### Composición de funciones
+
+La composición de nuestras funciones es una técnica fundamental en la programación funcional que consiste en combinar múltiples funciones en una sola, de manera en que la salida de una función se convierta en la entrada de la siguiente.
+
+```javascript
+let agregarMayuscula = (str) => str.toUpperCase();
+let agregarExclamacion = (str) => `${str} !`;
+let enfatizarPalabra = (str) => agregarExclamacion(agregarMayuscula(str));
+
+console.log(enfatizarPalabra("hola mundo")); //salida HOLA MUNDO!
+```
+
+Para mejorar la legibilidad, podemos crear una función de composición genérica:
+
+```javascript
+let agregarMayuscula = (str) => str.toUpperCase();
+let agregarExclamacion = (str) => `${str} !`;
+
+const componer = (...funcs) => {
+    return (valorInicial) => {
+        return funcs.reduceRight((valorAcumulado, funcionActual) => {
+            return funcionActual(valorAcumulado);
+        }, valorInicial);
+    };
+};
+
+const enfatizar2 = componer(agregarExclamacion, agregarMayuscula);
+console.log(enfatizar2("hola mundo")); //salida HOLA MUNDO!
+```
