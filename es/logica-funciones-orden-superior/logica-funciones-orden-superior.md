@@ -1,4 +1,4 @@
-# Manipulacion de logica de orden superior en funciones
+# Manipulacion de logica de orden superior en funciones en JavaScript
 
 <img src="/resources/logo.png">
 <hr />

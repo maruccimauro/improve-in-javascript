@@ -17,13 +17,13 @@ Con cariño, Mauro.
 
 #### - [Manipulación de Lógica de Precedencia y Asociatividad de Operadores en JavaScript](es/logica-precedencia-asociatividad/logica-precedencia-asociatividad.md)
 
-#### - [Manipulación de lógica de Conjuncion y Disyuncion](es/logica-conjuncion-disyuncion/logica-conjuncion-disyuncion.md)
+#### - [Manipulación de lógica de Conjuncion y Disyuncion en JavaScript](es/logica-conjuncion-disyuncion/logica-conjuncion-disyuncion.md)
 
-#### - [Manipulación de lógica de interpolacion de cadenas backticks](es/logica-interpolacion-cadenas-backticks/logica-interpolacion-cadenas-backticks.md)
+#### - [Manipulación de lógica de interpolacion de cadenas backticks en JavaScript](es/logica-interpolacion-cadenas-backticks/logica-interpolacion-cadenas-backticks.md)
 
 #### - [Manipulación de lógica de autoboxing y sus implicacias en JavaScript](es/logica-autoboxing/logica-autoboxing.md)
 
-#### - [Manipulación de lógica de ciclo de vida de una variable](es/ciclo-vida-variable/ciclo-vida-variable.md)
+#### - [Manipulación de lógica de ciclo de vida de una variable en JavaScript](es/ciclo-vida-variable/ciclo-vida-variable.md)
 
 #### - [Manipulación de Lógica de shallow copy en JavaScript](es/logica-shallow-copy/logica-shallow-copy.md)
 

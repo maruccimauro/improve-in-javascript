@@ -1,4 +1,4 @@
-# Manipulación de Lógica de Evaluación de Conjunción y Disyunción
+# Manipulación de Lógica de Evaluación de Conjunción y Disyunción en JavaScript
 
 <img src="/resources/logo.png">
 <hr />

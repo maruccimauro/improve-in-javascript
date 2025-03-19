@@ -1,4 +1,4 @@
-# Manipulación de lógica de ciclo de vida de una variable
+# Manipulación de lógica de ciclo de vida de una variable en JavaScript
 
 <img src="/resources/logo.png">
 <hr />

@@ -1,4 +1,4 @@
-# Manipulación de lógica de interpolacion de cadenas backticks
+# Manipulación de lógica de interpolacion de cadenas backticks en JavaScript
 
 <img src="/resources/logo.png">
 <hr />
