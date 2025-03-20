@@ -26,6 +26,8 @@ Con cariño, Mauro.
     - [Encapsulación y privacidad de variables](#encapsulación-y-privacidad-de-variables)
     - [Closures en bucles y problemas comunes](#closures-en-bucles-y-problemas-comunes)
 4. [Optimización y Rendimiento](#optimización-y-rendimiento)
+5. [Conclusión](#conclusión)
+    - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
 
 ---
 
