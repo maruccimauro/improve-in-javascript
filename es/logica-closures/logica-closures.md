@@ -21,6 +21,10 @@ Con cariño, Mauro.
 2. [Ámbito y Alcance de Variables](#ámbito-y-alcance-de-variables)
     - [Ámbito léxico](#ámbito-léxico)
     - [Diferencia entre ámbito local y global](#diferencia-entre-ámbito-local-y-global)
+3. [Manipulación de Closures](#manipulación-de-closures)
+    - [Persistencia de datos con closures](#persistencia-de-datos-con-closures)
+    - [Encapsulación y privacidad de variables](#encapsulación-y-privacidad-de-variables)
+    - [Closures en bucles y problemas comunes](#closures-en-bucles-y-problemas-comunes)
 
 ---
 
@@ -228,3 +232,108 @@ console.log(localVariable); // salida Uncaught ReferenceError ReferenceError: lo
 ```
 
 Vemos como en este caso nuestra variable `localVariable` solo está disponible dentro de la función `ambitoLocal`. Si intentamos acceder a ella fuera de esa función, recibiremos un error, ya que las variables locales no son accesibles fuera de su función de definición.
+
+## Manipulación de Closures
+
+### Persistencia de datos con closures
+
+Uno de los usos más comunes de los closures es la retención de datos en memoria. como nuestras funciones anidadas pueden acceder a variables de su función externa, incluso después de que esta última ha finalizado su ejecución, podemos usar este mecanismo para guardar estados sin necesidad de variables globales.
+
+```javascript
+function crearContador() {
+    let conteo = 0;
+    return () => {
+        conteo++;
+        console.log(conteo);
+    };
+}
+
+const contador1 = crearContador();
+contador1(); // salida 1
+contador1(); // salida 2
+
+const contador2 = crearContador(); // (es un nuevo closure independiente)
+contador2(); //salida 1
+contador2(); //salida 2
+```
+
+La función `crearContador` crea una variable `conteo` dentro de su ámbito y retorna una función que puede acceder y modificar `conteo`. cada vez que ejecutamos contador1(), la varaible `conteo` dentro de su closure sigue existiendo y se incrementa, al crear contador2. generamos un nuevo closure independiente con su propia variable `conteo`, mostrando que los closures pueden actuar como instancias separadas.
+
+### Encapsulación y privacidad de variables
+
+el motor de JavaScript no nos provee de un modificador de acceso como `private` en otros lenguajes. Sin embargo, los closures nos permiten lograr encapsulación, impidiendo que ciertas variables sean accesibles desde fuera de una función.
+
+```javascript
+function usuario(nombre) {
+    let _nombre = nombre;
+
+    return {
+        getNombre: function () {
+            return _nombre;
+        },
+        setNombre: function (nuevoNombre) {
+            _nombre = nuevoNombre;
+        },
+    };
+}
+
+const usuario1 = usuario("Juan");
+console.log(usuario1.getNombre()); // salida Juan
+usuario1.setNombre("Mauro");
+console.log(usuario1.getNombre()); // salida Mauro
+console.log(usuario1._nombre); //salida undefined
+```
+
+\_nombre es nuestra variable privada dentro del closure y no puede ser modificada directamente desde afuera, `getNombre` y `setNombre` son métodos expuestos que permiten leer y modificar `_nombre` sin acceder directamente a ella. Intentar acceder a `_nombre` desde fuera (`usuario1._nombre`) nos devolver undefined, garantizándonos así privacidad.
+
+### Closures en bucles y problemas comunes
+
+El uso incorrecto de closures dentro de bucles puede generarnos comportamientos inesperados, debido a que las variables dentro del closure pueden quedar ligadas al estado final del bucle en lugar de capturar el valor en cada iteración.
+
+```javascript
+for (var i = 10; i <= 3; i++) {
+    setTimeout(() => {
+        console.log(i);
+    }, 1000);
+}
+
+// salidas recibidas despues de 1 segundo:
+// salida iteracion 1 : 3
+// salida iteracion 2 : 3
+// salida iteracion 3 : 3
+```
+
+vemos como `setTimeout` ejecuta su callback después de que el bucle ha terminado,`var i` es una variable global en este contexto, por lo que su valor final es 3 al momento de ejecutar el setTimeout.
+
+para solucionar esto podemos usar `let` en lugar de `var` evitando así usar una variable de ámbito global y usar una variable de ámbito de bloque obteniendo el valor de `i` al momento de programar el `setTimeout`.
+
+```javascript
+for (let i = 1; i <= 3; i++) {
+    setTimeout(() => {
+        console.log(i);
+    }, 1000);
+}
+
+// salidas recibidas despues de 1 segundo:
+// salida iteracion 1 : 0
+// salida iteracion 2 : 1
+// salida iteracion 3 : 2
+```
+
+otra alternativa en caso de no poder usar `let` es usar un closure explicito para capturar el valor correcto.
+
+```javascript
+for (var i = 0; i < 3; i++) {
+    (function (capturaI) {
+        setTimeout(() => {
+            console.log(capturaI);
+        }, 1000);
+    })(i);
+}
+// salidas recibidas despues de 1 segundo:
+// salida iteracion 1 : 0
+// salida iteracion 2 : 1
+// salida iteracion 3 : 2
+```
+
+creamos un IIFE (inmediately invoke function expression) que recibirá `i` como argumento y la usa dentro del closure donde `captureI` mantendrá el valor correcto en cada iteración.
