@@ -31,6 +31,8 @@ Con cariño, Mauro.
 
 #### - [Manipulacion de logica de orden superior en funciones en JavaScript](es/logica-funciones-orden-superior/logica-funciones-orden-superior.md)
 
+#### - [Manipulación de Lógica clausuras en JavaScript](es/logica-closures/logica-closures.md)
+
 ---
 
 Muchas Gracias por leerme!
