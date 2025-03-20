@@ -25,6 +25,7 @@ Con cariño, Mauro.
     - [Persistencia de datos con closures](#persistencia-de-datos-con-closures)
     - [Encapsulación y privacidad de variables](#encapsulación-y-privacidad-de-variables)
     - [Closures en bucles y problemas comunes](#closures-en-bucles-y-problemas-comunes)
+4. [Optimización y Rendimiento](#optimización-y-rendimiento)
 
 ---
 
@@ -337,3 +338,11 @@ for (var i = 0; i < 3; i++) {
 ```
 
 creamos un IIFE (inmediately invoke function expression) que recibirá `i` como argumento y la usa dentro del closure donde `captureI` mantendrá el valor correcto en cada iteración.
+
+## Optimización y Rendimiento
+
+Cuando creamos un closure, se mantiene una referencia a las variables de la función externa en la memoria, incluso después de que la función externa haya terminado su ejecución. Esto se debe a que las funciones anidadas (closures) siguen necesitando acceso a esas variables. Este comportamiento tiene un impacto directo en el uso de la memoria. Para manejar esto podemos evitar realizar closures innecesarios , es decir que cuando no tengamos un estado persistente que guardar no sera necesario crear un closure, por otro lado , podemos liberar las referencias a las variables que mantiene si un closure ya no es necesario.
+
+```javascript
+contador = null; /// Liberamos referencia al closure.
+```
