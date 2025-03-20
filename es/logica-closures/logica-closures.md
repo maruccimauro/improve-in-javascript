@@ -15,4 +15,152 @@ Con cariño, Mauro.
 
 **Índice de la Guía**
 
+1. [Introducción](#introducción)
+    - [¿Qué es un closure?](#qué-es-un-closure)
+    - [Importancia de los closures en JavaScript](#importancia-de-los-closures-en-javascript)
+
 ---
+
+## Introducción
+
+Las clausuras nos permitiran que nuestras funciones accedan a variable de su ambito externo incluso despues de que dicho ambito haya finalizado su ejecucion. Esto nos permitira trabajar con encapsulamiento, gestion de estado y optimizacion.
+
+### Qué es un closure
+
+los closures en JavaScript son funciones que "recuerdan" el ambito en el que fueron creadas, incluso si se ejecutan en otros contexto. Es decir , un closure es una función que cierra sobre su ambito lexico, permitiendo acceder a variables externas aun cuando la ejecución de la funcion exterior haya finalizado.
+
+Veamos un ejemplo!
+
+```javascript
+function generarContador() {
+    let conteo = 0;
+
+    return () => {
+        return ++conteo;
+    };
+}
+
+let contador = generarContador();
+console.log(contador()); // salida 0
+console.log(contador()); // salida 1
+```
+
+Aqui vemos como la funcion anonima sigue teniendo acceso a `conteo` despues de que la funcion `generarContador` haya finalizado su ejecucion, es decir que contador al llamar a la funcion anonima aumentara a `conteo` quien pertenece a su ambito lexico manteniendo su estado entre llamadas.
+
+### Importancia de los closures en JavaScript
+
+Los closures nos sera una herramienta sumamente beneficiosa en el motor de JavaScript por que nos permitiran:
+
+**Encapsulación de datos y privacidad:**
+-Al no exponer nuestras variables directamente , los closures nos permitiran la creación de datos privados dentro de la función.
+-Esto nos sera util para evitar accesos indeseados y evitar modificaciones accidentales sobre nuestras variables.
+
+```javascript
+function usuario(nombre) {
+    const clave = "magica123";
+
+    return {
+        obtenerNombre: function () {
+            return nombre;
+        },
+        verificarClave: function (claveIngresada) {
+            return clave === claveIngresada;
+        },
+    };
+}
+const usuario1 = usuario("Mauro");
+
+console.log(usuario1.obtenerNombre()); // salida Mauro
+console.log(usuario1.verificarClave("magica123")); // salida true
+console.log(usuario1.clave); // salida undefined
+```
+
+**Manejo de estado:**
+Nos permiten conservas datos sin necesidad de usar variable globales, lo cual es util para contadores, caches y funciones que manejan configuraciones.
+
+```javascript
+function acumulador(valorInicial) {
+    let total = valorInicial;
+
+    return (valorIncremental) => {
+        total += valorIncremental;
+        return total;
+    };
+}
+
+let agregar = acumulador(100);
+console.log(agregar(20)); // salida 120
+console.log(agregar(10)); // salida 130
+```
+
+**Callbacks y gestion de eventos**
+Los closures permiten que nuestras funciones recuerden valores previos, lo cual es indispensable para que trabajemos con event listeners y callbacks en JavaScript.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button id="boton">Evaluar</button>
+        <script>
+            function enviarMensaje(mensaje) {
+                return () => {
+                    console.log(mensaje);
+                };
+            }
+
+            document
+                .getElementById("boton")
+                .addEventListener("click", enviarMensaje("Hola Mauro!"));
+        </script>
+    </body>
+</html>
+```
+
+**Funciones fabrica (function factory):**
+
+las function factory son nuestras funciones que retornan otras funciones con configuraciones predeterminadas mediante los closures.
+
+```javascript
+function multiplicador(a) {
+    return (b) => {
+        return a * b;
+    };
+}
+
+const multiplicarX5 = multiplicador(5);
+const multiplicarX10 = multiplicador(10);
+
+console.log(multiplicarX5(8)); // salida 40
+console.log(multiplicadorX10(8)); // salida 80
+```
+
+**Optimizacion de codigo y modularidad.**
+Los closures nos permiten escribir codigo más modular y reutilizable sin depender de variables globales.
+
+```javascript
+function generarContador(valorInicial) {
+    let total = valorInicial;
+
+    return {
+        incrementar: function () {
+            return ++total;
+        },
+        decrementar: function () {
+            return --total;
+        },
+        actual: function () {
+            return total;
+        },
+    };
+}
+
+const contador = generarContador(100);
+console.log(contador.actual()); // salida 100
+console.log(contador.incrementar()); // salida 101
+console.log(contador.decrementar()); // salida 100
+```
