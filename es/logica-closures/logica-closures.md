@@ -23,11 +23,11 @@ Con cariño, Mauro.
 
 ## Introducción
 
-Las clausuras nos permitiran que nuestras funciones accedan a variable de su ambito externo incluso despues de que dicho ambito haya finalizado su ejecucion. Esto nos permitira trabajar con encapsulamiento, gestion de estado y optimizacion.
+Las clausuras nos permitirán que nuestras funciones accedan a variable de su ámbito externo incluso después de que dicho ámbito haya finalizado su ejecución. Esto nos permitirá trabajar con encapsulamiento, gestión de estado y optimización.
 
 ### Qué es un closure
 
-los closures en JavaScript son funciones que "recuerdan" el ambito en el que fueron creadas, incluso si se ejecutan en otros contexto. Es decir , un closure es una función que cierra sobre su ambito lexico, permitiendo acceder a variables externas aun cuando la ejecución de la funcion exterior haya finalizado.
+los closures en JavaScript son funciones que "recuerdan" el ámbito en el que fueron creadas, incluso si se ejecutan en otros contextos. Es decir, un closure es una función que cierra sobre su ámbito léxico, permitiendo acceder a variables externas aun cuando la ejecución de la función exterior haya finalizado.
 
 Veamos un ejemplo!
 
@@ -45,15 +45,15 @@ console.log(contador()); // salida 0
 console.log(contador()); // salida 1
 ```
 
-Aqui vemos como la funcion anonima sigue teniendo acceso a `conteo` despues de que la funcion `generarContador` haya finalizado su ejecucion, es decir que contador al llamar a la funcion anonima aumentara a `conteo` quien pertenece a su ambito lexico manteniendo su estado entre llamadas.
+Aquí vemos como la función anónima sigue teniendo acceso a `conteo` después de que la función `generarContador` haya finalizado su ejecución, es decir que contador al llamar a la función anónima aumentara a `conteo` quien pertenece a su ámbito léxico manteniendo su estado entre llamadas.
 
 ### Importancia de los closures en JavaScript
 
-Los closures nos sera una herramienta sumamente beneficiosa en el motor de JavaScript por que nos permitiran:
+Los closures nos será una herramienta sumamente beneficiosa en el motor de JavaScript porque nos permitirán:
 
 **Encapsulación de datos y privacidad:**
--Al no exponer nuestras variables directamente , los closures nos permitiran la creación de datos privados dentro de la función.
--Esto nos sera util para evitar accesos indeseados y evitar modificaciones accidentales sobre nuestras variables.
+-Al no exponer nuestras variables directamente, los closures nos permitirán la creación de datos privados dentro de la función.
+-Esto nos será útil para evitar accesos indeseados y evitar modificaciones accidentales sobre nuestras variables.
 
 ```javascript
 function usuario(nombre) {
@@ -76,7 +76,7 @@ console.log(usuario1.clave); // salida undefined
 ```
 
 **Manejo de estado:**
-Nos permiten conservas datos sin necesidad de usar variable globales, lo cual es util para contadores, caches y funciones que manejan configuraciones.
+Nos permiten conservas datos sin necesidad de usar variables globales, lo cual es útil para contadores, caches y funciones que manejan configuraciones.
 
 ```javascript
 function acumulador(valorInicial) {
@@ -139,8 +139,8 @@ console.log(multiplicarX5(8)); // salida 40
 console.log(multiplicadorX10(8)); // salida 80
 ```
 
-**Optimizacion de codigo y modularidad.**
-Los closures nos permiten escribir codigo más modular y reutilizable sin depender de variables globales.
+**Optimización de código y modularidad.**
+Los closures nos permiten escribir código más modular y reutilizable sin depender de variables globales.
 
 ```javascript
 function generarContador(valorInicial) {
