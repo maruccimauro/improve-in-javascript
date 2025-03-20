@@ -60,3 +60,98 @@ El currying es una técnica clave en la programación funcional porque nos permi
 **Evitar el uso de argumentos redundantes:** En lugar de repetir valores en múltiples llamadas, podemos fijar ciertos valores y reutilizar la función resultante.
 **Mayor claridad y legibilidad:** En muchos casos, el código se vuelve más expresivo y fácil de entender.
 **Aplicación parcial:** Podemos usar el currying para generar versiones especializadas de nuestras funciones con parámetros predefinidos.
+
+## Fundamentos del Currying
+
+### Diferencia entre currying y funciones normales
+
+Para entender el curriying, es importante compararlo con las funciones tradicionales. en una función normal, todos los argumentos se pasan en una sola llamada y la función devuelve el resultado de forma directa. En cambio, en una función currificada, los argumentos se reciben en diferentes llamadas hasta completas los parámetros necesarios.
+
+```javascript
+function multiplicar(a, b, c) {
+    return a * b * c;
+}
+
+console.log(multiplicar(5, 3, 2)); // salida 30
+```
+
+en este caso multiplicar recibe todos los argumentos juntos y resuelve directamente el retorno.
+
+```javascript
+function multiplicarCurrificada(a) {
+    return (b) => {
+        return (c) => {
+            return a * b * c;
+        };
+    };
+}
+
+console.log(multiplicarCurrificada(5)(3)(2)); // salida 30
+```
+
+En este otro caso `multiplicarCurrificada()` recibe `a` como argumento y retorna una función que espera recibir `b` que a su vez retorna una función que espera recibir `c` y esta retorna `a * b * c`, solo cuando se ha pasado el ultimo argumento la multiplicación es evaluada y retornada.
+
+veamos cuáles son sus diferencias más significativas:
+| Característica | Función Normal | Currying |
+|---------------------------|------------------------------------|-----------------------------------------------|
+| **Recepción de parámetros** | Todos en una sola llamada | En múltiples llamadas anidadas |
+| **Reutilización de lógica** | Menos flexible | Se pueden preconfigurar valores intermedios |
+| **Composición de funciones** | Más difícil de combinar | Facilita la composición funcional |
+| **Expresividad** | Directa y concisa | Puede mejorar la claridad en código funcional |
+
+### Cómo transformar una función en su versión currificadas
+
+Para que podamos convertir nuestra función normal en una función currificada, debemos reestructurar su forma de recibir los argumentos.
+
+**Transformacion manual de una funcion**
+
+```javascript
+function sumar(a, b, c) {
+    return a + b + c;
+}
+
+console.log(sumar(1, 2, 3)); // salida  6
+```
+
+Para transformarla en su versión currificada, podemos reescribirla de la siguiente manera:
+
+```javascript
+function sumarCurrificada(a) {
+    return function (b) {
+        return function (c) {
+            return a + b + c;
+        };
+    };
+}
+
+console.log(sumarCurrificada(1)(2)(3)); // salida 6
+```
+
+**Implementación genérica de currying**
+En lugar de escribir manualmente nuestras funciones currificadas, podemos crear una función que convierta automáticamente cualquier función en nuestra versión currificada.
+
+```javascript
+function curry(fn) {
+    return function curried(...args) {
+        if (args.length >= fn.length) {
+            return fn.apply(this, args);
+        } else {
+            return (...nextArgs) => curried(...args, ...nextArgs);
+        }
+    };
+}
+
+function sumar(a, b, c) {
+    return a + b + c;
+}
+
+const sumarCurriado = curry(sumar);
+console.log(sumar.length);
+console.log(sumarCurriado(1)(2)(3)); // 6
+console.log(sumarCurriado(1, 2)(3)); // 6
+console.log(sumarCurriado(1)(2, 3)); // 6
+
+const sumarCurriyingParcial1 = sumarCurriado(100);
+const sumarCurriyingParcial2 = sumarCurriyingParcial1(50);
+console.log(sumarCurriyingParcial2(10)); // salida 160
+```
