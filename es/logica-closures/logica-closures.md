@@ -346,3 +346,26 @@ Cuando creamos un closure, se mantiene una referencia a las variables de la func
 ```javascript
 contador = null; /// Liberamos referencia al closure.
 ```
+
+## Conclusión
+
+En resumen, los closures son una característica en JavaScript que permite a nuestras las funciones acceder a variables fuera de su ámbito, lo que nos facilita la creación de funciones flexibles y persistentes. Sin embargo, su uso requiere cuidado para evitar problemas de rendimiento y consumo de memoria. Los closures nos permiten encapsular y mantener el estado, pero también exigen una gestión adecuada de las referencias a las variables para evitar fugas de memoria.
+
+### Resumen de los conceptos clave
+
+**Closure:** Es una función que tiene acceso a su propio ámbito, al ámbito externo y al ámbito global, incluso después de que la función externa haya finalizado su ejecución.
+
+**Ámbito léxico:** Se refiere a la regla que determina el ámbito de las variables en función de la estructura de las funciones en el código, no en el momento de ejecución.
+
+**Persistencia de datos:** Los closures pueden retener el estado de las variables de una función externa, lo que permite su persistencia más allá de la ejecución de la función original.
+
+**Recolección de basura:** Los closures pueden interferir con la recolección de basura si mantienen referencias a objetos o variables que ya no son necesarias, causando fugas de memoria.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
