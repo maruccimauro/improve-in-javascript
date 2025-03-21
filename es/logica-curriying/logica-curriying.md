@@ -219,3 +219,26 @@ console.log(componer(multiplicarX10, sumar5)(3)); // 3 * 10 + 5 = 35
 ```
 
 Aquí la función componer toma dos funciones currificadas y las podemos componer como queramos!
+
+## Conclusión
+
+En resumen, el currying es una técnica en la programación funcional que nos permite transformar nuestras funciones que reciben múltiples argumentos en una serie de funciones que una parte de esos argumentos. Esto facilita la creación de funciones más modulares y reutilizables, y mejora la composición y manipulación de datos en aplicaciones complejas.
+
+###Resumen de los conceptos clave
+
+**Currying:** Es el proceso de transformar una función que toma varios argumentos en una secuencia de funciones, cada una aceptando un solo argumento.
+
+**Funciones unarias:** Son funciones que aceptan un único argumento, lo cual facilita el currying al dividir una función con múltiples parámetros en funciones más simples.
+
+**Composición de funciones:** Es la capacidad de combinar varias funciones curriadas para formar nuevas funciones más complejas, facilitando la creación de soluciones más reutilizables.
+
+**Parcialización:** Aunque similar al currying, la parcialización permite aplicar algunos argumentos de una función sin requerir la transformación completa que impone el currying.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
