@@ -24,6 +24,8 @@ Con cariño, Mauro.
 3. [Manipulación Avanzada con Currying](#manipulación-avanzada-con-currying)
     - [Parcialización](#parcialización)
     - [Composición de funciones currificadas](#composición-de-funciones-currificadas)
+4. [Conclusión](#conclusión)
+    - [Resumen de los conceptos clave](#resumen-de-los-conceptos-clave)
 
 ---
 
