@@ -33,6 +33,8 @@ Con cariño, Mauro.
 
 #### - [Manipulación de Lógica clausuras en JavaScript](es/logica-closures/logica-closures.md)
 
+#### - [Manipulacion de logica currying en funciones Javascript](es/logica-curriying/logica-curriying.md)
+
 ---
 
 Muchas Gracias por leerme!
