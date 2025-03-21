@@ -18,6 +18,12 @@ Con cariño, Mauro.
 1. [Introducción](#introducción)
     - [¿Qué es el currying?](#qué-es-el-currying)
     - [Importancia del currying en la programación funcional](#importancia-del-currying-en-la-programación-funcional)
+2. [Fundamentos del Currying](#fundamentos-del-currying)
+    - [Diferencia entre currying y funciones normales](#diferencia-entre-currying-y-funciones-normales)
+    - [Cómo transformar una función en su versión currificada](#cómo-transformar-una-función-en-su-versión-currificada)
+3. [Manipulación Avanzada con Currying](#manipulación-avanzada-con-currying)
+    - [Parcialización](#parcialización)
+    - [Composición de funciones currificadas](#composición-de-funciones-currificadas)
 
 ---
 
@@ -99,7 +105,7 @@ veamos cuáles son sus diferencias más significativas:
 | **Composición de funciones** | Más difícil de combinar | Facilita la composición funcional |
 | **Expresividad** | Directa y concisa | Puede mejorar la claridad en código funcional |
 
-### Cómo transformar una función en su versión currificadas
+### Cómo transformar una función en su versión currificada
 
 Para que podamos convertir nuestra función normal en una función currificada, debemos reestructurar su forma de recibir los argumentos.
 
@@ -155,3 +161,61 @@ const sumarCurriyingParcial1 = sumarCurriado(100);
 const sumarCurriyingParcial2 = sumarCurriyingParcial1(50);
 console.log(sumarCurriyingParcial2(10)); // salida 160
 ```
+
+## Manipulación Avanzada con Currying
+
+### Parcialización
+
+la parcialización se da cuando "congelamos" algunos argumentos de una función , creando una nueva función que necesita menos argumentos, este proceso lo podemos aplicar a cualquier función , no solo a aquellas que están currificadas.
+
+podemos pasar de una función simple de multiplicación
+
+```javascript
+function multiplicar(a, b) {
+    return a * b;
+}
+```
+
+a parcializar nuestra función para fijar uno de los argumentos.
+
+```javascript
+function parcializar(funcion, argumento) {
+    return (b) => {
+        return funcion(argumento, b);
+    };
+}
+
+function multiplicar(a, b) {
+    return a * b;
+}
+
+multiplicarX5 = parcializar(multiplicar, 5);
+console.log(multiplicarX5(10));
+```
+
+### Composición de funciones currificadas
+
+El curriying nos facilitara la composición de funciones enormemente. La composición de funciones se refiere a la capacidad de combinar múltiples funciones pequeñas en una sola función que realiza todas las operaciones.
+con las funciones currificada, es mucho más sencillo que compongamos funciones, ya que el curriying hace que cada función devuelva otra función, lo que nos facilita la secuenciación de operaciones.
+veamos un ejemplo de una composición de función
+
+```javascript
+function sumar5(a) {
+    return a + 5;
+}
+
+function multiplicarX10(b) {
+    return b * 10;
+}
+
+function componer(funcion1, funcion2) {
+    return function (x) {
+        return funcion2(funcion1(x));
+    };
+}
+
+console.log(componer(sumar5, multiplicarX10)(3)); // (3 + 5) * 10 = 80
+console.log(componer(multiplicarX10, sumar5)(3)); // 3 * 10 + 5 = 35
+```
+
+Aquí la función componer toma dos funciones currificadas y las podemos componer como queramos!
