@@ -33,7 +33,9 @@ Con cariño, Mauro.
 
 #### - [Manipulación de Lógica clausuras en JavaScript](es/logica-closures/logica-closures.md)
 
-#### - [Manipulacion de logica currying en funciones Javascript](es/logica-curriying/logica-curriying.md)
+#### - [Manipulacion de logica currying en funciones en JavaScript](es/logica-curriying/logica-curriying.md)
+
+#### - [Manipulacion de logica de alcance de ambitos en JavaScript](es/logica-alcance-ambitos/logica-alcance-ambitos.md)
 
 ---
 
