@@ -19,6 +19,11 @@ Con cariño, Mauro.
     - [¿Qué es el ámbito en JavaScript?](#qué-es-el-ámbito-en-javascript)
     - [Importancia del control de alcance](#importancia-del-control-de-alcance)
     - [Tipos de ámbito en JavaScript](#tipos-de-ámbito-en-javascript)
+2. [Ámbito en JavaScript](#ámbito-en-javascript)
+    - [Ámbito global](#ámbito-global)
+    - [Ámbito de función](#ámbito-de-función)
+    - [Ámbito de bloque (let y const)](#ámbito-de-bloque-let-y-const)
+    - [Ámbito léxico y closure](#ámbito-léxico-y-closure)
 
 ---
 
@@ -76,3 +81,90 @@ En el motor de JavaScrpit existen distintos niveles de ámbitos que nos definir�
 **Ámbito de función:** las variables declaradas en una función solo son accesibles solo desde dentro de esa función.
 **Ámbito de bloque:** las variables definidas dentro de bloque `{}` con let y const solo existen dentro de ese mismo bloque.
 **Ámbito léxico:** las funciones en JavaScript recuerdan el ámbito en el que fueron creadas, lo que permite el uso de closures.
+
+## Ámbito global
+
+El ámbito global es el nivel más externo del ámbito en un programa de JavaScript. Las Variables declaradas fuera de cualquier función o bloque tienen ámbito global y son accesibles desde cualquier parte del código, incluyendo dentro de las funciones y bloques, el uso excesivo de variables globales puede dar lugar a problemas como la sobreescritura de valores y la dificultad de depurar el código. En un entorno de navegador, las variables globals se añaden al objeto windows. en node.js , se añaden al objeto global. Las declaraciones con `var` dentro de bloques que no estén dentro de funciones son levantadas al contexto global.
+
+veamos unos ejemplos:
+
+```javascript
+let variableGLobal = "Variable global";
+
+function miFuncion() {
+    console.log(gvariableGLobal);
+}
+
+miFuncion(); // salida Variable global
+console.log(variableGLobal); // salida Variable global
+```
+
+Aquí podemos apreciar como definimos una variable global que es accedida dentro de una función y también desde el contexto global.
+
+```javascript
+if (true) {
+    var variableGLobal = "Variable global";
+}
+
+console.log(variableGLobal); //salida Variable global
+```
+
+En este caso vemos como `variableGlobal` que pertenece a un ámbito de bloque fue ascendida por el uso de `var`.
+
+### Ámbito de función
+
+El ámbito de función es un ámbito que se crea cuando declaramos una función. Las variables que definimos ahí dentro solo son accesibles dentro de la misma función, es decir, son local a la función misma y no afectan a las variables fuera de ella, lo que nos ayuda a encapsular lógica y evitar efectos secundarios no deseados.
+
+Veamos un ejemplo
+
+```javascript
+function mostrarVariable() {
+    var variableLocal = "soy una variable local";
+    console.log(variableLocal);
+}
+mostrarVariable(); // salida soy una variable local
+console.log(variableLocal); // salida ErrorReference: variableLocal is not defined
+```
+
+Aquí vemos como definimos una variable que es completamente accesible desde la función y su ámbito local, pero una vez salimos al ámbito global la variable en cuestión ya no es accesible por lo cual recibiremos un error de definición.
+
+### Ámbito de bloque (let y const)
+
+El ámbito de bloque se refiere al alcance de las variables declaradas dentro de bloques de código, como los definidos por estructuras como if, for , while o funciones. En estos casos nuestras variables declaradas serán solo accesibles dentro del mismo bloque donde fueron declaradas.
+veamos un ejemplo
+
+```javascript
+if (true) {
+    let variableLocal = "soy una variable local";
+    console.log(variableLocal); // salida soy una variable local
+}
+
+console.log(variableLocal); // salida ErrorReference: variableLocal is not defined
+```
+
+Aqui podemos observar como ``variableLocal` es perfectamente accesible desde dentro del ámbito del bloque `{}` pero una vez terminado este ámbito y haber accedido al ámbito superior del mismo ya no podemos acceder a ella , recibiendo un error de definición.
+
+### Ámbito léxico y closure
+
+El ámbito léxico se refiere al hecho de que una función tiene acceso a las variables del ámbito en el que fue creada, no donde se ejecuta. Esto significa que una función tiene acceso a las variables de su contexto de creación, incluso si se ejecuta fuera de ese contexto.
+Un closure es una función que "recuerda" el entorno, es decir variables y parámetros, en el que fue creada incluso después de que el contexto externo a ella haya terminado de ejecutarse. esto se debe a que la función mantiene una referencia a las variables de su ámbito léxico.
+
+Veamos un ejemplo sencillo
+
+```javascript
+function crearContador() {
+    let conteo = 0;
+    return () => {
+        conteo++;
+        console.log(conteo);
+    };
+}
+
+const contador1 = crearContador();
+contador1(); // salida 1
+contador1(); // salida 2
+const contador2 = crearContador();
+contador2(); // salida 1
+```
+
+En este caso tenemos a la función `crearContador` que devuelve una función interna que mantendrá el acceso a la variable conteo, a pesar de que la ejecución de `crearContador` ya haya finalizado. Aunque la ejecución de la función de retorno es ejecutada en otro ámbito al de su creación , tiene la capacidad de mantener su propio recuerdo de `conteo` debido a las capacidades de los closures de recordar su contexto de léxico de creación.
