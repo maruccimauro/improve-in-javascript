@@ -33,6 +33,8 @@ Con cariño, Mauro.
     - [Diferencias entre `var`, `let` y `const`](#diferencias-entre-var-let-y-const)
     - [El uso de `bind`, `call` y `apply`](#el-uso-de-bind-call-y-apply)
     - [Ámbitos en funciones flecha](#ámbitos-en-funciones-flecha)
+5. [Conclusión](#conclusión)
+    - [Resumen de conceptos clave](#resumen-de-conceptos-clave)
 
 ---
 
@@ -416,3 +418,29 @@ obj.saludar()// saida Hola, Mauro!
 ```
 
 En este ejemplo, el valor de `this` dentro de la función flecha es el mismo que el de `this` en la función `saludar`, que es el objeto `obj`. Esto es posible porque las funciones flecha no crean su propio `this`, sino que lo heredan del contexto en el que fueron definidas.
+
+### Conclusión
+
+Dominar el ámbito en JavaScript es fundamental para escribir código limpio, eficiente y libre de errores. El hecho de comprender cómo funcionan los diferentes tipos de ámbito, el hoisting y el contexto `this` nos permitirá evitar conflictos de nombres, optimizar el uso de memoria y prevenir accesos no deseados a datos. Además, el uso adecuado de `let`, `const`, `bind`, `call` y `apply` nos dará un control sobre el comportamiento de nuestras variables y funciones.
+
+### Resumen de conceptos clave
+
+**Ámbito (Scope):** Define la accesibilidad y visibilidad de variables en diferentes partes del código.
+**Ámbito global:** Variables accesibles desde cualquier parte del código, pero su uso excesivo puede generar conflictos.
+**Ámbito de función:** Variables solo accesibles dentro de la función donde se declaran, encapsulando la lógica.
+**Ámbito de bloque:** Variables declaradas con `let` o `const` solo accesibles dentro del bloque `{}` donde se definen.
+**Ámbito léxico y closure:** Las funciones recuerdan el ámbito donde fueron creadas, permitiendo el uso de closures.
+**Hoisting:** Eleva las declaraciones de variables y funciones al inicio del contexto, aunque con diferencias entre `var`, `let` y `const`.
+**this:** Su valor depende del contexto de ejecución, pudiendo referirse a diferentes objetos.
+**var, let y const:** Diferencias en ámbito, hoisting y redefinición, siendo `let` y `const` más modernos y seguros.
+**bind, call y apply:** Métodos para controlar el contexto `this` y pasar argumentos a funciones.
+**Funciones flecha:** Heredan el valor de `this` del contexto donde se definen, simplificando el manejo de `this`.
+
+---
+
+Muchas Gracias por leerme!
+Marucci Mauro
+[www.linkedin.com/in/mauro-marucci/](https://www.linkedin.com/in/mauro-marucci/)
+[https://github.com/maruccimauro](https://github.com/maruccimauro)
+
+---
