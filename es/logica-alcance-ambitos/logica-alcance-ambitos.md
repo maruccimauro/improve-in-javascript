@@ -24,6 +24,15 @@ Con cariño, Mauro.
     - [Ámbito de función](#ámbito-de-función)
     - [Ámbito de bloque (let y const)](#ámbito-de-bloque-let-y-const)
     - [Ámbito léxico y closure](#ámbito-léxico-y-closure)
+3. [Hoisting y su Impacto en el Ámbito](#hoisting-y-su-impacto-en-el-ámbito)
+    - [¿Qué es el hoisting?](#qué-es-el-hoisting)
+    - [Hoisting en `var`, `let` y `const`](#hoisting-en-var-let-y-const)
+    - [Hoisting en funciones](#hoisting-en-funciones)
+4. [Manipulación Avanzada del Ámbito](#manipulación-avanzada-del-ámbito)
+    - [Manipulación con `this`](#manipulación-con-this)
+    - [Diferencias entre `var`, `let` y `const`](#diferencias-entre-var-let-y-const)
+    - [El uso de `bind`, `call` y `apply`](#el-uso-de-bind-call-y-apply)
+    - [Ámbitos en funciones flecha](#ámbitos-en-funciones-flecha)
 
 ---
 
@@ -230,3 +239,180 @@ var mostrarMensaje = function () {
 ```
 
 Vemos como en este caso la declaración de la variable es elevada, pero no el contenido de la función , por lo que podemos acceder a la variable pero no al cuerpo de la función.
+
+## Manipulación Avanzada del Ámbito
+
+### Manipulación con `this`
+
+El valor de this se refiere al objeto en el que se ejecuta el código. Dependiendo de cómo se invoque, this puede referirse a diferentes objetos. El valor de this se determina e tiempo de ejecución, no en el momento de la declaración.
+
+**Comportamiento de this en diferentes contextos:**
+**En el contexto global:** en el contexto global(fuera de cualquier función) this hace referencia al objeto global, en un navegador, será el objeto windows.
+
+```Javascript
+console.log(this)
+```
+
+**En una funcion:** dentro de la función, el valor de this depende de si es invocada en modo estricto o no.
+
+```javascript
+"use strict";
+function verThis() {
+    console.log(this);
+}
+verThis(); // salida undefined
+```
+
+```javascript
+function verThis() {
+    console.log(this);
+}
+verThis(); //salida windows
+```
+
+**En métodos de objetos:** Cuando una función es llamada como un método de un objeto, this hace referencia a ese objeto.
+
+```javascript
+const miObj = {
+    nombre: "mauro",
+    saludar: function () {
+        console.log(this.nombre);
+    },
+};
+
+obj.saludar();
+```
+
+**Valor de this en función de flecha:** las funciones flecha `=>` no tienen su propio this. En su logar heredan el valor de this del contexto en el que fueron definidas (su ámbito léxico).
+
+```javascript
+const miObj = {
+    nombre: "mauro",
+    saludar: function () {
+        setTimeout(() => {
+            console.log(this);
+        }, 1000);
+    },
+    verThis: () => this,
+};
+
+const miFuncionFlecha = () => {
+    console.log(this);
+};
+
+miFuncionFlecha(); // windows,
+console.log(miObj.verThis()); // windows aunque sea no intuitivo , el ambito en el
+// que se declara verThis es el ambito global , quien es su ambito lexico.
+miObj.saludar(); // miObj
+```
+
+**valor de this en clase:** en el contexto de las clases, this hace referencia a la instancia de clase.
+
+```javascript
+class Persona {
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+    getNombre() {
+        console.log(this.nombre); // this hace referencia a la instancia de la clase.
+    }
+}
+
+const persona = new Persona("Mauro");
+persona.getNombre();
+```
+
+### Diferencias entre `var`, `let` y `const`
+
+En el motor de JavaScript las palabras claves `var`,`let` y `const` la usaremos para declarar variables, pero tienen diferencias importantes en cuanto a su comportamiento dentro del ámbito.
+
+**var:**
+Ámbito de función: las variables declaradas con `var` tienen ámbito de función. esto significa que si se declaran dentro de una función solo son accesibles desde dentro de esa función, si se declaran fuera de una función son accesibles globalmente.
+Hoisting: las declaraciones de nuestras variables con `var` son elevadas al principio de su contexto de ejecución, pero su inicialización no, por eso será accesibles pero con un valor undefined.
+Redefinición: es posible que redeclaremos una variable con `var` dentro del mismo ámbito.
+
+```javascript
+var nombre = "Juan";
+var nombre = "Mauro"; // esto no nos va a dar error
+```
+
+**let**:
+Ámbito de bloque: Las variables que declaremos con `let` tienen un ámbito de bloque, lo que significa que solo están accesibles dentro del bloque (delimitado por {}) donde se declaran, ya sea una función o un bloque condicional.
+Hoisting: al igual que var, las variables declaradas con let son elevadas, pero no se pueden acceder hasta que se alcanzan en nel flujo del código. Esto se llama "zona muerta temporal" (TDZ).
+Re declaración: a diferencia de `var`, no es posible redeclarar una variable declarada con let en el mismo ámbito.
+
+```javascript
+let nombre = "Juan";
+let nombre = "Mauro"; // esto nos dara error
+```
+
+const:
+Ámbito de bloque: al igual que con `let`, nuestras variables declaradas con `const` tendrán ámbito de bloque.
+Reasignación y redeclaración: una variable declarada con `const` no puede ser reasignada ni redeclarada despues de su declaración inicial.
+Hoisting: al igual que con `let`, las variables declaradas `const` son elevadas al inicio del contexto de ejecución pero no pueden ser accedidas ya que se encontraran en la "zona muerta temporal" (TDZ).
+inmutabilidad de referencia: si se declara un objeto con `const`, su referencia no puede ser cambiada, pero los contenidos del objeto pueden modificarse.
+
+```javascript
+const nombre = "Juan";
+nombre = "Mauro"; // esto nos dara error
+
+const obj = { nombre: "Juan" };
+obj.nombre = "Mauro"; //esto NO dara error
+```
+
+### El uso de `bind`, `call` y `apply`
+
+`bind` nos servirá para crear una nueva función que tiene su propio contexto (this). Esta nueva función la podremos llamar más tarde, y siempre tendrá el valor de this especificado.
+
+```Javascript
+const persona = { nombre : "Mauro"};
+function crearSaludo(){
+  console.log(`Hola, ${this.nombre}!`);
+}
+
+const saludo = crearSaludo.bind(persona);// salida Hola, Mauro!
+```
+
+`call` ejecutara nuestra función inmediatamente, pero le permitirá especificar el valor de this y pasar los argumentos de la función que deseemos. Los argumentos se pasan de manera separada uno por uno.
+
+```javascript
+const persona = { nombre: "Mauro" };
+function saludar(arg1, arg2) {
+    console.log(`${arg1} ${this.nombre}${arg2}`);
+}
+
+saludar.call(persona, "Hola", "!"); // salida Hola, Mauro!
+```
+
+`apply` es similar a `call`, pero los argumentos se pasan como un array, esto es útil cuando no sabemos cuántos argumentos tendrá la función.
+
+```javascript
+const persona = { nombre: "Mauro" };
+function saludar(saludo, puntuacion) {
+    console.log(saludo + ", " + this.nombre + puntuacion);
+}
+cuerpoSaludo = ["Hola", "!"];
+saludar.apply(persona, cuerpoSaludo); // salida Hola, Mauro!
+```
+
+### Ámbitos en funciones flecha
+
+En una función flecha, el valor de this será el mismo que el de su entorno léxico (es decir, el valor de `this` en el contexto donde la función fue definida, no donde fue llamada). Esto soluciona muchos problemas comunes con `this` en funciones tradicionales, especialmente en eventos y callbacks.
+
+veamos un ejemplo
+
+```Javascript
+
+const obj = {
+  nombre:"Mauro",
+  saludar: function (){
+    setTimeout(()=>{
+      console.log(`Hola ${this.nombre}!`)
+    },1000)
+  }
+}
+
+obj.saludar()// saida Hola, Mauro!
+```
+
+En este ejemplo, el valor de `this` dentro de la función flecha es el mismo que el de `this` en la función `saludar`, que es el objeto `obj`. Esto es posible porque las funciones flecha no crean su propio `this`, sino que lo heredan del contexto en el que fueron definidas.
