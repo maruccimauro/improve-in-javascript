@@ -15,7 +15,23 @@ Con cariño, Mauro.
 
 **Índice de la Guía**
 
+1. [Introducción](#introducción)
+    - [¿Qué es la asignación de funciones en JavaScript?](#qué-es-la-asignación-de-funciones-en-javascript)
+    - [Importancia de la herencia en JavaScript](#importancia-de-la-herencia-en-javascript)
+
 ---
+
+## Introducción
+
+En JavaScript, nuestras funciones son ciudadanos de primera clase, lo que significa que podremos asignarlas a variables, pasarlas como argumentos y devolverlas desde otras funciones. Además, el motor de JavaScript utiliza un modelo de herencia basado en prototipos en lugar de la herencia clásica de clases de otros lenguajes. Comprender cómo se asignan nuestras funciones y cómo opera la herencia será crucial para que podamos estructurar código reutilizable y eficiente.
+
+### ¿Qué es la asignación de funciones en JavaScript?
+
+Esto se refiere a la manera en que podemos almacenar nuestras funciones en variables, objetos o estructuras de datos. Dependiendo de cómo se definan, las funciones pueden comportarse de manera diferente, los principales tipos de asignación son funciones declaradas, funciones expresadas, funciones flecha y funciones en objetos.
+
+### Importancia de la herencia en JavaScript
+
+La herencia es un mecanismo que nos permite hacer que un objeto o función reutilice propiedades y métodos de otro. El motor de JavaScript basa la herencia en el sistema de prototipos, lo que significa que los objetos pueden heredar de otros a través de su cadena de prototipos (`prototype chain`), esto nos permite la reutilización de código , permitiendo compartir funcionalidades entre objetos, mejorar la eficiencia en memoria ya que los métodos compartidos se almacenan en un solo lugar en el prototipo en lugar de cada instancia y generar una organización estructurada donde se facilita la creación de modelos jerárquicos para organizar el código.
 
 <hr>
 ... Seccion bajo construcción ...
