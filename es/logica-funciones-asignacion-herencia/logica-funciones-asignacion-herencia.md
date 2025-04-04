@@ -18,6 +18,10 @@ Con cariño, Mauro.
 1. [Introducción](#introducción)
     - [¿Qué es la asignación de funciones en JavaScript?](#qué-es-la-asignación-de-funciones-en-javascript)
     - [Importancia de la herencia en JavaScript](#importancia-de-la-herencia-en-javascript)
+2. [Tipos de Asignación de Funciones](#tipos-de-asignación-de-funciones)
+    - [Funciones declaradas](#funciones-declaradas)
+    - [Funciones expresadas](#funciones-expresadas)
+    - [Funciones asignadas a objetos](#funciones-asignadas-a-objetos)
 
 ---
 
@@ -32,6 +36,48 @@ Esto se refiere a la manera en que podemos almacenar nuestras funciones en varia
 ### Importancia de la herencia en JavaScript
 
 La herencia es un mecanismo que nos permite hacer que un objeto o función reutilice propiedades y métodos de otro. El motor de JavaScript basa la herencia en el sistema de prototipos, lo que significa que los objetos pueden heredar de otros a través de su cadena de prototipos (`prototype chain`), esto nos permite la reutilización de código , permitiendo compartir funcionalidades entre objetos, mejorar la eficiencia en memoria ya que los métodos compartidos se almacenan en un solo lugar en el prototipo en lugar de cada instancia y generar una organización estructurada donde se facilita la creación de modelos jerárquicos para organizar el código.
+
+## Tipos de Asignación de Funciones
+
+Javascript nos permite definir nuestras funciones de diferentes maneras , y cada una implica diferencias sutiles en el ámbito léxico, el comportamiento del `this`, el hosting, y en cómo interactúan con el entorno de ejecución.
+
+### Funciones declaradas
+
+Las funciones declaradas son las que creamos cuando utilizamos la palabra reservada función en una sentencia completa, no como parte de una expresión. en este caso capturan el entorno léxico en el que fueron creadas, su `this` será dinámico , es decir que dependerá del contexto de invocación y respecto al hoisting, este se encargara de elevar la función al principio del contexto de ejecución , lo que nos permitirá usarla antes de la línea donde es definida en el código.
+
+veamos un ejemplo simple:
+
+```javascript
+function sumar5(value) {
+    return value + 5;
+}
+```
+
+### Funciones expresadas
+
+las funciones expresadas son las funciones que definimos como parte de una expresión, como al asignarlas a una de nuestras variables o pasarlas como argumentos. en este caso `this` también es dinámico a menos que se utilice una función flecha y el hoisting solo elevara la declaración pero no el cuerpo de la función , es por eso que no podremos utilizarla antes de su inicialización en el código.
+
+veamos un ejemplo:
+
+```javascript
+const sumar5 = function (value) {
+    return value + 5;
+};
+```
+
+### Funciones asignadas a objetos
+
+Cuando asignamos una función como propiedad a un objeto, pasara a considerarse un método. Este tipo de asignación afecta directamente al valor `this`, ya que en este contexto hará referencia al objeto que posee el método, no posee intervención directa del hoisting.
+veamos un ejemplo:
+
+```javascript
+const persona = {
+    nombre: "Mauro",
+    hablar() {
+        console.log("Hola, soy " + this.nombre);
+    },
+};
+```
 
 <hr>
 ... Seccion bajo construcción ...
